@@ -17,6 +17,8 @@ Body:
   "message": "Forbidden",
   "statusCode": 403
     • }
+    
+    
 Get the Current User
 Returns the information about the current user that is logged in.
     • Require Authentication: true
@@ -82,6 +84,8 @@ Body:
     "password": "Password is required"
   }
     • }
+    
+    
 Sign Up a User
 Creates a new user, logs them in as the current user, and returns the current user's information.
     • Require Authentication: false
