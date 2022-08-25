@@ -140,16 +140,24 @@ Body:
   }
     • }
     
+    
+    
 --------------------------------------END PART 2 --------------------------------------------------------------------------------------
 
 ---------------------------------------------PART 3 GROUPS -----------------------------------------------------------------------------
+
+
 Get all Groups
 Returns all the groups.
     • Require Authentication: false
+    
+    
     • Request
         ◦ Method: GET
         ◦ URL: /api/groups
         ◦ Body: none
+        
+        
     • Successful Response
         ◦ Status Code: 200
         ◦ Headers:
@@ -173,12 +181,19 @@ Body:
     }
   ]
     • }
+    
+    
 Get all Groups joined or organized by the Current User
 Returns all the groups for current User.
+
+
     • Require Authentication: true
     • Request
+    
         ◦ Method: GET
+        
         ◦ URL: /api/users/currentUser?/groups
+        
         ◦ Body: none
     • Successful Response
         ◦ Status Code: 200
@@ -203,12 +218,20 @@ Body:
     }
   ]
     • }
+    
+    
 Get details of a Group from an id
 Returns the details of a group specified by its id.
+
+
     • Require Authentication: false
+    
     • Request
+    
         ◦ Method: GET
+        
         ◦ URL: /api/groups/:groupId
+        
         ◦ Body: none
     • Successful Response
         ◦ Status Code: 200
@@ -245,12 +268,19 @@ Body:
   "message": "Group couldn't be found",
   "statusCode": 404
     • }
+    
+    
 Create a Group
+
 Creates and returns a new group.
+
     • Require Authentication: true
     • Request
+    
         ◦ Method: POST
+        
         ◦ URL: /api/groups
+        
         ◦ Headers:
             ▪ Content-Type: application/json
 Body:
@@ -296,13 +326,20 @@ Body:
     "state": "State is required",
   }
     • }
+    
 Edit a Group
+
 Updates and returns an existing group.
+
     • Require Authentication: true
     • Require proper authorization: Group must belong to the current user
+    
     • Request
+    
         ◦ Method: PUT
+        
         ◦ URL: /api/groups/:groupId
+        
         ◦ Headers:
             ▪ Content-Type: application/json
 Body:
@@ -357,13 +394,19 @@ Body:
   "message": "Group couldn't be found",
   "statusCode": 404
     • }
+    
 Delete a Group
+
 Deletes an existing group.
+
     • Require Authentication: true
     • Require proper authorization: Group must belong to the current user
+    
     • Request
         ◦ Method: DELETE
+        
         ◦ URL: /api/groups/:groupId
+        
         ◦ Body: none
     • Successful Response
         ◦ Status Code: 200
@@ -383,12 +426,19 @@ Body:
   "message": "Group couldn't be found",
   "statusCode": 404
     • }
+    
 Get all Members of a Group specified by its id
+
 Returns the members of a group specified by its id.
+
     • Require Authentication: true
+    
     • Request
+    
         ◦ Method: GET
+        
         ◦ URL: /api/groups/:groupId/members
+        
         ◦ Body: none
     • Successful Response: If you ARE the organizer of the group. Shows all members, regardless of their status, and their status.
         ◦ Status Code: 200
@@ -577,9 +627,12 @@ Delete membership to a group specified by id
 Delete a membership to a group specified by id.
     • Require Authentication: true
     • Require proper authorization: Current User must be the host of the group, or the user whose membership is being deleted
+    
     • Request
         ◦ Method: DELETE
+        
         ◦ URL: /api/groups/:groupId/members/:membersId
+        
         ◦ Headers:
             ▪ Content-Type: application/json
             ▪ Body:
@@ -629,11 +682,15 @@ Body:
 
 
 Get all Events
+
 Returns all the events.
     • Require Authentication: false
     • Request
+    
         ◦ Method: GET
+        
         ◦ URL: /api/events
+        
         ◦ Body: none
     • Successful Response
         ◦ Status Code: 200
@@ -682,13 +739,18 @@ Body:
     },
   ]
     • }
+    
 Get all Events of a Group specified by its id
+
 Returns all the events of a group specified by its id
+
     • Require Authentication: false
     • Request
+    
         ◦ Method: GET
         ◦ URL: /api/groups/:groupId/events
         ◦ Body: none
+        
     • Successful Response
         ◦ Status Code: 200
         ◦ Headers:
@@ -746,11 +808,15 @@ Body:
   "statusCode": 404
     • }
 Get details of an Event specified by its id
+
 Returns the details of an event specified by its id.
     • Require Authentication: false
     • Request
+    
         ◦ Method: GET
+        
         ◦ URL: /api/events/:eventId
+        
         ◦ Body: none
     • Successful Response
         ◦ Status Code: 200
@@ -798,12 +864,17 @@ Body:
   "statusCode": 404
     • }
 Create a new Venue for a Group specified by its id
+
 Creates and returns a new venue for a group specified by its id
+
     • Require Authentication: true
     • Require Authentication: Current User must be the organizer of the group or a member of the group with a status of "co-host"
     • Request
+    
         ◦ Method: POST
+        
         ◦ URL: /api/groups/:groupId/venues
+        
         ◦ Headers:
             ▪ Content-Type: application/json
         ◦ Body:
@@ -1048,14 +1119,20 @@ Body:
   "message": "Event couldn't be found",
   "statusCode": 404
     • }
+    
 Delete an Event specified by its id
+
 Delete an event specified by its id
     • Require Authentication: true
     • Require Authorization: Current User must be the organizer of the group or a member of the group with a status of "co-host"
     • Request
+    
         ◦ Method: DELETE
+        
         ◦ URL: /api/events/:eventId
+        
         ◦ Body: none
+        
     • Successful Response
         ◦ Status Code: 200
         ◦ Headers:
@@ -1073,12 +1150,18 @@ Body:
   "message": "Event couldn't be found",
   "statusCode": 404
     • }
+    
 Get all Attendees of an Event specified by its id
+
 Returns the attendees of an event specified by its id.
     • Require Authentication: true
+    
     • Request
+    
         ◦ Method: GET
+        
         ◦ URL: /api/events/:eventId/attendees
+        
         ◦ Body: none
     • Successful Response: If you ARE the organizer of the group or a member of the group with a status of "co-host". Shows all attendees, regardless of their status, and their status.
         ◦ Status Code: 200
@@ -1150,10 +1233,15 @@ Body:
 Request to Attend an Event based on the Event's id
 Request attendance for an event specified by id.
     • Require Authentication: true
+    
     • Require Authorization: Current User must be a member of the group
+    
     • Request
+    
         ◦ Method: POST
+        
         ◦ URL: /api/events/:eventId/attendees
+        
         ◦ Headers:
             ▪ Content-Type: application/json
         ◦ Body: none
@@ -1194,12 +1282,16 @@ Body:
   "message": "User is already an attendee of the event",
   "statusCode": 400
     • }
+    
 Change the status of an attendance for an event specified by id
+
 Change the status of an attendance for an event specified by id.
     • Require Authentication: true
     • Require proper authorization: Current User must already be the organizer or have a membership to the group with the status of "co-host"
+    
     • Request
         ◦ Method: PUT
+        
         ◦ URL: /api/events/:eventId/attendees/:attendeeId
         ◦ Headers:
             ▪ Content-Type: application/json
@@ -1249,11 +1341,17 @@ Body:
     
     Delete attendance to an event specified by id
 Delete an attendance to an event specified by id.
+
     • Require Authentication: true
+    
     • Require proper authorization: Current User must be the host of the group, or the user whose attendance is being deleted
+    
     • Request
+    
         ◦ Method: DELETE
+        
         ◦ URL: /api/events/:eventId/attendees/
+        
         ◦ Headers:
             ▪ Content-Type: application/json
             ▪ Body:
@@ -1296,12 +1394,17 @@ Body:
   "statusCode": 403
     • }
 Add an Image to a Group based on the Group's id
+
 Create and return a new image for a group specified by id.
+
     • Require Authentication: true
     • Require proper authorization: Current User must be the organizer for the group
     • Request
+    
         ◦ Method: POST
+        
         ◦ URL: /api/groups/:groupId/images
+        
         ◦ Headers:
             ▪ Content-Type: application/json
 Body:
@@ -1328,13 +1431,18 @@ Body:
   "message": "Group couldn't be found",
   "statusCode": 404
     • }
+    
 Add an Image to a Event based on the Event's id
+
 Create and return a new image for an event specified by id.
     • Require Authentication: true
     • Require proper authorization: Current User must be an attendee of the event
     • Request
+    
         ◦ Method: POST
+        
         ◦ URL: /api/events/:eventId/images
+        
         ◦ Headers:
             ▪ Content-Type: application/json
 Body:
@@ -1361,13 +1469,20 @@ Body:
   "message": "Event couldn't be found",
   "statusCode": 404
     • }
+    
 Delete an Image
+
 Delete an existing image.
+
     • Require Authentication: true
     • Require proper authorization: Image must belong to the current user through the image's imageableId and imageableType
+    
     • Request
+    
         ◦ Method: DELETE
+        
         ◦ URL: /api/images/:imageId
+        
         ◦ Body: none
     • Successful Response
         ◦ Status Code: 200
