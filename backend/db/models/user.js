@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       const user = await User.scope('loginUser').findOne({
         where: {
           [Op.or]: {
-            email: credential
+            email: credential,
+            username: credential
           }
         }
       });
@@ -85,15 +86,15 @@ validate: {
     modelName: 'User',
     defaultScope: {
       attributes: {
-        exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
+        exclude: ["hashedPassword", "createdAt", "updatedAt"]
       }
     }, // probably removes most of the trouble
     scopes: {
       currentUser: {
         attributes: { exclude: ["hashedPassword", "username","createdAt","updatedAt"] } // meets the /me current user
       },
-    logIn: {
-      attributes: {include: ["id","firstName","lastName","email"]}
+    loginUser: {
+      attributes: {}
     }},
 
   });
