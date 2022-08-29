@@ -1,14 +1,45 @@
 'use strict';
+const bcrypt = require('bcryptjs');
+
 const {
-  Model
-} = require('sequelize');
+  Model, Validator} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    
+    toSafeObject() {
+      const { id, firstName, lastName, email } = this;
+      return { id, firstName, lastName, email }
+    }
+    validatePassword(password) {
+      return bcrypt.compareSync(password, this.hashedPassword.toString());
+    }
+    static getCurrentUserById(id) {
+      return User.scope("currentUser").findByPk(id);
+    }
+    static async login({ credential, password }) {
+      const { Op } = require('sequelize');
+      const user = await User.scope('loginUser').findOne({
+        where: {
+          [Op.or]: {
+            email: credential
+          }
+        }
+      });
+      if (user && user.validatePassword(password)) {
+        return await User.scope('currentUser').findByPk(user.id);
+      }
+    }
+    static async signup({ username, email, password }) {
+      const hashedPassword = bcrypt.hashSync(password);
+      const user = await User.create({
+        firstName,
+        lastName,
+        email,
+        hashedPassword
+      });
+      return await User.scope('currentUser').findByPk(user.id);
+    }
+
     static associate(models) {
       // define association here
     }
@@ -52,6 +83,19 @@ validate: {
   }, {
     sequelize,
     modelName: 'User',
+    defaultScope: {
+      attributes: {
+        exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
+      }
+    }, // probably removes most of the trouble
+    scopes: {
+      currentUser: {
+        attributes: { exclude: ["hashedPassword", "username","createdAt","updatedAt"] } // meets the /me current user
+      },
+    logIn: {
+      attributes: {include: ["id","firstName","lastName","email"]}
+    }},
+
   });
   return User;
 };
