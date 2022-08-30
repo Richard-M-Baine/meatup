@@ -8,7 +8,7 @@ router.use(restoreUser);
 
 
 router.use('/me', meRouter);
-router.use('/login', loginRouter)
+router.use('/session', loginRouter)
 
 router.post('/test', function(req, res) {
     res.json({ requestBody: req.body });

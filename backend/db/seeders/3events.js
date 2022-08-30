@@ -17,7 +17,7 @@ module.exports = {
     {
       name: 'Tennis Group Twentith Meet and Greet',
       description: 'a brief skype get together',
-      venueId:null,
+      venueId:2,
       groupId:2,
       type: 'Online',
       capacity: 20,
