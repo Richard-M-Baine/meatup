@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
   Venue.init({
     groupId: {type:DataTypes.INTEGER,
       allowNull:false},
+      organizerId:{
+        type: DataTypes.INTEGER,
+        allowNull:false
+      },
     address: {type:DataTypes.STRING,
       allowNull:false},
     city: {type:DataTypes.STRING,

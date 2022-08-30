@@ -30,7 +30,7 @@ router.post(
         return next(err);
       }
   
-      const token = await setTokenCookie(res, user);
+      await setTokenCookie(res, user);
   
       let response = await User.scope('currentUser').findOne({
         where: {

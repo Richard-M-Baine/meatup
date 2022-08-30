@@ -51,7 +51,7 @@ module.exports = {
     {
       name: 'Chess with people who are better than you',
       description: 'guaranteed to be mated within 20 moves or your money back!',
-      venueId: 4,
+      venueId: 2,
       groupId:3,
       type: 'In Person',
       capacity:20,
