@@ -32,22 +32,27 @@ router.get(
         }
       })
 
-
       let {id:value1,organizerId:value2,name:value3,about:value4,type:value5,private:value6,city:value7,
         state:value8,createdAt:value9,updatedAt:value10,previewImage:value11} = group
-        
 
-const organizer = await User.findOne({
-  attributes: ['id','firstName','lastName'],
-  where: {
-    id: value2
-  }
-})
 
-const venues = await Venue.findAll({
-  attributes:['id','groupId','address','city','state','lat','lng'],
+      const organizer = await User.findOne({
+        attributes: ['id','firstName','lastName'],
+        where: {
+          id: value2
+        }
+      })
+      const venues = await Venue.findAll({
+       where: {
+        groupId:req.params.groupId
+       }
+      
+      })
 
-})
+
+     
+
+
 
 let object = {id:value1,organizerId:value2,name:value3,about:value4,type:value5,private:value6,city:value7,state:value8,createdAt:value9,updatedAt:value10,
   "numMembers":number,groupImages,organizer,venues}
