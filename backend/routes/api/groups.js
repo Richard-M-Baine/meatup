@@ -277,7 +277,7 @@ res.json(object)
   })
 
 
-  //update a router
+  //update a group
 router.put('/:groupId',requireAuth,async(req,res,next) => {
   const group = await Group.findByPk(req.params.groupId)
 
