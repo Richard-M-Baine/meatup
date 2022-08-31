@@ -89,6 +89,8 @@ router.post(
   }
 )
 
+
+// groups joined by logged in user
 router.get('/current',requireAuth,async (req, res, next) => {
   const groupBoss = await Group.findAll({
     where: {
@@ -145,11 +147,13 @@ router.get('/current',requireAuth,async (req, res, next) => {
 
 
 
-res.json({'Groups':groupSoldaten})
+res.json({'Groups':bossArray})
 
 }
 )
 
+
+//get by groupid
 router.get(
   '/:groupId',
   async (req, res, next) => {
@@ -207,9 +211,70 @@ res.json(object)
   })
 
 
+  //update a router
+router.put('/:groupId',requireAuth,async(req,res,next) => {
+  const group = await Group.findByPk(req.params.groupId)
+
+  //no group per stackoverflow
+  if (!group) {
+    const err = new Error('Group couldn\'t be found')
+    err.status = 404
+    return next(err)
+}
+
+// better way
+if (group.organizerId !== req.user.id) {
+  const err = new Error('You must be the owner to edit this group')
+  err.status = 403
+  return next(err)
+}
+
+const { name, about, type, private, city, state } = req.body
+
+group.set({
+  name: name,
+  about: about,
+  type: type,
+  private: private,
+  city: city,
+  state: state
+})
 
 
 
+await group.save()
+
+
+res.json(group)
+
+
+
+
+
+})
+
+
+router.delete('/:groupId',requireAuth,async(req,res,next) => {
+  const group = await Group.findByPk(req.params.groupId)
+
+     //Group cannot be found
+     if (!group) {
+      const err = new Error('Group couldn\'t be found')
+      err.status = 404
+      return next(err)
+  }
+  //Only the owner can delete the group
+  if (group.organizerId !== req.user.id) {
+      const err = new Error('You must be the owner to delete this group')
+      err.status = 403
+      return next(err)
+  }
+  // you served me well meetup group enjoy your retirement
+  await group.destroy()
+
+        res.status(200).json({ message: "Successfully deleted", statusCode: 200 })
+
+})
 
 
 router.get('/', async (req,res,next) => {
