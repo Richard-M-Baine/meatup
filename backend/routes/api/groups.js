@@ -39,11 +39,41 @@ const validateGroup = [
 
 
 
+
+// add an image to group
+router.post('/:groupId/images',requireAuth, async (req,res) =>{
+  const {groupId} = req.params
+  const findgroupId = await Group.findAll({where:{organizerId:groupId}})
+  if(!findgroupId.length){
+      res.json({
+          "message": "Group couldn't be found",
+          "statusCode": 404
+        })
+  }
+  const{urll,previeww} = req.body
+
+  const groupImage = await GroupImage.create(
+  {groupId:groupId,
+      url:urll,
+      preview:previeww
+  })
+  return res.json({
+      id:groupImage.id,
+      url:groupImage.url,
+      preview:groupImage.preview
+  })
+})
+
+
+
+
+// make an exciting group
 router.post(
   '/',
   requireAuth,
   validateGroup,
   async (req, res, next) => {
+ 
       const { name, about, type, private, city, state } = req.body
       const newGroup = await Group.create({
           organizerId: req.user.id,
@@ -59,7 +89,66 @@ router.post(
   }
 )
 
+router.get('/current',requireAuth,async (req, res, next) => {
+  const groupBoss = await Group.findAll({
+    where: {
+      organizerId: req.user.id
+    },
+    include: [
+      {
+        model: GroupImage, // good except numberOf
+        as: 'previewImage',
+        attributes: ['url'],
+        limit: 1
+      },
+    ],
+  })
+  bossArray = []
+  const groupSoldaten = await Group.findAll({
+    include: [
+      {
+        model: GroupImage, // worse comes to worse do object destructure in am
+        as: 'previewImage',
+        attributes: ['url'],
+        limit: 1
+      },
+      {
+        model: Membership,
+        attributes: [],
+        where: {
+          userId: req.user.id
+        }
+      }
+    ]
+  })
 
+  const members = await Membership.findAll()
+
+
+  for (let i = 0; i < groupBoss.length; i ++){
+    let group = groupBoss[i]
+    let {id:value1,organizerId:value2,name:value3,about:value4,type:value5,private:value6,city:value7,state:value8,createdAt:value9,updatedAt:value10,previewImage:value11} = group
+    let count = 0
+    for (let i = 0; i < members.length; i ++){
+        let member = members[i]
+        if (member.groupId === value1){count = count + 1}
+    }
+    let numMembers = 'numMembers'
+    let object = {id:value1,organizerId:value2,name:value3,about:value4,type:value5,private:value6,city:value7,state:value8,createdAt:value9,updatedAt:value10,numMembers:count,previewImage:value11}
+    bossArray.push(object)
+
+
+}
+
+
+
+
+
+
+res.json({'Groups':groupSoldaten})
+
+}
+)
 
 router.get(
   '/:groupId',
@@ -120,66 +209,7 @@ res.json(object)
 
 
 
-router.get('/current',requireAuth,async (req, res, next) => {
-      const groupBoss = await Group.findAll({
-        where: {
-          organizerId: req.user.id
-        },
-        include: [
-          {
-            model: GroupImage, // good except numberOf
-            as: 'previewImage',
-            attributes: ['url'],
-            limit: 1
-          },
-        ],
-      })
-      bossArray = []
-      const groupSoldaten = await Group.findAll({
-        include: [
-          {
-            model: GroupImage, // worse comes to worse do object destructure in am
-            as: 'previewImage',
-            attributes: ['url'],
-            limit: 1
-          },
-          {
-            model: Membership,
-            attributes: [],
-            where: {
-              userId: req.user.id
-            }
-          }
-        ]
-      })
 
-      const members = await Membership.findAll()
-
-
-      for (let i = 0; i < groupBoss.length; i ++){
-        let group = groupBoss[i]
-        let {id:value1,organizerId:value2,name:value3,about:value4,type:value5,private:value6,city:value7,state:value8,createdAt:value9,updatedAt:value10,previewImage:value11} = group
-        let count = 0
-        for (let i = 0; i < members.length; i ++){
-            let member = members[i]
-            if (member.groupId === value1){count = count + 1}
-        }
-        let numMembers = 'numMembers'
-        let object = {id:value1,organizerId:value2,name:value3,about:value4,type:value5,private:value6,city:value7,state:value8,createdAt:value9,updatedAt:value10,numMembers:count,previewImage:value11}
-        bossArray.push(object)
-
- 
-    }
-
-
-
-
-
-
-    res.json({'Groups':groupSoldaten})
-    
-}
-)
 
 
 router.get('/', async (req,res,next) => {
