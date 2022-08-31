@@ -10,6 +10,34 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 
+router.get(
+    '/current',
+    requireAuth,
+    async (req, res, next) => {
+      const groups = await Group.findAll({
+        where: {
+          organizerId: req.user.id
+        },
+        include: [
+          {
+            model: GroupImage, // returns an array. clarify during stand up how to properly do this query
+            as: 'previewImage',
+            attributes: ['url'],
+            limit: 1
+          },
+        ],
+      })
+
+res.json({'Groups':groups})
+    })
+
+
+
+
+
+
+
+
 router.get('/', async (req,res,next) => {
 let returnobject = {}
     const groups = await Group.findAll({
