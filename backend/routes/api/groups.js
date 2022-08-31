@@ -9,7 +9,31 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-//validation errors
+
+
+//validation errors for venue
+const validateVenue = [
+  check('address')
+      .exists({ checkFalsy: true })
+      .withMessage('Street address is required'),
+  check('city')
+      .exists({ checkFalsy: true })
+      .withMessage('City is required'),
+  check('state')
+      .exists({ checkFalsy: true })
+      .isLength({ min: 2, max: 2 })
+      .withMessage('Abbreviation of the State is required'),
+  check('lat')
+      .exists()
+      .isDecimal()
+      .withMessage('Latitude is not valid'),
+  check('lng')
+      .exists()
+      .isDecimal()
+      .withMessage('Longitude is not valid'),
+  handleValidationErrors
+]
+//validation errors for group
 const validateGroup = [
   check('name')
       .exists({ checkFalsy: true })
@@ -78,7 +102,36 @@ router.post('/:groupId/images',requireAuth, async (req,res) =>{
 })
 
 
+router.post('/:groupId/venues', requireAuth, async (req,res,next) => {
+  const group = await Group.findByPk(req.params.groupId)
 
+  if (!group) {
+    const err = new Error('Group couldn\'t be found')
+    err.status = 404
+    return next(err)
+}
+
+const cohost = await Membership.findOne({
+  where: {
+      groupId: req.params.groupId,
+      userId: req.user.id,
+      status: 'co-host'
+  },
+})
+
+const { address, city, state, lat, lng } = req.body
+
+if (group.organizerId === req.user.id || cohost) {
+  const newVenue = await Venue.create({ groupId: req.params.groupId, address, city, state, lat, lng })
+
+  res.json({ id: newVenue.id, groupId: newVenue.groupId, address: newVenue.address, city: newVenue.city, state: newVenue.state, lat: newVenue.lat, lng: newVenue.lng })
+} else {
+  const err = new Error('Current User must be the organizer or a co-host to create a venue')
+  err.status = 403
+  return next(err)
+}
+
+})
 
 // make an exciting group
 router.post(

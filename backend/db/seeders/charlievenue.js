@@ -8,7 +8,6 @@ module.exports = {
 
       {
         groupId: 1,
-        organizerId:1,
         address:'123 Ryleh lane',
         city:'Rlyeh',
         state:'WV',
@@ -17,7 +16,6 @@ module.exports = {
       },
       {
         groupId:1,
-        organizerId: 2,
         address: '159 south scott plaza',
         city: 'Fort Dix',
         state: 'NJ',
@@ -26,7 +24,6 @@ module.exports = {
       },
       {
         groupId:3,
-        organizerId: 3,
         address: '1443 south pleasant east',
         city:'Mischatonic',
         state:'MA',
