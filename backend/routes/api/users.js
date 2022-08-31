@@ -47,7 +47,7 @@ router.post(
       err.errors = {}
       err.errors.email = 'User with that email already exists'
 
-      return next(err)
+    res.json(err)
   
     }
 
