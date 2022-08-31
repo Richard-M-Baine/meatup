@@ -39,7 +39,25 @@ const validateGroup = [
 
 
 
+router.post(
+  '/',
+  requireAuth,
+  validateGroup,
+  async (req, res, next) => {
+      const { name, about, type, private, city, state } = req.body
+      const newGroup = await Group.create({
+          organizerId: req.user.id,
+          name,
+          about,
+          type,
+          private,
+          city,
+          state
+      })
 
+      res.json(newGroup)
+  }
+)
 
 
 
