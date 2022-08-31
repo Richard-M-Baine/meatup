@@ -40,7 +40,7 @@ let object = {id:value1,organizerId:value2,name:value3,about:value4,type:value5,
 scaryarray.push(object)
 }  
 
-res.json(scaryarray)
+res.json({'Groups':scaryarray})
 })
 
 module.exports = router;
