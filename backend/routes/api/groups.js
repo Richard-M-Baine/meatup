@@ -38,7 +38,20 @@ const validateGroup = [
 ]
 
 
+router.get('/:groupId/venues', async (req,res,next) => {
 
+  const venue = await Venue.findAll({
+    where: {
+      groupId: req.params.groupId
+    }
+  })
+  if (!venue.length) {
+    const err = new Error('Group couldn\'t be found')
+    err.status = 404
+    res.json(err)
+}
+res.json(venue)
+})
 
 // add an image to group
 router.post('/:groupId/images',requireAuth, async (req,res) =>{
