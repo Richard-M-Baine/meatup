@@ -1,13 +1,64 @@
 const express = require('express')
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Group, GroupImage, Membership } = require('../../db/models');
+const { Group, GroupImage, Membership,sequelize,User,Venue } = require('../../db/models');
 const { Op, where } = require('sequelize');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
+
+
+
+
+
+router.get(
+  '/:groupId',
+  async (req, res, next) => {
+      const group = await Group.findByPk(req.params.groupId)
+
+      const numMembers = await Membership.findAll({
+        where: {
+          groupId:req.params.groupId
+        }
+      })
+      number = numMembers.length
+      
+      const groupImages = await GroupImage.findAll({
+        attributes:['id','url','preview'],
+        where: {
+          groupId:req.params.groupId
+        }
+      })
+
+
+      let {id:value1,organizerId:value2,name:value3,about:value4,type:value5,private:value6,city:value7,
+        state:value8,createdAt:value9,updatedAt:value10,previewImage:value11} = group
+        
+
+const organizer = await User.findOne({
+  attributes: ['id','firstName','lastName'],
+  where: {
+    id: value2
+  }
+})
+
+const venues = await Venue.findAll({
+  attributes:['id','groupId','address','city','state','lat','lng'],
+
+})
+
+let object = {id:value1,organizerId:value2,name:value3,about:value4,type:value5,private:value6,city:value7,state:value8,createdAt:value9,updatedAt:value10,
+  "numMembers":number,groupImages,organizer,venues}
+
+
+res.json(object)
+
+
+  })
+
+
 
 
 router.get('/current',requireAuth,async (req, res, next) => {
@@ -60,16 +111,16 @@ router.get('/current',requireAuth,async (req, res, next) => {
 
  
     }
-    res.json({'Groups':bossArray})
+
+
+
+
+
+
+    res.json({'Groups':groupSoldaten})
     
 }
 )
-
-
-
-
-
-
 
 
 router.get('/', async (req,res,next) => {
