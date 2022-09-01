@@ -1,0 +1,26 @@
+{
+  "name": "meatup",
+  "version": "1.0.0",
+  "description": "meetUp.com clone project",
+  "main": "index.js",
+ 
+    "scripts": {
+      "install": "npm --prefix backend install backend",
+      "dev:backend": "npm install --prefix backend start",
+      "sequelize": "npm run --prefix backend sequelize",
+      "sequelize-cli": "npm run --prefix backend sequelize-cli",
+      "start": "npm start --prefix backend"
+    },
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Richard-M-Baine/MeatUp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Richard-M-Baine/MeatUp/issues"
+  },
+  "homepage": "https://github.com/Richard-M-Baine/MeatUp#readme"
+}
