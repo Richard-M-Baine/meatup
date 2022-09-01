@@ -168,6 +168,46 @@ else {
 
 })
 
+router.post('/:groupId/members', requireAuth, async (req,res,next) => {
+  const group = await Group.findByPk(req.params.groupId)
+
+  if (!group) {
+    const err = new Error('Group couldn\'t be found')
+    err.status = 404
+    return next(err)
+}
+const Membership = await Membership.findOne({
+  where: {
+    groupId:req.params.groupId,
+    userId: req.user.id
+  }
+})
+
+if (Membership){
+  if (Membership.status === 'pending') {
+    const err = new Error('Membership has already been requested')
+    err.status = 400
+    return next(err)
+}
+if (Membership.status === 'member' || Membership.status === 'co-host') {
+    const err = new Error('User is already a member of the group')
+    err.status = 400
+    return next(err)
+}
+
+}
+
+const createMember = await Membership.create({
+  userId: req.user.id,
+  groupId: Number(req.params.groupId),
+  status: 'pending'
+})
+
+const returnObject = {groupId:createMember.userId,userId:createMember.userId,status:createMember.status}
+
+res.json(returnObject)
+})
+
 router.get('/:groupId/venues', async (req,res,next) => {
 
   const venue = await Venue.findAll({
