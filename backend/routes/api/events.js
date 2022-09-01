@@ -17,6 +17,7 @@ router.get('/',  async (req,res,next) => {
 
 
     let eventArray = await Event.findAll({
+        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'startDate'],
         include: [
             {
                 model: EventImage,
@@ -37,10 +38,29 @@ router.get('/',  async (req,res,next) => {
 
             }
         ],
+
+        
         
     })
+    const events = []
 
-   res.json(eventArray) 
+    for (let event of eventArray){
+        const eventJSON = event.toJSON()
+        if (eventJSON.previewImage[0]) eventJSON.previewImage = eventJSON.previewImage[0].url
+        let number = await Attendance.findAll({
+            where: {
+                eventId:event.id,
+                status: { [Op.in]: ['member'] }
+            }
+        })
+        let count = number.length
+        eventJSON.numAttending = count
+        events.push(eventJSON)
+
+
+    }
+
+   res.json(events) 
 })
 
 
