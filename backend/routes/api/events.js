@@ -10,6 +10,48 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 // need to alter preview image // test when you have a chance
+const validateEvent = [
+    check('venueId')
+        .custom(
+            async (val, { req }) => {
+                const venue = await Venue.findByPk(val)
+                if (venue) return true
+                else return false
+            }
+        )
+        .withMessage('Venue doesnt exist'),
+    check('name')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 5 })
+        .withMessage('Name must have at least 5 characters'),
+    check('type')
+        .exists({ checkFalsy: true })
+        .isIn(['In Person', 'Online'])
+        .withMessage('Type must be Online or In Person'),
+    check('capacity')
+        .isInt({ min: 1 })
+        .withMessage('Capacity must be an integer'),
+    check('price')
+        .isCurrency({ allow_negatives: false, digits_after_decimal: [0, 1, 2] })
+        .withMessage('Price is invalid'),
+    check('description')
+        .exists({ checkFalsy: true })
+        .withMessage('Description is required'),
+    check('startDate')
+        .isAfter()
+        .withMessage('Start date must be in the future'),
+    check('endDate')
+        .custom(
+            (val, { req }) => {
+                return (Date.parse(val) - Date.parse(req.body.startDate)) >= 0
+            }
+        )
+        .withMessage('End date must be after the start date'),
+    handleValidationErrors
+]
+
+
+
 
 
 router.post('/:eventId/images',requireAuth,async (req, res, next) => {
@@ -95,6 +137,64 @@ router.get('/:eventId', async (req,res,next) => {
    res.json(eventJSON) 
 })
 
+router.put('/:eventId',requireAuth,validateEvent, async (req, res, next) => {
+        const event = await Event.findByPk(
+            req.params.eventId,
+            {
+                attributes: ['id', 'groupId', 'venueId', 'name', 'type',
+                    'capacity', 'price', 'description', 'startDate', 'endDate']
+            }
+        )
+
+        if (!event) {
+            const err = new Error('Event couldn\'t be found')
+            err.status = 404
+            return next(err)
+        }
+
+        const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body
+
+        const group = Group.findOne({
+            where: {
+                id:req.params.eventId
+            }
+        })
+
+        if (!group) {
+            const err = new Error('Group couldn\'t be found')
+            err.status = 404
+            return next(err)
+        }
+
+        if (venueId) {
+            const venue = await Venue.findByPk(venueId)
+
+            if (!venue) {
+                const err = new Error('Venue couldn\'t be found')
+                err.status = 404
+                return next(err)
+            }
+        }
+        const cohost = await Membership.findOne({
+            where: {
+                groupId: group.id,
+                userId: req.user.id,
+                status: 'co-host'
+            },
+        })
+
+        if (group.organizerId === req.user.id || cohost) {
+            await event.set({ venueId, name, type, capacity, price, description, startDate, endDate })
+            await event.save()
+            res.json({ id: event.id, groupId: group.id, venueId, name, type, capacity, price, description, startDate, endDate })
+        } else {
+            const err = new Error('Current User must be the organizer or a co-host to edits an event')
+            err.status = 403
+            return next(err)
+        }
+    })
+
+    
 router.get('/',  async (req,res,next) => {
 // query stuff
 
