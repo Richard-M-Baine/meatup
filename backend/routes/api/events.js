@@ -9,7 +9,37 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-// need to alter preview image
+// need to alter preview image // test when you have a chance
+
+
+router.post('/:eventId/images',requireAuth,async (req, res, next) => {
+        const event = await Event.findByPk(req.params.eventId)
+
+        if (!event) {
+            const err = new Error('Event couldn\'t be found')
+            err.status = 404
+            return next(err)
+        }
+        const group = await Group.findOne({
+            where:{
+                id: event.groupId
+            }
+
+        })
+        
+        const attendance = await Attendance.findOne({ where: { eventId: req.params.eventId, userId: req.user.id, status: 'member' } })
+
+        if (group.organizerId === req.user.id || attendance) {
+            const newImage = await Image.create({ eventId: Number(req.params.eventId), url: req.body.url, preview: false})
+            res.json({ id: newImage.id, url: newImage.url, preview:false })
+        } else {
+            const err = new Error('User must be either the organizer or an attendee to upload images')
+            err.status = 403
+            return next(err)
+        }
+    }
+)
+
 router.get('/:eventId', async (req,res,next) => {
 
     let event = await Event.findByPk(req.params.eventId,{
@@ -44,10 +74,14 @@ router.get('/:eventId', async (req,res,next) => {
         return next(err)
     }
 
-    event['previewImage'] = event['EventImages']
-    delete event['previewImage']
+    
     
     const eventJSON = event.toJSON()
+
+
+  
+
+
     const number = await Attendance.findAll({
         where: {
             eventId:req.params.eventId,
