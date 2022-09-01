@@ -30,7 +30,7 @@ router.post('/:eventId/images',requireAuth,async (req, res, next) => {
         const attendance = await Attendance.findOne({ where: { eventId: req.params.eventId, userId: req.user.id, status: 'member' } })
 
         if (group.organizerId === req.user.id || attendance) {
-            const newImage = await Image.create({ eventId: Number(req.params.eventId), url: req.body.url, preview: false})
+            const newImage = await EventImage.create({ eventId: Number(req.params.eventId), url: req.body.url, preview: false})
             res.json({ id: newImage.id, url: newImage.url, preview:false })
         } else {
             const err = new Error('User must be either the organizer or an attendee to upload images')
