@@ -61,7 +61,71 @@ const validateVenue = [
     handleValidationErrors
   ]
   
+router.put('/:venueId', requireAuth, validateVenue, async (req,res,next) => {
+    let blah = await Venue.findByPk(req.params.venueId)
 
+    if (!blah) {
+        const err = new Error('Group couldn\'t be found')
+        err.status = 404
+        return next(err)
+    }
+
+
+    const group = await Group.findOne({
+        where: {
+            id:blah.groupId
+        }
+    })
+    const organizer = await User.findOne({
+        where:{
+            id:group.organizerId,
+        }
+    })
+    
+            const cohost = await Membership.findOne({
+                where: {
+                    groupId: group.id,
+                    userId: req.user.id,
+                    status: 'co-host'
+                },
+            })
+        
+  
+
+//     // start constraints making sure user is verified
+
+
+    // if the signed in user is either organizer or cohost
+    if (organizer || cohost){
+        const {address,city,state,lat,lng} = req.body
+
+        blah.set({
+          address:address,
+          city:city,
+          state:state,
+          lat:lat,
+          lng:lng
+  })
+  await blah.save()
+  res.json(blah)
+  
+
+    } else{
+        const err = new Error('Current User must be the organizer or a co-host to edit a venue')
+            err.status = 403
+            return next(err)
+    }
+
+
+
+    
+     
+
+
+
+
+   
+})
 
 
 
