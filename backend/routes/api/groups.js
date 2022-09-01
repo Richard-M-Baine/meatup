@@ -163,6 +163,54 @@ router.post('/:groupId/images',requireAuth, async (req,res) =>{
 })
 
 
+router.post('/:groupId/events', requireAuth, async (req,res) => {
+  
+        const group = await Group.findByPk(req.params.groupId)
+
+        if (!group) {
+            const err = new Error('Group couldn\'t be found')
+            err.status = 404
+            return next(err)
+        }
+
+        const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body
+
+        if (venueId) {
+            const venue = await Venue.findByPk(venueId)
+
+            if (!venue) {
+                const err = new Error('Venue couldn\'t be found')
+                err.status = 404
+                return next(err)
+            }
+        }
+
+        const cohost = await Membership.findOne({
+            where: {
+                groupId: req.params.groupId,
+                userId: req.user.id,
+                status: 'co-host'
+            },
+        })
+
+        if (group.organizerId === req.user.id || cohost) {
+            const event = await Event.create({ groupId: Number(req.params.groupId), venueId, name, type, capacity, price, description, startDate, endDate })
+
+            res.json({ id: event.id, groupId: event.groupId, venueId, name, type, capacity, price, description, startDate, endDate })
+        } else {
+            const err = new Error('Current User must be the organizer or a co-host to create an event')
+            err.status = 403
+            return next(err)
+        }
+
+    }
+  
+
+
+
+
+)
+
 router.post('/:groupId/venues', requireAuth, async (req,res,next) => {
   const group = await Group.findByPk(req.params.groupId)
 
@@ -379,6 +427,7 @@ res.json(group)
 
 
 })
+
 
 
 router.delete('/:groupId',requireAuth,async(req,res,next) => {
