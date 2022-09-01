@@ -123,6 +123,51 @@ res.json(events)
 
 })
 
+router.get('/:groupId/members', requireAuth, async (req,res,next) => {
+const group = await Group.findByPk(req.params.groupId)
+
+if (!group) {
+  const err = new Error('Group couldn\'t be found')
+  err.status = 404
+  return next(err)
+}
+
+if (group.organizerId === req.user.id){
+  const Members = await User.findAll({
+    attributes: ['id','firstName','lastName'],
+    include: {
+      model: Membership,
+      attributes: ['status'],
+      where: {
+        groupId: req.params.groupId
+      }
+    }
+  })
+  res.json({Members})
+}
+else {
+  const Members = await User.findAll({
+    attributes: ['id','firstName','lastName'],
+    include: {
+      model: Membership,
+      attributes: ['status'],
+      where: {
+        groupId: req.params.groupId,
+        status: {
+          [Op.not]: ['pending']
+        }
+      }
+    },
+    
+  })
+
+  res.json({ Members })
+}
+
+
+
+})
+
 router.get('/:groupId/venues', async (req,res,next) => {
 
   const venue = await Venue.findAll({
