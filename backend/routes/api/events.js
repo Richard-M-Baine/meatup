@@ -9,8 +9,57 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
+// need to alter preview image
+router.get('/:eventId', async (req,res,next) => {
+
+    let event = await Event.findByPk(req.params.eventId,{
+        attributes: ['id', 'groupId', 'venueId', 'name','description', 'type','capacity','price', 'startDate','endDate'],
+        include: [
+            {
+                model: EventImage,
+                as: 'previewImage',
+                attributes: ['url'],
+                where: {
+                    eventId:req.params.eventId
+                },
+            },
+            {
+                model: Group,
+                attributes: ['id', 'name','private', 'city', 'state']
+            },
+            {
+                model: Venue,
+                attributes: ['id','address', 'city', 'state','lat','lng']
+
+            }
+        ],
+
+        
+        
+    })
+
+    if (!event) {
+        const err = new Error('Event couldn\'t be found')
+        err.status = 404
+        return next(err)
+    }
+
+    event['previewImage'] = event['EventImages']
+    delete event['previewImage']
+    
+    const eventJSON = event.toJSON()
+    const number = await Attendance.findAll({
+        where: {
+            eventId:req.params.eventId,
+            status: 'member'
+        }
+    })
+    const numAttending = number.length
+    eventJSON.numAttending = numAttending
 
 
+   res.json(eventJSON) 
+})
 
 router.get('/',  async (req,res,next) => {
 // query stuff
