@@ -10,46 +10,39 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 
-router.delete('/:imageid', requireAuth, async (req,res,next) => {
-    const eventImage = await eventImage.findByPk(req.params.imageid)
+router.delete('/:imageId', requireAuth, async(req, res, next) => {
+    const { imageId } = req.params;
 
-    if (!eventImage) {
-        const err = new Error('Image couldn\'t be found')
-        err.status = 404
-        return next(err)
-    }
-    const event = await Event.findOne({
-        where: {
-            id: eventImage.eventId
-        }
-    })
+    const { user } = req;
 
-    const group = await Group.findOne({
-        where: {
-            id:event.groupId
-        }
+    let currentUser = user.toSafeObject();
+    let currentUserId = currentUser.id;
 
-    })
-
-    const user = await User.findOne({
-        where: {
-            id:group.organizerId
-        }
-    })
-
-    if (!user){
-        await image.destroy()
-        res.json({message: "Successfully deleted", statusCode: 200})
-
+    let image = await EventImage.findByPk(imageId, {include: {model: Event, attributes: ['groupId']}})
+    
+    if(!image){
+        res.status = 404;
+        return res.json({
+            message: "Event Image couldn't be found",
+            statusCode: 404
+        })
     }
 
-    else {
-        const err = new Error('Only the owner can delete an image')
-        err.status = 403
-        return next(err)
+    let validateAuthorization = await Membership.findOne({ where: { [Op.and]: [ {userId: currentUserId}, { groupId: image.Event.groupId} ] }})
+    if(validateAuthorization.status === "co-host" || validateAuthorization.status === "organizer"){
+        await image.destroy();
+        return res.json({
+            message: "Successfully deleted",
+            statusCode: 200
+        })
     }
 
-} )
+    res.status = 403;
+    res.json({
+        message: "Current User is not authorized to delete a image",
+        statusCode: 403
+    })
+})
 
 
 

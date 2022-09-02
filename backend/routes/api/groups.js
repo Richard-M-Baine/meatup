@@ -271,41 +271,46 @@ res.json(returnObject)
 
 
 
-// went by docs 
-router.delete('/:groupId/membership', requireAuth, async (req,res,next) => {
+// went by docs. geekforgeeks actually responded! 
+router.delete('/:groupId/membership', requireAuth, async(req, res, next) => {
+  const { groupId } = req.params;
+  const { memberId } = req.body;
 
-  const group = await Group.findByPk(req.params.groupId)
-  const membership = await Membership.findOne({
-    where: {
-      groupId: req.params.groupId,
-      userId: req.body.memberId
-    }
+  let checkGroup = await Group.findByPk(groupId)
+  if(!checkGroup){
+      res.status = 404;
+      return res.json({
+          message: "Group couldn't be found",
+          statusCode: 404
+      })
+  }
+
+  let checkUser = await User.findByPk(memberId)
+  if(!checkUser){
+      res.status = 404;
+      return res.json({
+          message: "Validation Error",
+          statusCode: 404,
+          errors: {
+              memberId: "User couldn't be found"
+          }
+      })
+  }
+
+  let member = await Membership.findOne({where: { [Op.and]: [ { userId: memberId }, { groupId } ] }}) 
+  if(member){
+      await member.destroy();
+      return res.json({
+          message: "Successfully deleted membership from group"
+      })
+  } else {
+       res.status = 400;
+  return res.json({
+      message: "Membership does not exist for this User",
+      statusCode: 404,
   })
-
-  if (!group) {
-    const err = new Error('Group couldn\'t be found')
-    err.status = 404
-    return next(err)
-}
-if (!membership) {
-  const err = new Error('Membership between the user and the group does not exits')
-  err.status = 404
-  return next(err)
-}
-
-if (req.user.id !== group.organizerId && req.user.id !== req.body.memberId) {
-  const err = new Error('Only the User or organizer may delete a Membership')
-  err.status = 403
-  return next(err)
-}
-await membership.destroy()
-        res.json({
-            message: "Successfully deleted membership from group"
-        })
-
-
-
-
+  }
+ 
 })
 
 router.get('/:groupId/venues', async (req,res,next) => {
