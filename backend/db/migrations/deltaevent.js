@@ -17,6 +17,7 @@ module.exports = {
       },
       groupId: {
         type: Sequelize.INTEGER,
+        onDelete: 'cascade',
         references: {
           model: 'Groups',
           key: 'id'
