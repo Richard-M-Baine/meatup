@@ -348,11 +348,11 @@ router.post('/:groupId/images',requireAuth, async (req,res) =>{
 
 }
 
-else{
+
   const err = new Error('User must be the organizer to upload images')
   err.status = 403
   return next(err)
-}
+
 })
 
 
