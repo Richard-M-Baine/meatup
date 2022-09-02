@@ -82,6 +82,104 @@ router.post('/:eventId/images',requireAuth,async (req, res, next) => {
     }
 )
 
+router.post('/:eventId/attendees', requireAuth, async (req,res,next) => {
+    const event = await Event.findByPk(req.params.eventId)
+
+    if (!event) {
+        const err = new Error('Event couldn\'t be found')
+        err.status = 404
+        return next(err)
+    }
+    const Attendance = await Attendance.findOne({ 
+        where: {
+         eventId: req.params.eventId,
+          userId: req.user.id, 
+        } })
+
+        if (Attendance) {
+            if (Attendance.status === 'pending') {
+                const err = new Error('Attendance has already been requested')
+                err.status = 400
+                return next(err)
+            }
+            if (Attendance.status === 'member' || Attendance.status === 'waitlist') {
+                const err = new Error('User is already an attendee of this event')
+                err.status = 400
+                return next(err)
+            }
+        }
+        const participant = await Attendee.create({
+            eventId: Number(req.params.eventId),
+            userId: req.user.id,
+            status: 'pending'
+        })
+const returnObject = {
+    eventId:participant.eventId,
+    userId: req.user.id,
+    status: 'pending'
+}
+res.json(returnObject)
+
+})
+
+router.get('/:eventId/attendees',async (req,res,next) => {
+
+    const theEvent = await Event.findByPk(req.params.eventId)
+
+    if (!theEvent){
+        const err = new Error('Event couldn\'t be found')
+            err.status = 404
+            return next(err)
+    }
+ const group = await Event.findOne({
+    where: {
+        id:theEvent.groupId
+    }
+ })
+ const cohost = await Member.findOne({
+    where: {
+        groupId: group.id,
+        memberId: req.user.id,
+        status: 'co-host'
+    }
+})
+
+if (group.organizerId === req.user.id || cohost) {
+    const Attendees = await User.findAll({
+        include: {
+            model: Attendee,
+            as: 'Attendance',
+            attributes: ['status'],
+            where: {
+                eventId: req.params.eventId
+            }
+        }
+    })
+    res.json({ Attendees })
+}
+
+else {
+
+    const Attendees = await User.findAll({
+        include: {
+            model: Attendee,
+            as: 'Attendance',
+            attributes: ['status'],
+            where: {
+                eventId: req.params.eventId,
+                status: {
+                    [Op.not]: 'pending'
+                }
+            }
+        }
+    })
+    res.json({ Attendees })
+}
+
+
+
+})
+
 router.get('/:eventId', async (req,res,next) => {
 
     let event = await Event.findByPk(req.params.eventId,{

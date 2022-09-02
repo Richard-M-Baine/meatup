@@ -264,6 +264,10 @@ const returnObject = {groupId:createMember.userId,userId:createMember.userId,sta
 
 res.json(returnObject)
 })
+
+
+
+// went by docs 
 router.delete('/:groupId/membership', requireAuth, async (req,res,next) => {
 
   const group = await Group.findByPk(req.params.groupId)
