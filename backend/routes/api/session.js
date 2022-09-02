@@ -30,8 +30,16 @@ router.post(
     async (req, res, next) => {
       const { credential, password } = req.body;
 
-      if (!credential || !password){
-        console.log('i am here')
+      if (!credential || !password) {
+        res.status(400);
+        return res.json({
+          "message": "Validation error",
+          "statusCode": 400,
+          "errors": {
+            "email": "Email is required",
+            "password": "Password is required"
+          }
+        })
       }
   
       const user = await User.login({ credential, password });
