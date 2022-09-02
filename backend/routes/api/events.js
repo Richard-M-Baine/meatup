@@ -426,28 +426,28 @@ router.put('/:eventId',requireAuth,validateEvent, async (req, res, next) => {
     
 router.get('/',  async (req,res,next) => {
 // query stuff
-let {page,size,name,type,startDate} = req.query
+// let {page,size,name,type,startDate} = req.query
 
 
-if (page) {
-    if (page < 0) page = 1
-    else if (page > 10) page = 10
-    else page = Number(page)
-} else page = 1
+// if (page) {
+//     if (page < 0) page = 1
+//     else if (page > 10) page = 10
+//     else page = Number(page)
+// } else page = 1
 
-if (size) {
-    if (size < 0) size = 10
-    else if (size > 20) size = 20
-    else size = Number(size)
-} else size = 20
+// if (size) {
+//     if (size < 0) size = 10
+//     else if (size > 20) size = 20
+//     else size = Number(size)
+// } else size = 20
 
-let pagination = { limit: size, offset: size * page }
+// let pagination = { limit: size, offset: size * page }
 
-if (name) {
-    queries.where.name = { [Op.substring]: name }
-}
-if (type) queries.where.type = type
-if (startDate && !isNaN(Date.parse(startDate))) queries.where.startDate = startDate
+// if (name) {
+//     queries.where.name = { [Op.substring]: name }
+// }
+// if (type) queries.where.type = type
+// if (startDate && !isNaN(Date.parse(startDate))) queries.where.startDate = startDate
 
 
 
@@ -475,8 +475,8 @@ if (startDate && !isNaN(Date.parse(startDate))) queries.where.startDate = startD
         ],
 
         
-        ...queries,
-        ...pagination
+        // ...queries,
+        // ...pagination
     })
     const eventsArray = []
 
