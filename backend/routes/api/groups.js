@@ -583,6 +583,12 @@ res.json(object)
 router.put('/:groupId',requireAuth,async(req,res,next) => {
   const group = await Group.findByPk(req.params.groupId)
 
+  if (group.organizerId !== req.user.id) {
+    const err = new Error('You must be the owner to edit this group')
+    err.status = 403
+    return next(err)
+  }
+
   //no group per stackoverflow
   if (!group) {
     const err = new Error('Group couldn\'t be found')
@@ -591,11 +597,7 @@ router.put('/:groupId',requireAuth,async(req,res,next) => {
 }
 
 // better way
-if (group.organizerId !== req.user.id) {
-  const err = new Error('You must be the owner to edit this group')
-  err.status = 403
-  return next(err)
-}
+
 
 const { name, about, type, private, city, state } = req.body
 
