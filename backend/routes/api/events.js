@@ -122,6 +122,61 @@ res.json(returnObject)
 
 })
 
+router.put('/:eventId/attendees', requireAuth, async (req,res,next) => {
+
+    const event = await Event.findByPk(req.params.eventId)
+
+    if (!event) {
+        const err = new Error('Event couldn\'t be found')
+        err.status = 404
+        return next(err)
+    }
+
+    const group = await Group.findOne({
+        where: {id:event.groupId}
+    })
+
+    const cohost = await Member.findOne({
+        where: {
+            groupId: group.id,
+            memberId: req.user.id,
+            status: 'co-host'
+        },
+    })
+
+    const attendance = await Attendance.findOne({
+        where: {
+            eventId: req.params.eventId,
+            userId: req.body.userId,
+        }
+    })
+
+    if (!attendance) {
+        const err = new Error('Attendance between the user and the event does not exist')
+        err.status = 404
+        return next(err)
+    }
+
+    if (req.body.status === 'pending') {
+        const err = new Error('Cannot change an attendance status to pending')
+        err.status = 400
+        return next(err)
+    }
+
+    
+    if (group.organizerId === req.user.id || cohost) {
+        attendance.status = req.body.status
+        await attendance.save()
+        res.json({ id: attendance.id, eventId: attendance.eventId, userId: attendance.userId, status: attendance.status })
+    } else {
+        const err = new Error('Current User must be the organizer or a co-host to update an attendance')
+        err.status = 403
+        return next(err)
+    }
+
+
+})
+
 router.get('/:eventId/attendees',async (req,res,next) => {
 
     const theEvent = await Event.findByPk(req.params.eventId)
