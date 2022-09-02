@@ -82,6 +82,48 @@ router.post('/:eventId/images',requireAuth,async (req, res, next) => {
     }
 )
 
+router.delete('/:eventId/attendees', requireAuth, async (req,res,next) => {
+
+const event = await Event.findByPk(req.params.eventId)
+
+if (!event){
+        const err = new Error('Event couldn\'t be found')
+        err.status = 404
+        return next(err)
+}
+const group = await Group.findOne({
+    where:{
+        id:event.groupId
+    }
+})
+
+const attendance = await Attendance.findOne({
+    where: {
+        eventId: req.params.eventId,
+        userId: req.body.userId
+    }
+})
+
+if (!Attendance) {
+    const err = new Error('Attendance does not exist for this User')
+    err.status = 404
+    return next(err)
+}
+
+if (group.organizerId === req.user.id || Attendance.userId === req.user.id) {
+    await Attendance.destroy()
+    res.json({ message: "Successfully deleted attendance from event" })
+} else {
+    const err = new Error('Only the User or organizer may delete an attendance')
+    err.status = 403
+    return next(err)
+}
+
+
+})
+
+
+
 router.post('/:eventId/attendees', requireAuth, async (req,res,next) => {
     const event = await Event.findByPk(req.params.eventId)
 
@@ -186,7 +228,7 @@ router.get('/:eventId/attendees',async (req,res,next) => {
             err.status = 404
             return next(err)
     }
- const group = await Event.findOne({
+ const group = await Group.findOne({
     where: {
         id:theEvent.groupId
     }
