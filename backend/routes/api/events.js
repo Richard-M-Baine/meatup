@@ -50,32 +50,6 @@ const validateEvent = [
     handleValidationErrors
 ]
 
-const validateQueries = [
-    query('page')
-        .optional()
-        .isInt({ min: 0 })
-        .withMessage('Page must be greater than or equal to 0'),
-    query('size')
-        .optional()
-        .isInt({ min: 0 })
-        .withMessage('Size must be greater than or equal to 0'),
-    query('name')
-        .optional()
-        .isString()
-        .withMessage('Name must be a string'),
-    query('type')
-        .optional()
-        .isIn(['Online', 'In Person'])
-        .withMessage('Type must be Online or In Person'),
-    query('startDate')
-        // .exists({ checkFalsy: true })
-        .optional()
-        .isAfter()
-        .custom((val) =>  !isNaN(Date.parse(val))) //takes a date string and converts to exact seconds since epox date, and if its NaN then the string passed is not a valid date
-        .toDate()
-        .withMessage('Start date must be a valid datetime'),
-    handleValidationErrors
-]
 
 
 
