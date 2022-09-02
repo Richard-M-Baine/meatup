@@ -320,20 +320,15 @@ res.json(venue)
 })
 
 // add an image to group
-router.post('/:groupId/images',requireAuth, async (req,res) =>{
+router.post('/:groupId/images',requireAuth, async (req,res,next) =>{
   const {groupId} = req.params
 
   const{url,preview} = req.body
 
   const group = await Group.findByPk(req.params.groupId)
 
-  if (!group){
-    const err = new Error('Group couldn\'t be found')
-    err.status = 404
-    return next(err)
-  }
 
-
+if (group){
  if (group.organizerId === req.user.id) {
   const groupImage = await GroupImage.create(
     {groupId,
@@ -347,12 +342,14 @@ router.post('/:groupId/images',requireAuth, async (req,res) =>{
   })
 
 }
+}
+else {
 
-
-  const err = new Error('User must be the organizer to upload images')
-  err.status = 403
-  return next(err)
-
+  res.json({
+    "message": "Group couldn't be found",
+    "statusCode": 404
+  })
+}
 })
 
 
@@ -361,9 +358,14 @@ router.post('/:groupId/events', requireAuth, async (req,res) => {
         const group = await Group.findByPk(req.params.groupId)
 
         if (!group) {
-            const err = new Error('Group couldn\'t be found')
-            err.status = 404
-            return next(err)
+
+          res.json(
+            {
+              "message": "Group couldn't be found",
+              "statusCode": 404
+            }
+
+          ) 
         }
 
         const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body
@@ -583,22 +585,16 @@ res.json(object)
 router.put('/:groupId',requireAuth,async(req,res,next) => {
   const group = await Group.findByPk(req.params.groupId)
 
+
+
+// better way
+
+if (group){
   if (group.organizerId !== req.user.id) {
     const err = new Error('You must be the owner to edit this group')
     err.status = 403
     return next(err)
   }
-
-  //no group per stackoverflow
-  if (!group) {
-    const err = new Error('Group couldn\'t be found')
-    err.status = 404
-    return next(err)
-}
-
-// better way
-
-
 const { name, about, type, private, city, state } = req.body
 
 group.set({
@@ -616,6 +612,17 @@ await group.save()
 
 
 res.json(group)
+}
+else{
+  // ie group does not exist
+  //no group per stackoverflow
+
+    const err = new Error('Group couldn\'t be found')
+    err.status = 404
+    return next(err)
+
+
+}
 
 
 
