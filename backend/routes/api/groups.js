@@ -322,16 +322,16 @@ res.json(venue)
 // add an image to group
 router.post('/:groupId/images',requireAuth, async (req,res) =>{
   const {groupId} = req.params
-  const findgroupId = await Group.findAll({where:{organizerId:req.user.id}})
-  if(!findgroupId.length){
-      res.json({
-          "message": "Group couldn't be found",
-          "statusCode": 404
-        })
-  }
+
   const{url,preview} = req.body
 
   const group = await Group.findByPk(req.params.groupId)
+
+  if (!group){
+    const err = new Error('Group couldn\'t be found')
+    err.status = 404
+    return next(err)
+  }
 
 
  if (group.organizerId === req.user.id) {
