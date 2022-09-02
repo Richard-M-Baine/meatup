@@ -331,6 +331,8 @@ router.post('/:groupId/images',requireAuth, async (req,res) =>{
   }
   const{url,preview} = req.body
 
+
+ if (group.organizerId === req.user.id) {
   const groupImage = await GroupImage.create(
     {groupId,
         url:url,
@@ -341,6 +343,14 @@ router.post('/:groupId/images',requireAuth, async (req,res) =>{
       url:groupImage.url,
       preview:groupImage.preview
   })
+
+}
+
+else{
+  const err = new Error('User must be the organizer to upload images')
+  err.status = 403
+  return next(err)
+}
 })
 
 
