@@ -366,61 +366,86 @@ router.delete('/:eventId', requireAuth, async (req,res,next) => {
 
 })
 
-router.put('/:eventId',requireAuth,validateEvent, async (req, res, next) => {
-        const event = await Event.findByPk(
-            req.params.eventId,
-            {
-                attributes: ['id', 'groupId', 'venueId', 'name', 'type',
-                    'capacity', 'price', 'description', 'startDate', 'endDate']
-            }
-        )
+router.put('/:eventId',requireAuth, async (req, res, next) => {
 
-        if (!event) {
-            const err = new Error('Event couldn\'t be found')
-            err.status = 404
-            return next(err)
+    const { eventId } = req.params;
+    const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+
+    let event = await Event.findByPk(eventId)
+    
+    if(event){
+        if(event.venueId !== venueId){
+            res.status = 404;
+            return res.json({
+                message: "Venue could not be found",
+                statusCode: 404
+            })
         }
 
-        const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body
+        event.set({id: eventId, venueId})
+        event.update({name, type, capacity, price, description, startDate, endDate})
+        .then(function(event){
+            res.json({
+                id: event.id,
+                groupId: event.groupId,
+                venueId: event.venueId,
+                name: event.name,
+                type: event.type,
+                capacity: event.capacity,
+                price: event.price,
+                description: event.description,
+                startDate: event.startDate,
+                endDate: event.endDate
+            });
+          })
+        .catch(function (err) {
+            res.status = 400;
+            res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                "errors": {
+                    address: "Street address is required",
+                    city: "City is required",
+                    state: "State is required",
+                    lat: "Latitude is not valid",
+                    lng: "Longitude is not valid",
+                }
+            })
+          });
 
-        const group = Group.findOne({
-            where: {
-                id:event.groupId
-            }
+    } else {
+        res.status = 404;
+        return res.json({
+            message: "Event couldn't be found",
+            statusCode: 404
         })
+    }
+        // const event = await Event.findByPk(req.params.eventId)
 
-        if (!group) {
-            const err = new Error('Group couldn\'t be found')
-            err.status = 404
-            return next(err)
-        }
+        // if (!event) {
+        //     const err = new Error('Event couldn\'t be found')
+        //     err.status = 404
+        //     return next(err)
+        // }
 
-        if (venueId) {
-            const venue = await Venue.findByPk(venueId)
+        // const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body
 
-            if (!venue) {
-                const err = new Error('Venue couldn\'t be found')
-                err.status = 404
-                return next(err)
-            }
-        }
-        const cohost = await Membership.findOne({
-            where: {
-                groupId: group.id,
-                userId: req.user.id,
-                status: 'co-host'
-            },
-        })
+        // const group = Group.findOne({
+        //     where: {
+        //         id:event.groupId
+        //     }
+        // })
 
-        if (group.organizerId === req.user.id || cohost) {
-            await event.set({ venueId, name, type, capacity, price, description, startDate, endDate })
-            await event.save()
-            res.json({ id: event.id, groupId: group.id, venueId, name, type, capacity, price, description, startDate, endDate })
-        } else {
-            const err = new Error('Current User must be the organizer or a co-host to edits an event')
-            err.status = 403
-            return next(err)
-        }
+
+        // if (group.organizerId === req.user.id) {
+        //     await event.set({ venueId, name, type, capacity, price, description, startDate, endDate })
+        //     await event.save()
+        //     res.json({ id: event.id, groupId: group.id, venueId, name, type, capacity, price, description, startDate, endDate })
+        // } else {
+        //     const err = new Error('Current User must be the organizer or a co-host to edits an event')
+        //     err.status = 403
+        //     return next(err)
+        // }
     })
 
     
