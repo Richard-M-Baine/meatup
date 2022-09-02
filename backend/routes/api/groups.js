@@ -182,10 +182,13 @@ router.put('/:groupId/membership', requireAuth, async(req, res, next) => {
   let membership = await Membership.findOne({where: { [Op.and]: [ {userId: memberId}, {groupId} ] } })
 
   let group = await Group.findByPk(groupId)
-
+ 
+console.log(group.organizerId)
   let checkUser = await User.findByPk(currentUserId)
   let currentUserMembership = await Membership.findOne({where: { [Op.and]: [ {userId: currentUserId}, {groupId} ] } })
 
+  console.log(currentUserMembership.id)
+  
 
   if(status === "pending"){
       res.status = 400;
@@ -206,6 +209,8 @@ router.put('/:groupId/membership', requireAuth, async(req, res, next) => {
       })
   }
 
+  console.log(group.organizerId)
+
   if(!checkUser){
       res.status = 404;
       return res.json({
@@ -224,8 +229,9 @@ router.put('/:groupId/membership', requireAuth, async(req, res, next) => {
           statusCode: 404
       })
   }
-
-  if(currentUserMembership.status === "organizer"){
+  
+ 
+  if(currentUserMembership.id === group.organizerId){
       membership.update({status})
       return res.json({
           id: membership.id,
