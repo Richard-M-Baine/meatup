@@ -424,7 +424,7 @@ router.put('/:eventId',requireAuth,validateEvent, async (req, res, next) => {
     })
 
     
-router.get('/', validateQueries, async (req,res,next) => {
+router.get('/',  async (req,res,next) => {
 // query stuff
 let {page,size,name,type,startDate} = req.query
 
