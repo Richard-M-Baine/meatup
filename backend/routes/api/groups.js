@@ -329,12 +329,12 @@ router.post('/:groupId/images',requireAuth, async (req,res) =>{
           "statusCode": 404
         })
   }
-  const{urll,previeww} = req.body
+  const{url,preview} = req.body
 
   const groupImage = await GroupImage.create(
     {groupId,
-        urll,
-        previeww
+        url:url,
+        preview:preview
     })
   return res.json({
       id:groupImage.id,
