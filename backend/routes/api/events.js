@@ -352,37 +352,35 @@ router.get('/:eventId', async (req,res,next) => {
    res.json(eventJSON) 
 })
 
-router.delete('/:eventId', requireAuth, async (req,res,next) => {
-    const event = await Event.findByPk(req.params.eventId)
+router.delete('/:eventId', requireAuth, async(req, res, next) => {
+    const { eventId } = req.params;
+    const { user } = req;
 
-    if (!event) {
-        const err = new Error('Event couldn\'t be found')
-        err.status = 404
-        return next(err)
+    let currentUser = user.toSafeObject();
+    let currentUserId = currentUser.id;
+
+    let event = await Event.findByPk(eventId)
+    if(!event){
+        res.status = 404;
+        return res.json({
+            message: "Event couldn't be found",
+            statusCode: 404
+        })
     }
 
-    const group = Group.findOne({
-        where: {
-            id:event.groupId
-        }
-    })
-
-    const cohost = await Membership.findOne({
-        where: {
-            groupId: group.id,
-            userId: req.user.id,
-            status: 'co-host'
-        },
-    })
-    if (group.organizerId === req.user.id || cohost) {
-        await event.destroy()
-        res.json({ message: 'Successfully deleted' })
+    let validateAuthorization = await Membership.findOne({ where: { [Op.and]: [ {userId: currentUserId}, { groupId: event.groupId} ] }})
+    if(validateAuthorization.status === "co-host" || validateAuthorization.status === "organizer"){
+        await event.destroy();
+        return res.json({
+            message: "Successfully deleted"
+        })
     } else {
-        const err = new Error('Current User must be the organizer or a co-host to delete an event')
-        err.status = 403
-        return next(err)
+        res.status = 403;
+        return res.json({
+            message: "Current User does not have authorization to delete event",
+            statusCode: 403
+        })
     }
-
 
 })
 

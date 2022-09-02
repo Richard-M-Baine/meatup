@@ -640,27 +640,25 @@ else{
 })
 
 
+router.delete('/:groupId', async(req, res, next) => {
+  const { groupId } = req.params;
 
-router.delete('/:groupId',requireAuth,async(req,res,next) => {
-  const group = await Group.findByPk(req.params.groupId)
+  let group = await Group.findByPk(groupId)
 
-     //Group cannot be found
-     if (!group) {
-      const err = new Error('Group couldn\'t be found')
-      err.status = 404
-      return next(err)
+  if(group){
+      await group.destroy()
+
+      res.json({
+          message: "Successfully deleted",
+          statusCode: 200
+      })
+  } else {
+      res.status = 404
+      res.json({
+          message: "Group couldn't be found",
+          statusCode: 404
+      })
   }
-  //Only the owner can delete the group
-  if (group.organizerId !== req.user.id) {
-      const err = new Error('You must be the owner to delete this group')
-      err.status = 403
-      return next(err)
-  }
-  // you served me well meetup group enjoy your retirement
-  await group.destroy()
-
-        res.status(200).json({ message: "Successfully deleted", statusCode: 200 })
-
 })
 
 
