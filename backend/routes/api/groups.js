@@ -332,10 +332,10 @@ router.post('/:groupId/images',requireAuth, async (req,res) =>{
   const{urll,previeww} = req.body
 
   const groupImage = await GroupImage.create(
-  {groupId:groupId,
-      url:urll,
-      preview:previeww
-  })
+    {groupId,
+        urll,
+        previeww
+    })
   return res.json({
       id:groupImage.id,
       url:groupImage.url,
