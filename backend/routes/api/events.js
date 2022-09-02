@@ -50,6 +50,32 @@ const validateEvent = [
     handleValidationErrors
 ]
 
+const validateQueries = [
+    query('page')
+        .optional()
+        .isInt({ min: 0 })
+        .withMessage('Page must be greater than or equal to 0'),
+    query('size')
+        .optional()
+        .isInt({ min: 0 })
+        .withMessage('Size must be greater than or equal to 0'),
+    query('name')
+        .optional()
+        .isString()
+        .withMessage('Name must be a string'),
+    query('type')
+        .optional()
+        .isIn(['Online', 'In Person'])
+        .withMessage('Type must be Online or In Person'),
+    query('startDate')
+        // .exists({ checkFalsy: true })
+        .optional()
+        .isAfter()
+        .custom((val) =>  !isNaN(Date.parse(val))) //takes a date string and converts to exact seconds since epox date, and if its NaN then the string passed is not a valid date
+        .toDate()
+        .withMessage('Start date must be a valid datetime'),
+    handleValidationErrors
+]
 
 
 
@@ -424,8 +450,31 @@ router.put('/:eventId',requireAuth,validateEvent, async (req, res, next) => {
     })
 
     
-router.get('/',  async (req,res,next) => {
+router.get('/', validateQueries, async (req,res,next) => {
 // query stuff
+let {page,size,name,type,startDate} = req.query
+
+
+if (page) {
+    if (page < 0) page = 1
+    else if (page > 10) page = 10
+    else page = Number(page)
+} else page = 1
+
+if (size) {
+    if (size < 0) size = 10
+    else if (size > 20) size = 20
+    else size = Number(size)
+} else size = 20
+
+let pagination = { limit: size, offset: size * page }
+
+if (name) {
+    queries.where.name = { [Op.substring]: name }
+}
+if (type) queries.where.type = type
+if (startDate && !isNaN(Date.parse(startDate))) queries.where.startDate = startDate
+
 
 
     let eventArray = await Event.findAll({
@@ -452,13 +501,16 @@ router.get('/',  async (req,res,next) => {
         ],
 
         
-        
+        ...queries,
+        ...pagination
     })
-    const events = []
+    const eventsArray = []
 
     for (let event of eventArray){
         const eventJSON = event.toJSON()
-        if (eventJSON.previewImage[0]) eventJSON.previewImage = eventJSON.previewImage[0].url
+        if (eventJSON.previewImage[0]) {
+            eventJSON.previewImage = eventJSON.previewImage[0].url
+        }
         let number = await Attendance.findAll({
             where: {
                 eventId:event.id,
@@ -467,12 +519,12 @@ router.get('/',  async (req,res,next) => {
         })
         let count = number.length
         eventJSON.numAttending = count
-        events.push(eventJSON)
+        eventsArray.push(eventJSON)
 
 
     }
 
-   res.json(events) 
+   res.json({Events: eventsArray}) 
 })
 
 
