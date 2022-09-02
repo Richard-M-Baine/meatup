@@ -82,43 +82,50 @@ router.post('/:eventId/images',requireAuth,async (req, res, next) => {
     }
 )
 
-router.delete('/:eventId/attendance', requireAuth, async (req,res,next) => {
+router.delete('/:eventId/attendance', requireAuth, async(req, res, next) => {
+    const { eventId } = req.params;
+    const { memberId } = req.body;
+    const { user } = req;
 
-const event = await Event.findByPk(req.params.eventId)
+    let currentUser = user.toSafeObject();
+    let currentUserId = currentUser.id;
 
-if (!event){
-        const err = new Error('Event couldn\'t be found')
-        err.status = 404
-        return next(err)
-}
-const group = await Group.findOne({
-    where:{
-        id:event.groupId
+    let eventCheck = await Event.findByPk(eventId);
+    if(!eventCheck) {
+        res.status = 404;
+        return res.json({
+            message: "Event couldn't be found",
+            statusCode: 404
+        })
     }
-})
 
-const attendance = await Attendance.findOne({
-    where: {
-        eventId: req.params.eventId,
-        userId: req.body.userId
+    let checkAuthorization = await Group.findOne({
+        where: { organizerId: currentUserId},
+    })
+    
+
+    if(checkAuthorization ||  memberId === currentUserId){
+         let member = await Attendance.findOne({ where: { [Op.and]: [ {eventId}, {userId: memberId } ] } });
+        console.log(member)
+        if(member){
+        await member.destroy()
+        return res.json({
+            message: "Successfully deleted attendance from event"
+        })
+         } else {
+            res.status = 404;
+            return res.json({
+            message: "Attendance does not exist for this User",
+            statusCode: 404
+            })
+        }
     }
-})
-
-if (!Attendance) {
-    const err = new Error('Attendance does not exist for this User')
-    err.status = 404
-    return next(err)
-}
-
-if (group.organizerId === req.user.id || Attendance.userId === req.user.id) {
-    await Attendance.destroy()
-    res.json({ message: "Successfully deleted attendance from event" })
-} else {
-    const err = new Error('Only the User or organizer may delete an attendance')
-    err.status = 403
-    return next(err)
-}
-
+    
+    res.status = 403;
+    return res.json({
+        message: "Only the User or organizer may delete an Attendance",
+        statusCode: 403
+    })
 
 })
 
