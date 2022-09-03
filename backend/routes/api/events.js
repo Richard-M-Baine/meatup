@@ -280,8 +280,7 @@ else {
 
     const Attendees = await User.findAll({
         include: {
-            model: Attendee,
-            as: 'Attendance',
+            model: Attendance,
             attributes: ['status'],
             where: {
                 eventId: req.params.eventId,

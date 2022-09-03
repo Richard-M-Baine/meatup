@@ -19,6 +19,16 @@ const router = express.Router();
         }
     })
 
+    if (!blah){
+        res.json(
+            {
+                message: "Event couldn't be found",
+                statusCode: 404
+            }
+        )
+       
+    }
+
     console.log(blah)
     await blah.destroy()
 
