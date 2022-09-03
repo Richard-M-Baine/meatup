@@ -187,7 +187,6 @@ console.log(group.organizerId)
   let checkUser = await User.findByPk(currentUserId)
   let currentUserMembership = await Membership.findOne({where: { [Op.and]: [ {userId: currentUserId}, {groupId} ] } })
 
-  console.log(currentUserMembership.id)
   
 
   if(status === "pending"){

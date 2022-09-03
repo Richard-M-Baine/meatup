@@ -73,7 +73,7 @@ router.post('/:eventId/images',requireAuth,async (req, res, next) => {
 
         if (group.organizerId === req.user.id || attendance) {
             const newImage = await EventImage.create({ eventId: Number(req.params.eventId), url: req.body.url, preview: req.body.preview})
-            res.json({ id: newImage.id, url: newImage.url, preview:false })
+            res.json({ id: newImage.id, url: newImage.url, preview:newImage.preview })
         } else {
             const err = new Error('User must be either the organizer or an attendee to upload images')
             err.status = 403
@@ -239,20 +239,21 @@ router.put('/:eventId/attendance', requireAuth, async(req, res, next) => {
     })
 })
 
-router.get('/:eventId/attendance',async (req,res,next) => {
+router.get('/:eventId/attendance',async (req,res) => {
 
     const theEvent = await Event.findByPk(req.params.eventId)
 
     if (!theEvent){
-        const err = new Error('Event couldn\'t be found')
-            err.status = 404
-            return next(err)
+        res.json({"message": "Event couldn't be found",
+        "statusCode": 404})
+            
     }
  const group = await Group.findOne({
     where: {
         id:theEvent.groupId
     }
  })
+
  const cohost = await Member.findOne({
     where: {
         groupId: group.id,
@@ -519,15 +520,9 @@ router.get('/:eventId/attendees', async(req, res, next) => {
                
             }
         }
-        if(payload.length >= 1){
+        
              return res.json({Attendees: payload})  
-        } else {
-            res.status = 404;
-            return res.json({
-                message: "No Attendees were found for this event",
-                statusCode: 404
-            })
-        }
+       
      
         
     })
