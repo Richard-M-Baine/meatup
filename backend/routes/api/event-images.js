@@ -24,6 +24,16 @@ const router = express.Router();
 
     res.json({"message": "Successfully deleted",
     "statusCode": 200})
+
+    if (!blah){
+        res.json(
+            {
+                message: "Event couldn't be found",
+                statusCode: 404
+            }
+        )
+       
+    }
     })
 
 
