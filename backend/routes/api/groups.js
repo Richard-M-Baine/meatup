@@ -412,9 +412,10 @@ router.post('/:groupId/events', requireAuth, async (req,res) => {
             const venue = await Venue.findByPk(venueId)
 
             if (!venue) {
-                const err = new Error('Venue couldn\'t be found')
-                err.status = 404
-                return next(err)
+                res.json({
+                  "message": "Event couldn't be found",
+                  "statusCode": 404
+                })
             }
         }
 
