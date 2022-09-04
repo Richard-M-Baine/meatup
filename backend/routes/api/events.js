@@ -353,32 +353,22 @@ router.get('/:eventId', async (req,res,next) => {
 })
 
 router.delete('/:eventId', requireAuth, async(req, res, next) => {
-    const { eventId } = req.params;
-    const { user } = req;
+    const { groupId } = req.params;
 
-    let currentUser = user.toSafeObject();
-    let currentUserId = currentUser.id;
-
-    let event = await Event.findByPk(eventId)
-    if(!event){
-        res.status = 404;
-        return res.json({
-            message: "Event couldn't be found",
-            statusCode: 404
-        })
-    }
-
-    let validateAuthorization = await Membership.findOne({ where: { [Op.and]: [ {userId: currentUserId}, { groupId: event.groupId} ] }})
-    if(validateAuthorization.status === "co-host" || validateAuthorization.status === "organizer"){
-        await event.destroy();
-        return res.json({
-            message: "Successfully deleted"
+    let group = await Group.findByPk(groupId)
+  
+    if(group){
+        await group.destroy()
+  
+        res.json({
+            message: "Successfully deleted",
+            statusCode: 200
         })
     } else {
-        res.status = 403;
-        return res.json({
-            message: "Current User does not have authorization to delete event",
-            statusCode: 403
+        res.status = 404
+        res.json({
+            message: "Group couldn't be found",
+            statusCode: 404
         })
     }
 
