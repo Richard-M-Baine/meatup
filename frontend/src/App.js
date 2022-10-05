@@ -4,16 +4,24 @@ import { useDispatch } from "react-redux";
 
 // LoginForm stuff
 import Login from "./components/LoginFormModal/LoginForm";
-// end LoginStuff
 
+// end LoginStuff
+import * as sessionActions from "./store/session";
 
 
 function App() {
 
+  const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+  }, [dispatch]);
+
+
   
 
 
-  return (
+  return isLoaded &&(
     <Switch>
       <Route path="/login">
         <Login />
