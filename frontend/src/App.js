@@ -1,6 +1,24 @@
+import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+// LoginForm stuff
+import Login from "./components/LoginFormModal/LoginForm";
+// end LoginStuff
+
+
+
 function App() {
+
+  
+
+
   return (
-    <h1>Hello from App</h1>
+    <Switch>
+      <Route path="/login">
+        <Login />
+      </Route>
+    </Switch>
   );
 }
 
