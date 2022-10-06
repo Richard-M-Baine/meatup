@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 
 // LoginForm stuff
 import Login from "./components/LoginFormModal/LoginForm";
+import Signup from "./components/SignupFormModal/SignupForm"
 
 // end LoginStuff
 import * as sessionActions from "./store/session";
@@ -25,6 +26,9 @@ function App() {
     <Switch>
       <Route path="/login">
         <Login />
+      </Route>
+      <Route path='/signup'>
+        <Signup />
       </Route>
     </Switch>
   );
