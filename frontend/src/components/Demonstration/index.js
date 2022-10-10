@@ -15,7 +15,7 @@ export default function DemoUser() {
     }
     return (
         <form onSubmit={handleSubmit}>
-             <h1>This is the demo user button and not offical meetup etc. etc.</h1>
+             <h4>The purple is demo user button.</h4>
             <button className = 'dasButton'type='submit'>Demo User</button>
         </form>
     )

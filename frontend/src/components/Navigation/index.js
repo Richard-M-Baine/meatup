@@ -20,7 +20,8 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
-  if (sessionUser) {
+  console.log()
+  if (Object.keys(sessionUser).length && sessionUser) {
     sessionLinks = (
       <ProfileButton user={sessionUser} />
     );
