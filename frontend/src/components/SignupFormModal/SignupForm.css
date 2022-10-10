@@ -21,3 +21,16 @@ div.signup-footer {
     display: flex;
     margin-top: 10px;
 } 
+.signup-bottom{
+    background-color: #f77070;
+    width: 624px;
+    height: 3rem;
+    background-color: #f65858;
+    text-align: center;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+}

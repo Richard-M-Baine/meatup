@@ -47,11 +47,12 @@ function Signup() {
           </h2>
   
           <input
+            className="w100"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w100"
+            
   
           />
           <h2>
@@ -59,11 +60,12 @@ function Signup() {
           </h2>
   
           <input
+            className="w100"
             type="text"
             value={username}
             onChange={(e) => setUserName(e.target.value)}
             required
-            className="w100"
+            
   
           />
           <h2>
@@ -71,11 +73,12 @@ function Signup() {
           </h2>
   
           <input
+            className="w100"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
-            className="w100"
+            
   
           />
           <h2>
@@ -83,11 +86,12 @@ function Signup() {
           </h2>
   
           <input
+            className="w100"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
-            className="w100"
+            
   
           />
           <h2>
@@ -95,11 +99,12 @@ function Signup() {
           </h2>
   
           <input
+            className="w100"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w100"
+            
   
           />
           <h2>
@@ -107,16 +112,17 @@ function Signup() {
           </h2>
   
           <input
+            className="w100"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
-            className="w100"
+            
   
           />
           <div className="signup-footer w100 flex-column-center">
             {/* <button className="return" onclick="javascript:history.back()">Back</button> */}
-            <button className="default signup" type="submit">Sign Up</button>
+            <button className="signup-bottom" type="submit">Sign Up</button>
           </div>
         </form>
       </>
