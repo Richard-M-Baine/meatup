@@ -46,13 +46,16 @@ function Login( ){
       }
 
       const gotoSignup = () => {
+        
         history.push("/signup");
 
     }
-
-    if (sessionUser) return (
-      <Redirect to="/" />
-    );
+   
+    // if (sessionUser) return (
+    //   console.log(sessionUser),    
+      
+    //   <Redirect to="/" />
+    // );
       
     return (
       <div className='login-ruckgrund'>
