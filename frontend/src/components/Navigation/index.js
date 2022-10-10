@@ -1,16 +1,18 @@
+// frontend/src/components/Navigation/index.js
+
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import ProfileButton from './ProfileButton';
-import LoginFormPage from '../LoginFormModal';
+import LoginFormModal from '../LoginFormModal';
 import DemoUser from '../Demonstration/index';
 
 
 import './Navigation.css';
 
 
-// frontend/src/components/Navigation/index.js
 
 
 
@@ -20,16 +22,18 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
-  console.log()
-  if (Object.keys(sessionUser).length && sessionUser) {
+  console.log(sessionUser)
+  if (sessionUser) {
     sessionLinks = (
       <ProfileButton user={sessionUser} />
     );
-  } else {
+  } 
+  
+  else {
     sessionLinks = (
       <>
         <DemoUser />
-        <NavLink to="/login">Log In</NavLink>
+        <LoginFormModal />
         <NavLink to="/signup">Sign Up</NavLink>
       </>
     );

@@ -11,6 +11,7 @@ export default function DemoUser() {
         e.preventDefault();
         const credential = 'bilbo@gmail.com';
         const password = 'password';
+        alert('your going to be logged in as Bilbo Baggins.  Use your power wisely')
         return dispatch(sessionActions.login({ credential, password }))
     }
     return (

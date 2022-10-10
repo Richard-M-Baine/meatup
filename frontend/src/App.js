@@ -29,9 +29,6 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
           <Route path="/signup">
             <Signup />
           </Route>
@@ -40,5 +37,6 @@ function App() {
     </>
   );
 }
+
 
 export default App;

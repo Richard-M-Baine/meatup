@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import * as sessionActions from '../../store/session';
 import {useDispatch, useSelector} from 'react-redux'
+
 import {Link, useHistory} from 'react-router-dom'
 import { Redirect } from 'react-router-dom';
 
@@ -47,8 +48,8 @@ function Login( ){
         history.push("/signup");
 
     }
-   
-    if (Object.keys(sessionUser).length) return (
+   // Object.keys(sessionUser).length
+    if (sessionUser) return (
          
       
       <Redirect to="/" />
