@@ -51,11 +51,11 @@ function Login( ){
 
     }
    
-    // if (sessionUser) return (
-    //   console.log(sessionUser),    
+    if (Object.keys(sessionUser).length) return (
+         
       
-    //   <Redirect to="/" />
-    // );
+      <Redirect to="/" />
+    );
       
     return (
       <div className='login-ruckgrund'>
