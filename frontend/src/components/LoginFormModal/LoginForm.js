@@ -41,9 +41,6 @@ function Login( ){
         
       };
 
-      const handleSubmitDemoUser = (e) => {
-        return dispatch(sessionActions.login({credential: 'bilbo@gmail.com', password: 'password'}))
-      }
 
       const gotoSignup = () => {
         

@@ -8,6 +8,8 @@ import Signup from "./components/SignupFormModal/SignupForm"
 
 // end LoginStuff
 import * as sessionActions from "./store/session";
+import Navigation from "./components/Navigation";
+// end authme stuff
 
 
 function App() {
@@ -22,15 +24,20 @@ function App() {
   
 
 
-  return isLoaded &&(
-    <Switch>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path='/signup'>
-        <Signup />
-      </Route>
-    </Switch>
+  return (
+    <>
+      <Navigation isLoaded={isLoaded} />
+      {isLoaded && (
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+        </Switch>
+      )}
+    </>
   );
 }
 
