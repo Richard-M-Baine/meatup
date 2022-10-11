@@ -1,0 +1,33 @@
+.login{
+    border-bottom: 0.5px solid rgba(34, 34, 34, 0.2);
+}
+
+.logout{
+    border-bottom: none;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.profile{
+    display: flex;
+    border-radius: 50%;
+    background-color: #f65858;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    align-content: center;
+    font-weight: bold;
+    cursor: pointer
+}
+
+.recht {
+    display: flex;
+    flex-direction: row;
+}

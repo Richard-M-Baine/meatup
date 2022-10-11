@@ -22,30 +22,45 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
-  console.log(sessionUser)
+ 
   if (sessionUser) {
     sessionLinks = (
+      <div className='navLoginOutDiv'>
+        <div className='newGroupButton'>
+        <NavLink className='new-group' to={`/groups/new`}>Create your group</NavLink>
+
+        </div>
+      <div className='profile'>
       <ProfileButton user={sessionUser} />
+      </div>
+      </div>
     );
   } 
   
   else {
     sessionLinks = (
-      <>
+      <div className='logout'>
         <DemoUser />
         <LoginFormModal />
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
+        <NavLink className= 'signup' to="/signup">Sign Up</NavLink>
+      </div>
     );
   }
 
+
+  // altered the authMe thing for divs
+
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
+    // thank you
+
+    <div className={sessionUser ? "navbar login" : 'navbar logout'}>
+      <div className='logo'>
+        <NavLink exact to="/">insert logo here</NavLink>
+      </div>
+      <div className='buttons'>
         {isLoaded && sessionLinks}
-      </li>
-    </ul>
+      </div>
+    </div>
   );
 }
 
