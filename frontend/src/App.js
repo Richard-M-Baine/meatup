@@ -14,6 +14,9 @@ import Navigation from "./components/Navigation";
 //Splash
 import Home from './components/Home'
 
+// group stuff
+import CreateGroupForm from './components/Groups/CreateGroup'
+
 
 function App() {
 
@@ -32,11 +35,17 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+
           <Route path='/' exact>
             <Home />
             </Route>
+
           <Route path="/signup">
             <Signup />
+          </Route>
+
+          <Route path='/groups/new'>
+            <CreateGroupForm />
           </Route>
         </Switch>
       )}
