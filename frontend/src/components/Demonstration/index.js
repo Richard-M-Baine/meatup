@@ -16,7 +16,7 @@ export default function DemoUser() {
     }
     return (
         <form onSubmit={handleSubmit}>
-             <h4>The purple is demo user button.</h4>
+             
             <button className = 'dasButton'type='submit'>Demo User</button>
         </form>
     )

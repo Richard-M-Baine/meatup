@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     margin-right: 40px;
+    
 }
 
 .profile{
@@ -27,7 +28,46 @@
     cursor: pointer
 }
 
-.recht {
+.nav{
+    
+        display: flex;
+        background-color: white;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030px;
+        width: 100vw;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        
+    
+}
+
+.navLoginOutDiv {
     display: flex;
     flex-direction: row;
+}
+
+.new{
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.new:hover{
+    color: #0098ae;
+}
+
+
+
+.newGroupDiv{
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
 }

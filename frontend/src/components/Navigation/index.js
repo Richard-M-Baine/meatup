@@ -26,9 +26,8 @@ function Navigation({ isLoaded }){
   if (sessionUser) {
     sessionLinks = (
       <div className='navLoginOutDiv'>
-        <div className='newGroupButton'>
-        <NavLink className='new-group' to={`/groups/new`}>Create your group</NavLink>
-
+        <div className='newGroupDiv'>
+        <NavLink className='new' to={`/groups/new`}>Create a group</NavLink>
         </div>
       <div className='profile'>
       <ProfileButton user={sessionUser} />
@@ -53,7 +52,7 @@ function Navigation({ isLoaded }){
   return (
     // thank you
 
-    <div className={sessionUser ? "navbar login" : 'navbar logout'}>
+    <div className={sessionUser ? "nav login" : 'nav logout'}>
       <div className='logo'>
         <NavLink exact to="/">insert logo here</NavLink>
       </div>
