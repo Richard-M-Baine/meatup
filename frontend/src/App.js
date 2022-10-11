@@ -11,6 +11,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 // end authme stuff
 
+//Splash
+import Home from './components/Home'
+
 
 function App() {
 
@@ -29,6 +32,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path='/' exact>
+            <Home />
+            </Route>
           <Route path="/signup">
             <Signup />
           </Route>
