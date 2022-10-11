@@ -7,18 +7,23 @@ import ticket from './splashImages/ticket.svg'
 import joinGroup from './splashImages/joinGroup.svg'
 import handsup from './splashImages/handsup.svg'
 // end of pictures
+import './SplashMain.css'
+
 
 import React from 'react'
 
+
+
 export default function Home() {
   return (
-    <>
-    <div className='ersteHaupt'>
-      <div className='erseteText'>
+    <div className='out'>
+    <div className='main'>
+    <div className='homeGroupOne'>
+      <div className='firstText'>
         <h1>Celebrating 20 years of real connections on Meatup</h1>
         <p>Whatever you’re looking to do this year, Meatup can help. For 20 years, people have turned to Meatup to meet people, make friends, find support, grow a business, and explore their interests. Thousands of events are happening every day—join the fun.</p>
       </div>
-      <div className='ersteBild'>
+      <div className='firstPic'>
         <img id='firstpic' src={online_events} alt='random clip art images'/>
       </div>
     </div>
@@ -41,8 +46,9 @@ export default function Home() {
 
       </div>
     </div>
+    </div>
 
-    </>
+    </div>
   )
 }
 
