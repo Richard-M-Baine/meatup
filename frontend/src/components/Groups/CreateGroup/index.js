@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 import './CreateGroup.css';
-//import { createGroupThunk } from '../../store/group';
-//import * as GroupActions from '../../store/group';
+import { createGroupThunk } from '../../../store/group';
+import * as GroupActions from '../../../store/group';
 
 
 function CreateGroupForm(){
@@ -48,14 +48,16 @@ function CreateGroupForm(){
             name: name,
             about: about,
             type: type,
-            privacy: privacy,
+            private: privacy,
             city: city,
             state: state
         }
+       
+        console.log(newGroup)
 
-        //const data = await dispatch(createNewGroupThunk(newGroup))
+        const data = await dispatch(createGroupThunk(newGroup))
 
-        //history.push(`/groups/${data.id}/about`)
+        history.push(`/groups/${data.id}/about`)
     }
 
            // renamed copied classes from  cloned site DONE 
@@ -189,8 +191,8 @@ function CreateGroupForm(){
                                 <h2 className="create-group">What type of group will {name} be ?</h2>
                                 <p className="create-group">Will this group primarily be In Person or Online?</p>
                                 <select name='type' value={type} onChange={e => setType(e.target.value)} >
-                                    <option value='In person'>In Person</option>
-                                    <option value='Online'>Online</option>
+                                    <option value="In person">In person</option>
+                                    <option value="Online">Online</option>
                                 </select>
                             </div>
 
