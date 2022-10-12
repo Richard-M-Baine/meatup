@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 // defintions or whatever they are called
 
 const CREATE_GROUP = 'groups/new'
-const GET_GROUPS = 'groups/groups'
+const GET_GROUPS = 'groups/all'
 const UPDATE_GROUP = 'groups/update'
 
 
@@ -13,6 +13,13 @@ const UPDATE_GROUP = 'groups/update'
 const createGroupAction = (payload) => {
     return {
         type: CREATE_GROUP,
+        payload
+    }
+}
+
+const getGroupsAction = (payload) => {
+    return {
+        type: GET_GROUPS,
         payload
     }
 }
@@ -47,6 +54,21 @@ export const createGroupThunk = (payload) => async dispatch => {
 }
 
 
+// read / get all the groups PROBLEMS HERE
+
+export const getGroupsThunk = () => async (dispatch) => {
+    const response = await csrfFetch('/api/groups/', {
+        method: 'GET'
+    })
+    const data = await response.json()
+    dispatch(getGroupsAction(data))
+    return response
+    console.log(response)
+}
+
+// 
+
+
 // REDUCERVILLE
 
 const initialState = {}
@@ -57,6 +79,12 @@ const groupReducer = (state = initialState, action) => {
         case CREATE_GROUP: { 
             newState = { ...state }
             newState[action.payload.id] = action.payload
+            return newState
+        }
+        case GET_GROUPS: {
+            action.payload.Groups.forEach(group => {
+                newState[group.id] = group
+            })
             return newState
         }
 

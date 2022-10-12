@@ -16,6 +16,7 @@ import Home from './components/Home'
 
 // group stuff
 import CreateGroupForm from './components/Groups/CreateGroup'
+import AllGroups from "./components/Groups/AllGroups";
 
 
 function App() {
@@ -46,6 +47,10 @@ function App() {
 
           <Route path='/groups/new'>
             <CreateGroupForm />
+          </Route>
+
+          <Route path='/groups/test'>
+            <AllGroups/>
           </Route>
           
         </Switch>
