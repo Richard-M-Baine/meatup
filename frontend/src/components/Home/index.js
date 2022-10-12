@@ -20,8 +20,8 @@ export default function Home() {
     <div className='main'>
     <div className='homeGroupOne'>
       <div className='firstText'>
-        <h1>Celebrating 20 years of real connections on Meatup</h1>
-        <p>Whatever you’re looking to do this year, Meatup can help. For 20 years, people have turned to Meatup to meet people, make friends, find support, grow a business, and explore their interests. Thousands of events are happening every day—join the fun.</p>
+        <h1>Celebrating 1 month of fake connections on Meatup</h1>
+        <p>Whatever you’re looking to do this year, Meatup can help. For 1 month, people have turned to Meatup to meet people, make friends, find support, grow a business, and explore their interests. One and sometimes two events are happening every day—join the fun.</p>
       </div>
       <div className='firstPic'>
         <img id='firstpic' src={online_events} alt='random clip art images'/>
