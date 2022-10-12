@@ -17,7 +17,7 @@ function CreateGroupForm(){
 
     const [name,setName] = useState('')
     const [about, setAbout] = useState('')
-    const [type, setType] = useState('In Person')
+    const [type, setType] = useState("In Person")
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [preImage, setPreImage] = useState('')
@@ -189,9 +189,11 @@ function CreateGroupForm(){
                         <div className='partDiv'>
                             <div className='fourthTextContainer'>
                                 <h2 className="create-group">What type of group will {name} be ?</h2>
+
                                 <p className="create-group">Will this group primarily be In Person or Online?</p>
+
                                 <select name='type' value={type} onChange={e => setType(e.target.value)} >
-                                    <option value="In person">In person</option>
+                                    <option value="In Person">In Person</option>
                                     <option value="Online">Online</option>
                                 </select>
                             </div>
@@ -229,7 +231,7 @@ function CreateGroupForm(){
 
                                 <span>Once you submit your group, you'll be redirected to your newly created group's page</span>
 
-                                <div className="w100 flex-row-justify-between border-top-black-2px">
+                            <div className="buttons">
                                 <button className="return" onClick={e => setPart('PART 4')}>Back</button>
                                 <button className="default" type="submit">{'Agree & Create group'}</button>
                             </div>
