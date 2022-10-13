@@ -54,7 +54,7 @@ function App() {
             <AllGroups/>
           </Route>
 
-          <Route path='/groups/test'>
+          <Route path='/groups/:groupId'>
             <GroupDetails />
           </Route>
           
