@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 
 const CREATE_GROUP = 'groups/new'
 const GET_GROUPS = 'groups/all'
+const ONE_GROUP = 'groups/one'
 
 
 
@@ -23,6 +24,13 @@ const getGroupsAction = payload => {
     return {
         type: GET_GROUPS,
         payload
+    }
+}
+
+const OneGroup = group => {
+    return {
+        type: ONE_GROUP,
+        group
     }
 }
 
@@ -56,9 +64,7 @@ export const createGroupThunk = (payload) => async dispatch => {
 }
 
 
-// read / get all the groups PROBLEMS HERE
-
-
+// read / get all the groups
 
 export const fetchGroups = () => async dispatch => {
     const res = await csrfFetch('/api/groups');
@@ -74,7 +80,23 @@ export const fetchGroups = () => async dispatch => {
     }
 }
 
-// 
+// get group by id
+
+export const getOneGroupThunk = (id) => async dispatch => {
+    
+    const res = await csrfFetch(`/api/groups/${id}`);
+    if (res.ok) {
+        console.log(' i am here')
+        
+        const singleGroup = await res.json()
+        
+        dispatch(OneGroup(singleGroup))
+        return singleGroup
+    }
+
+}
+
+
 
 
 // REDUCERVILLE
@@ -89,14 +111,17 @@ const groupReducer = (state = initialState, action) => {
             newState[action.payload.id] = action.payload
             return newState
         }
-        case GET_GROUPS: {
-           
-            
+        case GET_GROUPS: {  
             action.payload.Groups.forEach(group => {
                 newState[group.id] = group
             })
-            return newState
-            
+            return newState 
+        }
+        case ONE_GROUP: {
+            newState = { ...state };
+            newState[action.group.id] = action.group;
+            return newState;
+
         }
        
       
