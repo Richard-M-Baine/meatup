@@ -15,9 +15,10 @@ function AllGroups(){
     const dispatch = useDispatch()
     const groups = useSelector(state => state.groups)
 
-    if (groups) {
+    
         const groupsList = Object.values(groups)
-    }
+    
+    
     
 
     const [loaded, setLoaded] = useState(false)
@@ -30,8 +31,10 @@ function AllGroups(){
 
     return loaded && (
         <div>
-            
-                <GroupCard />
+            {groupsList.map(group => (
+                <GroupCard group={group} key={group.id}/>
+            ))}
+                
            
         </div>
     )
