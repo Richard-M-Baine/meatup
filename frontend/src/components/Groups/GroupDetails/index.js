@@ -17,8 +17,8 @@ export default function GroupDetails(){
     const dispatch = useDispatch();
     const { groupId } = useParams();
     const history = useHistory();
-    const test = useSelector((state) => state.groups);
-    const thisGroup = test[groupId];
+    const reduxstate = useSelector((state) => state.groups);
+    const singleGroup = reduxstate[groupId];
     const thisUser = useSelector(state => state.session.user);
 
     useEffect(() => {
@@ -29,6 +29,7 @@ export default function GroupDetails(){
     return (
         <div>
         <h1>I am the group details thing</h1>
+        <h4>{singleGroup.name}</h4>
         <h2></h2>
         </div>
     )
