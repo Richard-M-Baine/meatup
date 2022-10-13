@@ -16,12 +16,14 @@ export default function GroupDetails(){
 
     const dispatch = useDispatch();
     const { groupId } = useParams();
+    
     const history = useHistory();
     const reduxstate = useSelector((state) => state.groups);
     const singleGroup = reduxstate[groupId];
     const thisUser = useSelector(state => state.session.user);
 
     useEffect(() => {
+        
         dispatch(getOneGroupThunk(groupId))
     }, [dispatch]);
 
@@ -29,8 +31,8 @@ export default function GroupDetails(){
     return (
         <div>
         <h1>I am the group details thing</h1>
-        <h4>{singleGroup.name}</h4>
-        <h2></h2>
+        
+        <h2>{singleeGroup.name}</h2>
         </div>
     )
 }

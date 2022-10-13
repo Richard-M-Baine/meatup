@@ -82,7 +82,7 @@ export const fetchGroups = () => async dispatch => {
 
 // get group by id
 
-export const getOneGroupThunk = (id) => async dispatch => {
+export const getOneGroupThunk = id => async dispatch => {
     
     const res = await csrfFetch(`/api/groups/${id}`);
     if (res.ok) {
