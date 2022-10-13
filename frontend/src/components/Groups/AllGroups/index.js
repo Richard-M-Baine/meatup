@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import GroupCard from './GroupCard/index'
 import './groups.css'
 
-import { getGroupsThunk} from '../../../store/group'
+import { fetchGroups } from '../../../store/group'
 
 
 
@@ -15,12 +15,15 @@ function AllGroups(){
     const dispatch = useDispatch()
     const groups = useSelector(state => state.groups)
 
-    const groupsList = Object.values(groups)
+    if (groups) {
+        const groupsList = Object.values(groups)
+    }
+    
 
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        dispatch(getGroupsThunk())
+        dispatch(fetchGroups())
         .then(() => setLoaded(true))
     },[dispatch])
     console.log(loaded)

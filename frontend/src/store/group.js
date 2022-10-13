@@ -17,6 +17,13 @@ const createGroupAction = (payload) => {
     }
 }
 
+const getMyGroups = groups => {
+    return {
+        type: GET_GROUPS,
+        groups
+    }
+}
+
 const getGroupsAction = (payload) => {
     return {
         type: GET_GROUPS,
@@ -56,14 +63,25 @@ export const createGroupThunk = (payload) => async dispatch => {
 
 // read / get all the groups PROBLEMS HERE
 
-export const getGroupsThunk = () => async (dispatch) => {
-    const response = await csrfFetch('/api/groups/', {
-        method: 'GET'
-    })
-    const data = await response.json()
-    dispatch(getGroupsAction(data))
-    return response
-    console.log(response)
+// export const getGroupsThunk = () => async (dispatch) => {
+//     const response = await csrfFetch('/api/groups/', {
+//         method: 'GET'
+//     })
+//     const data = await response.json()
+//     dispatch(getGroupsAction(data))
+//     return response
+//     console.log(response)
+// }
+
+export const fetchGroups = () => async dispatch => {
+    const res = await csrfFetch('/api/groups');
+   
+    if (res.ok) {
+        const groups = await res.json();
+       
+        dispatch(getGroupsAction(groups));
+        return groups;
+    }
 }
 
 // 
@@ -87,6 +105,8 @@ const groupReducer = (state = initialState, action) => {
             })
             return newState
         }
+        default:
+            return state;
 
 
 
