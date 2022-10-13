@@ -7,7 +7,7 @@ import './groupCard.css'
 function GroupCard() {
 
     return (
-        <h1>will this make me skinny?</h1>
+        <h1>will this work?</h1>
     )
 
 }

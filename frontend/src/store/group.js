@@ -75,11 +75,12 @@ export const createGroupThunk = (payload) => async dispatch => {
 
 export const fetchGroups = () => async dispatch => {
     const res = await csrfFetch('/api/groups');
-   
+   console.log(res)
     if (res.ok) {
         const groups = await res.json();
        
         dispatch(getGroupsAction(groups));
+        console.log(groups)
         return groups;
     }
 }

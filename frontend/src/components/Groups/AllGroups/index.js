@@ -26,11 +26,13 @@ function AllGroups(){
         dispatch(fetchGroups())
         .then(() => setLoaded(true))
     },[dispatch])
-    console.log(loaded)
+    
 
-    return (
+    return loaded && (
         <div>
-            <GroupCard />
+            
+                <GroupCard />
+           
         </div>
     )
     
