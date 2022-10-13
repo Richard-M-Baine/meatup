@@ -17,6 +17,7 @@ import Home from './components/Home'
 // group stuff
 import CreateGroupForm from './components/Groups/CreateGroup'
 import AllGroups from "./components/Groups/AllGroups";
+import GroupDetails from "./components/Groups/GroupDetails";
 
 
 function App() {
@@ -49,8 +50,12 @@ function App() {
             <CreateGroupForm />
           </Route>
 
-          <Route path='/groups/test'>
+          <Route path='/groups/all'>
             <AllGroups/>
+          </Route>
+
+          <Route path='/groups/test'>
+            <GroupDetails />
           </Route>
           
         </Switch>
