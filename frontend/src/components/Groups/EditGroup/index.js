@@ -12,12 +12,16 @@ import './EditGroup.css'
 
 
 function EditGroupForm(){
+    useEffect(() => {
+        dispatch(getOneGroupThunk(groupId))
+            .then(() => setIsLoaded(true))
+    }, [dispatch, groupId])
 
     const history = useHistory();
-    const params = useParams()
+    const { groupId } = useParams();
     const dispatch = useDispatch();
 
-    const { groupId } = useParams();
+    
     const group = useSelector((state) => state.groups[groupId]);
 
     const sessionUser = useSelector((state) => state.session.user);
