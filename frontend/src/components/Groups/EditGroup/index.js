@@ -72,10 +72,10 @@ return (
 
     <form onSubmit={submit}>
 
-<input
-    value={name}></input>
 
-    
+   
+
+
     </form>
 
 
