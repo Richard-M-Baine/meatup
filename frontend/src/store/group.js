@@ -5,6 +5,7 @@ import { csrfFetch } from "./csrf";
 const CREATE_GROUP = 'groups/new'
 const GET_GROUPS = 'groups/all'
 const ONE_GROUP = 'groups/one'
+const EDIT_GROUP = 'groups/edit'
 
 
 
@@ -30,6 +31,13 @@ const getGroupsAction = payload => {
 const OneGroup = group => {
     return {
         type: ONE_GROUP,
+        group
+    }
+}
+
+const EditGroup = group => {
+    return {
+        type: EDIT_GROUP,
         group
     }
 }
@@ -97,6 +105,25 @@ export const getOneGroupThunk = id => async dispatch => {
 }
 
 
+export const editGroup = (group, groupId) => async(dispatch) => {
+    const {name, description, type, private_key, city, state} = group;
+    const response = await csrfFetch(`/api/groups/${groupId}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            name,
+            about: description,
+            type,
+            private: private_key,
+            city,
+            state
+        })
+    })
+    const data = await response.json();
+    dispatch(editGroup(data));
+    return response;
+}
+
+
 
 
 // REDUCERVILLE
@@ -118,7 +145,8 @@ const groupReducer = (state = initialState, action) => {
             return newState 
         }
         case ONE_GROUP: {
-            newState = { ...state };
+            
+            newState = {...state };
             newState[action.group.id] = action.group;
             return newState;
 

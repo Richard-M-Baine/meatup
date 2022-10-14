@@ -18,25 +18,27 @@ export default function GroupDetails(){
 
     const dispatch = useDispatch();
     const { groupId } = useParams();
+   const reduxstate = useSelector((state) => state.groups);
+    const singleGroup = reduxstate[groupId];
    
+    
+
+    const thisUser = useSelector(state => state.session.user);
 
     const [isLoaded, setIsLoaded] = useState(false)
     
     const history = useHistory();
-    const reduxstate = useSelector((state) => state.groups);
+    
 
-    const group = useSelector(state => state.groups[Number(groupId)])
-    const singleGroup = reduxstate[groupId];
-
-    const thisUser = useSelector(state => state.session.user);
-    const isOwner = thisUser?.id === group.organizerId
+    
+    const isOwner = thisUser?.id === singleGroup?.organizerId
   
 
 
     useEffect(() => {
         dispatch(getOneGroupThunk(groupId))
             .then(() => setIsLoaded(true))
-    }, [dispatch])
+    }, [dispatch, groupId])
 
 
     return isLoaded && (

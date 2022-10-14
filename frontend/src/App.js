@@ -18,6 +18,7 @@ import Home from './components/Home'
 import CreateGroupForm from './components/Groups/CreateGroup'
 import AllGroups from "./components/Groups/AllGroups";
 import GroupDetails from "./components/Groups/GroupDetails";
+import EditGroupForm from "./components/Groups/EditGroup";
 
 
 function App() {
@@ -54,8 +55,12 @@ function App() {
             <AllGroups/>
           </Route>
 
-          <Route path='/groups/:groupId'>
+          <Route path='/groups/:groupId/about'>
             <GroupDetails />
+          </Route>
+
+          <Route path='/test'>
+            <EditGroupForm />
           </Route>
           
         </Switch>
