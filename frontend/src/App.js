@@ -59,7 +59,7 @@ function App() {
             <GroupDetails />
           </Route>
 
-          <Route path='/test'>
+          <Route path='/groups/:groupId/edit'>
             <EditGroupForm />
           </Route>
           

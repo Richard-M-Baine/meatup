@@ -41,6 +41,12 @@ export default function GroupDetails(){
     }, [dispatch, groupId])
 
 
+    const editRoute = () => {
+        let path = `/groups/${groupId}/edit`
+        history.push(path)
+    }
+
+
     return isLoaded && (
         
        <div className='main-container'>
@@ -78,7 +84,7 @@ export default function GroupDetails(){
                     </div>
                     <div className='button-container'>
                         {isOwner &&
-                            <button className='button' >Edit Group</button>}
+                            <button className='button' onClick={editRoute}>Edit Group</button>}
                     </div>
                     <div className='button-container'>
                         {isOwner &&
