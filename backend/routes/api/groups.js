@@ -566,11 +566,7 @@ router.get(
   async (req, res, next) => {
       const group = await Group.findByPk(req.params.groupId)
 
-      if (!group) {
-        const err = new Error('Group couldn\'t be found')
-        err.status = 404
-        return next(err)
-    }
+   
 
       const numMembers = await Membership.findAll({
         where: {
