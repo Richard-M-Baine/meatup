@@ -9,6 +9,10 @@ import handsup from './splashImages/handsup.svg'
 // end of pictures
 import './SplashMain.css'
 
+// router crud
+
+import {Link} from 'react-router-dom'
+
 
 import React from 'react'
 
@@ -34,14 +38,19 @@ export default function Home() {
     <div className='dreiteHauptContainer'>
       <div className='dreiteInsides'>
         <img id='secondpic' src={handsup} alt='some hands with the python coding language emblem in the background.'/>
+        <div className='linkDiv1'>
+          <Link to='/groups/all'>Look for Groups</Link>
+        </div>
       <p>Do what you love, meet others who love it, find your community. The rest is history!</p>
       </div>
       <div className='dreiteHauptInsides'>
-      <img src={ticket} alt='some tickets that honestly look like envelopes' />
-        <p>Events are happening on just about any topic you can think of, from online gaming and photography to yoga and hiking.</p>
+          <img src={ticket} alt='some tickets that honestly look like envelopes' />
+          <Link to='/events/all'>Look for Events</Link>
+          <p>Events are happening on just about any topic you can think of, from online gaming and photography to yoga and hiking.</p>
       </div>
       <div className='dreiteHauptInsides'>
-      <img src={joinGroup} alt='pictures of people. look like grey aliens'/>
+        <Link to='/signup'>Signup to start a group!</Link>
+        <img src={joinGroup} alt='pictures of people. look like grey aliens'/>
         <p>You don’t have to be an expert to gather people together and explore shared interests.</p>
 
       </div>
