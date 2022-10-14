@@ -6,16 +6,13 @@ import { useParams } from 'react-router-dom';
 
 // thunk
 import { editGroup } from '../../../store/group';
-
+import { getOneGroupThunk } from '../../../store/group';
 import './EditGroup.css'
 
 
 
 function EditGroupForm(){
-    useEffect(() => {
-        dispatch(getOneGroupThunk(groupId))
-            .then(() => setIsLoaded(true))
-    }, [dispatch, groupId])
+  
 
     const history = useHistory();
     const { groupId } = useParams();
@@ -23,7 +20,7 @@ function EditGroupForm(){
 
     
     const group = useSelector((state) => state.groups[groupId]);
-
+console.log(group.city)
     const sessionUser = useSelector((state) => state.session.user);
     const [name, setName] = useState(group && group.name);
     const [about, setAbout] = useState(group && group.about)
@@ -33,8 +30,13 @@ function EditGroupForm(){
     const [isPrivate, setPrivate] = useState(group && group.private);
     const [errors, setErrors] = useState([]);
     const [submitted, setSubmitted] = useState(false);
+    const [loaded, setIsLoaded] = useState(false)
 
     //console.log(name)
+    useEffect(() => {
+        dispatch(getOneGroupThunk(groupId))
+            .then(() => setIsLoaded(true))
+    }, [dispatch, groupId])
 
     const submit = async (e) => {
         e.preventDefault();
@@ -64,18 +66,20 @@ function EditGroupForm(){
 
 
 
+
 return (
     <div className='main'>
         <div className='flavorText'>
     <h1>Welcome {sessionUser.firstName}! </h1>
-    <h3>feel free to alter {name} as you see fit</h3>
+    <h3>feel free to alter {group.name} as you see fit</h3>
         </div>
     
         
     
 
     <form onSubmit={submit}>
-
+        
+        <input></input>
 
    
 
