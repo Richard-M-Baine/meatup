@@ -86,7 +86,7 @@ export const getOneGroupThunk = id => async dispatch => {
     
     const res = await csrfFetch(`/api/groups/${id}`);
     if (res.ok) {
-        console.log(' i am here')
+        
         
         const singleGroup = await res.json()
         
