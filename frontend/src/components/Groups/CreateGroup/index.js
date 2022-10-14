@@ -53,7 +53,7 @@ function CreateGroupForm(){
             state: state
         }
        
-        console.log(newGroup)
+       
 
         const data = await dispatch(createGroupThunk(newGroup))
 

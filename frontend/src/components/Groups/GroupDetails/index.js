@@ -18,7 +18,7 @@ export default function GroupDetails(){
 
     const dispatch = useDispatch();
     const { groupId } = useParams();
-    console.log(groupId)
+   
 
     const [isLoaded, setIsLoaded] = useState(false)
     

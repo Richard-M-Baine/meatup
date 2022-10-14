@@ -183,7 +183,6 @@ router.put('/:groupId/membership', requireAuth, async(req, res, next) => {
 
   let group = await Group.findByPk(groupId)
  
-console.log(group.organizerId)
   let checkUser = await User.findByPk(currentUserId)
   let currentUserMembership = await Membership.findOne({where: { [Op.and]: [ {userId: currentUserId}, {groupId} ] } })
 
@@ -208,7 +207,7 @@ console.log(group.organizerId)
       })
   }
 
-  console.log(group.organizerId)
+  
 
   if(!checkUser){
       res.status = 404;
