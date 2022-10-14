@@ -1,3 +1,5 @@
+// group details react template
+
 import React from 'react'
 import { useEffect, useState } from 'react';
 import * as sessionActions from '../../../store/session';
@@ -16,6 +18,9 @@ export default function GroupDetails(){
 
     const dispatch = useDispatch();
     const { groupId } = useParams();
+    console.log(groupId)
+
+    const [isLoaded, setIsLoaded] = useState(false)
     
     const history = useHistory();
     const reduxstate = useSelector((state) => state.groups);
@@ -23,16 +28,16 @@ export default function GroupDetails(){
     const thisUser = useSelector(state => state.session.user);
 
     useEffect(() => {
-        
         dispatch(getOneGroupThunk(groupId))
-    }, [dispatch]);
+            .then(() => setIsLoaded(true))
+    }, [dispatch])
 
 
-    return (
+    return isLoaded && (
         <div>
         <h1>I am the group details thing</h1>
         
-        <h2>{singleeGroup.name}</h2>
+        <h2>{singleGroup.name}</h2>
         </div>
     )
 }
