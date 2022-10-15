@@ -67,10 +67,11 @@ function CreateGroupForm(){
     return(
            
                 <form className='formMain' onSubmit={handleSubmit}>
-
-                    <h2 className="text">
+                       <div className="text">
+                    <h2 >
                         {part} OF 5
                     </h2>
+                    </div> 
 
                         {/* part 1 */}
 
@@ -133,7 +134,7 @@ function CreateGroupForm(){
                      {
                         part === 'PART 2' && (
                             <div className='partDiv'>
-                                <div className='secondTextContainer'>
+                                <div className='SecondTextContainer'>
                                     <h2 className="create-group">What will your group's name be?</h2>
                                     <p className="create-group">Choose a name that will give people a clear idea of what the group is about. Feel free to get creative! You can edit this later if you change your mind.</p>
                                 </div>
@@ -144,7 +145,7 @@ function CreateGroupForm(){
                                 maxLength='60'
                                 placeholder='max 60 characters'
                                 name='name'/>
-                                <span className="text14 textcolor-grey">Character count: {name.length}</span>
+                                <span className="secondSpan">Character count: {name.length}</span>
 
                                 <div className="buttons">
                                 <button className="return" onClick={e => setPart('PART 1')}>Back</button>

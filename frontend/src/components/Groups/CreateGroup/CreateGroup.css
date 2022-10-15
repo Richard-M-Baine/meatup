@@ -11,6 +11,10 @@
     margin-left: 20vw;
     margin-right: 20vw;
 }
+
+.secondSpan{
+    margin-top: 10px;
+}
 .TextContainer{
     display: flex;
     flex-direction: column;
@@ -19,6 +23,7 @@
     margin-bottom: 20px;
 }
 
+
 #cityLabel{
     margin-right: 4px;
 }
@@ -26,7 +31,8 @@
 .partDiv{
     display: flex;
     flex-direction: column;
-    width: 250px;
+    justify-content: center;
+    width: 350px;
     height: 250px;
 }
 .secondPart{
