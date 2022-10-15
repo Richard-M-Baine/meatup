@@ -16,27 +16,31 @@ import './EditGroup.css'
  
 function EditGroupForm(){
  
- 
-    const history = useHistory();
     const { groupId } = useParams();
+     const group = useSelector((state) => state.groups[groupId]);
+
+    const history = useHistory();
+    const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
  
    
-    const group = useSelector((state) => state.groups[groupId]);
-    const sessionUser = useSelector((state) => state.session.user);
+   
+
  
     const [name, setName] = useState(group && group.name);
+    
     const [about, setAbout] = useState(group && group.about)
     const [type, setType] = useState(group && group.type)
     const [city, setCity] = useState(group && group.city)
     const [state, setState] = useState(group && group.state);
     const [isPrivate, setPrivate] = useState(group && group.private);
     const [errors, setErrors] = useState([]);
+
     const [submitted, setSubmitted] = useState(false);
     const [loaded, setIsLoaded] = useState(false)
  
    
- 
+
  
     useEffect(() => {
         dispatch(getOneGroupThunk(groupId))
@@ -61,7 +65,7 @@ function EditGroupForm(){
            
         };
  
-        console.log('I am the payload from the react side of things ')
+      
         return dispatch(editGroupThunk(payload, groupId))
        
         .then(() => {

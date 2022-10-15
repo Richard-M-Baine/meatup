@@ -130,12 +130,12 @@ export const deleteGroupThunk = (groupId) => async dispatch => {
 
 
 export const editGroupThunk = (group, groupId) => async(dispatch) => {
-    const {name, description, type, isPrivate , city, state} = group;
+    const {name, about, type, isPrivate , city, state} = group;
     const response = await csrfFetch(`/api/groups/${groupId}`, {
         method: 'PUT',
         body: JSON.stringify({
             name,
-            about: description,
+            about,
             type,
             private: isPrivate,
             city,

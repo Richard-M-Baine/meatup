@@ -630,6 +630,8 @@ if (group){
   }
 const { name, about, type, private, city, state } = req.body
 
+
+
 group.set({
   name: name,
   about: about,
