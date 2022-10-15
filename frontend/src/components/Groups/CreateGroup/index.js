@@ -65,27 +65,29 @@ function CreateGroupForm(){
 
 
     return(
-
+           
                 <form className='formMain' onSubmit={handleSubmit}>
 
-                    <div className="textcolor-grey">
+                    <h2 className="text">
                         {part} OF 5
-                    </div>
+                    </h2>
 
                         {/* part 1 */}
 
                     {
                         part === 'PART 1' && (
                     <div className="partDiv">
-                        <div className="firstTextContainer">
+                        <div className="TextContainer">
                             <h2 className="create-group">First, set your group's location</h2>
                             <p className="create-group">Meetup groups meet locally, in person and online. We'll connect you with people in your area, and more can join you online.</p>
                         </div>
 
+                    <div className='secondPart'>
                         <div className='cityDiv'>
-                            <label for='city'>City</label>
+                            <label className='label' id='cityLabel' for='city'>City</label>
 
                             <input
+                        className='input'
                         required
                         type='text'
                         onChange={text => setCity(text.target.value)}
@@ -98,26 +100,28 @@ function CreateGroupForm(){
                         </div>
                             
                      
-                    <div className='stateDiv'>
-                        <label for='state' className='textState'>State</label>
-                        <input
-                         required
-                         type='text'
-                         onChange={text => setState(text.target.value)}
-                         value={state}
-                         maxLength='50'
-                         placeholder='enter the state abbreviation'
-                         name='city'
-                         id='city' />
+                        <div className='stateDiv'>
+                            <label for='state' className='label'>State</label>
+                            <input
+                            className='input'
+                            required
+                             type='text'
+                            onChange={text => setState(text.target.value)}
+                            value={state}
+                             maxLength='50'
+                             placeholder='enter the state abbreviation'
+                            name='city'
+                             id='city' />
                         
                         
-                    </div>
+                         </div>
+                         </div>
 
-                    <div className='buttons'>
-                        <button className='return' style={{ visibility: 'hidden' }}></button>
-                        <button className="default" disabled={city.length < 3} onClick={e => setPart('PART 2')}>Next</button>
+                        <div className='buttons'>
+                             <button className='return' style={{ visibility: 'hidden' }}></button>
+                              <button className="default" disabled={city.length < 3} onClick={e => setPart('PART 2')}>Next</button>
 
-                    </div>
+                        </div>
 
                 </div>
                         )
@@ -256,6 +260,7 @@ function CreateGroupForm(){
 
 
                 </form>
+              
 
 
 
