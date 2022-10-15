@@ -142,6 +142,7 @@ export const editGroupThunk = (group, groupId) => async(dispatch) => {
             state
         })
     })
+    
     const data = await response.json();
     dispatch(EditGroup(data));
     return response;

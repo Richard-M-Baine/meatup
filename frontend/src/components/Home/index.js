@@ -31,28 +31,33 @@ export default function Home() {
         <img id='firstpic' src={online_events} alt='random clip art images'/>
       </div>
     </div>
+
+
+
     <div className='zweiteHaupt'>
       <h3>How Meatup Works</h3>
       <p>Meet new people who share your interests through online and in-person events. It’s free to create an account.</p>
-    </div>
+    
     <div className='dreiteHauptContainer'>
-      <div className='dreiteInsides'>
+      <div className='dreiteHauptInsides'>
         <img id='secondpic' src={handsup} alt='some hands with the python coding language emblem in the background.'/>
-        <div className='linkDiv1'>
-          <Link to='/groups/all'>Look for Groups</Link>
-        </div>
+        
+          <Link id='linkOne' to='/groups/all'>Look for Groups</Link>
+        
       <p>Do what you love, meet others who love it, find your community. The rest is history!</p>
       </div>
       <div className='dreiteHauptInsides'>
           <img src={ticket} alt='some tickets that honestly look like envelopes' />
-          <Link to='/events/all'>Look for Events</Link>
+          <Link id='linkTwo' to='/events/all'>Look for Events</Link>
           <p>Events are happening on just about any topic you can think of, from online gaming and photography to yoga and hiking.</p>
       </div>
       <div className='dreiteHauptInsides'>
-        <Link to='/signup'>Signup to start a group!</Link>
+        
         <img src={joinGroup} alt='pictures of people. look like grey aliens'/>
+        <Link id='linkThree' to='/signup'>Signup to start a group!</Link>
         <p>You don’t have to be an expert to gather people together and explore shared interests.</p>
 
+      </div>
       </div>
     </div>
     </div>
