@@ -6,6 +6,7 @@ const CREATE_GROUP = 'groups/new'
 const GET_GROUPS = 'groups/all'
 const ONE_GROUP = 'groups/one'
 const EDIT_GROUP = 'groups/edit'
+const DELETE_GROUP = 'groups/delete'
 
 
 
@@ -15,6 +16,13 @@ const EDIT_GROUP = 'groups/edit'
 const createGroupAction = (payload) => {
     return {
         type: CREATE_GROUP,
+        payload
+    }
+}
+
+const deleteGroupAction = (payload) => {
+    return {
+        type: DELETE_GROUP,
         payload
     }
 }
@@ -105,8 +113,24 @@ export const getOneGroupThunk = id => async dispatch => {
 }
 
 
-export const editGroup = (group, groupId) => async(dispatch) => {
-    const {name, description, type, private_key, city, state} = group;
+export const deleteGroupThunk = (groupId) => async dispatch => {
+    const response = await csrfFetch(`/api/groups/${groupId}`,
+        {
+            method: 'DELETE'
+        })
+    const data = await response.json()
+
+    if (response.ok) {
+        await dispatch(deleteGroupAction(groupId))
+        return data
+    } else { // any bad requests and errors
+        return data
+    }
+}
+
+
+export const editGroupThunk = (group, groupId) => async(dispatch) => {
+    const {name, description, type, isPrivate , city, state} = group;
     const response = await csrfFetch(`/api/groups/${groupId}`, {
         method: 'PUT',
         body: JSON.stringify({
@@ -119,7 +143,7 @@ export const editGroup = (group, groupId) => async(dispatch) => {
         })
     })
     const data = await response.json();
-    dispatch(editGroup(data));
+    dispatch(EditGroup(data));
     return response;
 }
 

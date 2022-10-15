@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
  
  
 // thunk
-import { editGroup } from '../../../store/group';
+import { editGroupThunk } from '../../../store/group';
 import { getOneGroupThunk } from '../../../store/group';
 import { deleteGroupThunk } from '../../../store/group';
  
@@ -62,7 +62,7 @@ function EditGroupForm(){
         };
  
         console.log('I am the payload from the react side of things ')
-        return dispatch(editGroup(payload, groupId))
+        return dispatch(editGroupThunk(payload, groupId))
        
         .then(() => {
             history.push(`/groups/${groupId}`);
