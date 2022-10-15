@@ -55,7 +55,7 @@ function EditGroupForm(){
             name: name,
             about: about,
             type: type,
-            privatee: isPrivate,
+            private: isPrivate,
             city: city,
             state: state,
            

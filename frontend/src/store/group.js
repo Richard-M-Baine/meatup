@@ -113,7 +113,7 @@ export const editGroup = (group, groupId) => async(dispatch) => {
             name,
             about: description,
             type,
-            private: private_key,
+            private: isPrivate,
             city,
             state
         })
@@ -150,6 +150,12 @@ const groupReducer = (state = initialState, action) => {
             newState[action.group.id] = action.group;
             return newState;
 
+        }
+
+        case EDIT_GROUP: {
+            newState = { ...state }
+            newState[action.payload.id] = { ...newState[action.payload.id], ...action.payload }
+            return newState
         }
        
       
