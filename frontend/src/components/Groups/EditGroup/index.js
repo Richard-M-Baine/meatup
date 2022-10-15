@@ -2,26 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
-
+ 
+ 
 // thunk
 import { editGroup } from '../../../store/group';
 import { getOneGroupThunk } from '../../../store/group';
+import { deleteGroupThunk } from '../../../store/group';
+ 
+ 
 import './EditGroup.css'
-
-
-
+ 
+ 
+ 
 function EditGroupForm(){
-  
-
+ 
+ 
     const history = useHistory();
     const { groupId } = useParams();
     const dispatch = useDispatch();
-
-    
+ 
+   
     const group = useSelector((state) => state.groups[groupId]);
-console.log(group.city)
     const sessionUser = useSelector((state) => state.session.user);
+ 
     const [name, setName] = useState(group && group.name);
     const [about, setAbout] = useState(group && group.about)
     const [type, setType] = useState(group && group.type)
@@ -31,13 +34,19 @@ console.log(group.city)
     const [errors, setErrors] = useState([]);
     const [submitted, setSubmitted] = useState(false);
     const [loaded, setIsLoaded] = useState(false)
-
-    //console.log(name)
+ 
+   
+ 
+ 
     useEffect(() => {
         dispatch(getOneGroupThunk(groupId))
             .then(() => setIsLoaded(true))
     }, [dispatch, groupId])
-
+ 
+   
+ 
+ 
+ 
     const submit = async (e) => {
         e.preventDefault();
         setErrors([]);
@@ -46,12 +55,15 @@ console.log(group.city)
             name: name,
             about: about,
             type: type,
-            private: isPrivate,
+            privatee: isPrivate,
             city: city,
             state: state,
-            
+           
         };
-        return dispatch(editGroup(groupId, payload))
+ 
+        console.log('I am the payload from the react side of things ')
+        return dispatch(editGroup(payload, groupId))
+       
         .then(() => {
             history.push(`/groups/${groupId}`);
         })
@@ -62,39 +74,122 @@ console.log(group.city)
             }
         })
 }
-
-
-
-
-
+ 
+ 
+const deleteGroup = e => {
+    e.preventDefault()
+    setIsLoaded(false)
+    dispatch(deleteGroupThunk(group.id)).then(() => history.push('/groups/all'))
+ 
+ 
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 return (
     <div className='main'>
         <div className='flavorText'>
     <h1>Welcome {sessionUser.firstName}! </h1>
-    <h3>feel free to alter {group.name} as you see fit</h3>
+    <h3>feel free to alter your group as you see fit</h3>
         </div>
-    
-        
-    
-
-    <form onSubmit={submit}>
-        
-        <input></input>
-
+       
+       <form onSubmit={submit}>
+       <ul className='error'>
+            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+ 
+                        <div className='inputDiv'>
+                            <label className='label'>name</label>
+                            <input
+                                className='input-box'
+                                type='text'
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className='field'>
+                            <label className='label'>About</label>
+                            <input
+                                className='input-box'
+                                type='text'
+                                value={about}
+                                onChange={e => setAbout(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className='field'>
+                            <label className='label'>Type</label>
+                            <select
+                                  className = 'dropdown-option'
+                                value={type}
+                                onChange={e => setType(e.target.value)}
+                                required
+                            >
+                                <option   className = 'dropdown-option' value={'In person'}>In person</option>
+                                <option   className = 'dropdown-option' value={'Online'}>Online</option>
+                            </select>
+                        </div>
+                        <div className='field'>
+                            <label className='label'>City</label>
+                            <input
+                                className='input-box'
+                                type='text'
+                                value={city}
+                                onChange={e => setCity(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className='field'>
+                            <label className='label'>State</label>
+                            <input
+                                className='input-box'
+                                type='text'
+                                value={state}
+                                onChange={e => setState(e.target.value)}
+                                required
+                            >
+                            </input>
+                        </div>
+                        <div className='field'>
+                            <label className='label'>Group Privacy</label>
+                            <select
+                                className = 'dropdown-option'
+                                type='text'
+                                value={isPrivate}
+                                onChange={e => setPrivate(e.target.value)}
+                                required
+                            >
+                                <option className='input-box' value={true}>Private</option>
+                                <option className='input-box' value={false}>Public</option>
+                            </select>
+                        </div>
+ 
+                        <button className='edit-group-button' type='submit'>
+                        Submit
+                    </button>
+                    <h4>DELETE GROUP CAUTION THERE IS NO WAY TO GET IT BACK!</h4>
+                    <button onClick={deleteGroup}>DELETE GROUP</button>
+ 
+ 
+ 
+ 
+ 
+ 
+       </form>
+       
    
-
-
-    </form>
-
-
+ 
+ 
     </div>
-
-
+ 
+ 
 )
 
-
-
 }
-
 
 export default EditGroupForm
