@@ -54,7 +54,7 @@ export default function Home() {
       <div className='dreiteHauptInsides'>
         
         <img src={joinGroup} alt='pictures of people. look like grey aliens'/>
-        <Link id='linkThree' to='/signup'>Signup to start a group!</Link>
+        <Link id='linkThree' to='/groups/new'>start a group!</Link>
         <p>You don’t have to be an expert to gather people together and explore shared interests.</p>
 
       </div>
