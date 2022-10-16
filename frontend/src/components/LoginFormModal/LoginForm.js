@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Link, useHistory} from 'react-router-dom'
 import { Redirect } from 'react-router-dom';
 
+import SignupFormModal from '../SignupFormModal/index'
+
 
 import './LoginForm.css'
 
@@ -43,11 +45,6 @@ function Login( ){
       };
 
 
-      const gotoSignup = () => {
-        
-        history.push("/signup");
-
-    }
    // Object.keys(sessionUser).length
     if (sessionUser) return (
          
@@ -59,7 +56,7 @@ function Login( ){
       <div className='login-ruckgrund'>
           <div className='login-erstediv'>
               <div className='login-div'>Log in</div>
-              <div className='signup-div'>Not a member yet? <Link className='signup-link' onClick={gotoSignup}>Sign up</Link> </div>
+              
           </div>
           <form className='login-form' onSubmit={submitFunction}>
               <ul>
