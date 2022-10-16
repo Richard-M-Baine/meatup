@@ -43,6 +43,7 @@ function CreateEventForm() {
             <div className='createEventDiv'>
                 <h3>What is the name for your event?</h3>
                 <input
+                className='inputEvent'
                 required
                 value={name}
                 onChange={e => setName(e.target.value)}
@@ -77,15 +78,46 @@ function CreateEventForm() {
             </div>
 
             <div className="createEventDiv">
-                <h3>How many people are allowed to attend this event?</h3>
+                <h3>How many people are allowed to attend this event? </h3>
+                <h5> You can have up to 100 people attend.</h5>
                 <input
+                    className='inputEvent'
                     required
                     name="event-capacity"
                     type="number"
                     value={capacity}
                     onChange={e => setCapacity(e.target.value)}
                     min="1"
-                    max="100" />
+                    max="100" 
+                    />
+            </div>
+
+            <div className='createEventDiv'>
+                <h3>How much will it cost to attend the event?</h3>
+                <input 
+                className='inputEvent'
+                required
+                name="event-price"
+                value={price}
+                onChange={e => setPrice(e.target.value)}
+                min='0'
+                maxLength='5'
+                type='currency' 
+                />
+            </div>
+
+            <div className='createEventDiv'>
+                <div className='startDiv'>
+                    <h3>When will your event start?</h3>
+                        <input
+                        required
+                        name="event-start-date"
+                        type="datetime-local"
+                        max={"9999-12-31T00:00"}
+                        value={startDate}
+                        onChange={e => setStartDate(e.target.value)} 
+                        />
+                </div>
             </div>
 
 
