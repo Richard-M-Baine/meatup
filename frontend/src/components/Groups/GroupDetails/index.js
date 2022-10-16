@@ -46,6 +46,11 @@ export default function GroupDetails(){
         history.push(path)
     }
 
+    const makeEvent = () => {
+        let path = `/groups/${groupId}/events/new`
+        history.push(path)
+    }
+
 
     return isLoaded && (
         
@@ -78,17 +83,14 @@ export default function GroupDetails(){
                         <p>Welcome Mr. / Mrs. {singleGroup.organizer.lastName}.  As the organizer of the group how do you wish to proceed?</p>}
                     </div>
                 
+                
                     <div className='button-container'>
                         {isOwner &&
-                            <button className='button' >Delete Group</button>}
+                            <button className='button' onClick={editRoute}>Edit or remove Group</button>}
                     </div>
                     <div className='button-container'>
                         {isOwner &&
-                            <button className='button' onClick={editRoute}>Edit Group</button>}
-                    </div>
-                    <div className='button-container'>
-                        {isOwner &&
-                            <button className='button' >Create Event</button>}
+                            <button className='button' onClick={makeEvent}>Create Event</button>}
                     </div>
                     <div className='notice'>
                         {!isOwner &&

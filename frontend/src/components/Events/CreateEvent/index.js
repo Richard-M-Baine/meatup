@@ -10,17 +10,16 @@ import {createEventThunk} from '../../../store/events'
 import * as EventActions from '../../../store/events'
 
 
-// test case
-const group = {
-    id: 1
-}
+// selectors
+
 
 
 function CreateEventForm() {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const groupId = group.id
+    
+    
 
     const [name, setName] = useState('')
     const [type, setType] = useState('In Person')

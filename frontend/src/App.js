@@ -73,7 +73,7 @@ function App() {
             <AllEvents />
           </Route>
 
-          <Route path='/events/new'>
+          <Route path='/groups/:groupId/events/new'>
             <CreateEventForm />
           </Route>
           
