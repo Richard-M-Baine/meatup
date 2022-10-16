@@ -36,18 +36,24 @@ function Signup() {
     };
   
     return (
-      <>
-        <form onSubmit={handleSubmit}>
-          <h1>Sign Up</h1>
+      <div className="signup-ruckgrund">
+        <div className="signup-erstediv">
+        <h1 id="signupbutton">Sign Up</h1>
+        </div>
+        <form className='signupForm' onSubmit={handleSubmit}>
+          
           <ul>
             {errors.map((error, index) => <li key={index}>{Object.values(error)[0]}</li>)}
           </ul>
-          <h2>
+
+          <div className="divdiv">
+          <h2 className="label">
             Email
           </h2>
+          </div>
   
           <input
-            className="w100"
+            className="input"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -55,12 +61,12 @@ function Signup() {
             
   
           />
-          <h2>
+          <h2 className="label">
             Username
           </h2>
   
           <input
-            className="w100"
+            className="input"
             type="text"
             value={username}
             onChange={(e) => setUserName(e.target.value)}
@@ -68,12 +74,12 @@ function Signup() {
             
   
           />
-          <h2>
+          <h2 className="label">
             First Name
           </h2>
   
           <input
-            className="w100"
+            className="input"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -81,12 +87,12 @@ function Signup() {
             
   
           />
-          <h2>
+          <h2 className="label">
             Last Name
           </h2>
   
           <input
-            className="w100"
+            className="input"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -94,12 +100,12 @@ function Signup() {
             
   
           />
-          <h2>
+          <h2 className="label">
             Password
           </h2>
   
           <input
-            className="w100"
+            className="input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -107,12 +113,12 @@ function Signup() {
             
   
           />
-          <h2>
+          <h2 className="label">
             Confirm Password
           </h2>
   
           <input
-            className="w100"
+            className="input"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -120,12 +126,12 @@ function Signup() {
             
   
           />
-          <div className="signup-footer w100 flex-column-center">
+          <div className="signup-button-div">
             {/* <button className="return" onclick="javascript:history.back()">Back</button> */}
             <button className="signup-bottom" type="submit">Sign Up</button>
           </div>
         </form>
-      </>
+      </div>
     );
   }
   
