@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import * as sessionActions from '../../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 
 import './CreateEventForm.css'
 
+import {getOneGroupThunk} from '../../../store/group'
 import {createEventThunk} from '../../../store/events'
 import * as EventActions from '../../../store/events'
 
@@ -17,8 +18,13 @@ import * as EventActions from '../../../store/events'
 function CreateEventForm() {
     const dispatch = useDispatch()
     const history = useHistory()
+    const { groupId } = useParams();
 
-    
+
+    useEffect(() => {
+        dispatch(getOneGroupThunk(groupId))
+            .then(() => setIsLoaded(true))
+    }, [dispatch, groupId])
     
 
     const [name, setName] = useState('')
@@ -28,6 +34,7 @@ function CreateEventForm() {
     const [description, setDescription] = useState('')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
+    const [isLoaded, setIsLoaded] = useState(false)
 
     const [validationErrors, setvalidationErrors] = useState([])
     const [isSubmitted, setIsSubmitted] = useState(false)
