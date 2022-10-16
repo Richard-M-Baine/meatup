@@ -42,11 +42,54 @@ function CreateEventForm() {
 
 
 //const data = await dispatch(createEventThunk(groupId, payload))
+// error useEffect sort of like with the test 89 through 92 ok?
+
+useEffect(() => {
+    const errors = []
+
+    if (name.length < 5) errors.push('Name must have at least 5 characters')
+    if (description.length < 50) errors.push('Description must be at least 50 characters')
+    if (price < 0) errors.push('Price can not be a negative value')
+    if (new Date(startDate) <= new Date()) errors.push('Start date must be in the future')
+    if (new Date(endDate) < new Date(startDate)) errors.push('End date must be after the start date')
+
+    setvalidationErrors(errors)
+
+}, [name, description, startDate, endDate, price])
+
+const submit = async e => {
+e.preventDefault()
+setIsSubmitted(true)
+
+if (validationErrors.length > 0) return
+
+const payload = {
+    
+    name,
+    type,
+    capacity,
+    price,
+    description,
+    startDate,
+    endDate
+}
+
+const data = await dispatch(createEventThunk(groupId, payload))
+
+
+history.push('/events/all')
+}
+
 
 
     return (
-        <form>
+        <form onSubmit={submit}>
             <h2>Let's create an event!</h2>
+
+            {isSubmitted && validationErrors.length > 0 &&
+                <ul>
+                    {validationErrors.map(error => <li key={error}>{error}</li>)}
+                </ul>}
 
             <div className='createEventDiv'>
                 <h3>What is the name for your event?</h3>
