@@ -118,7 +118,23 @@ function CreateEventForm() {
                         onChange={e => setStartDate(e.target.value)} 
                         />
                 </div>
+
+                <div className='endDiv'>
+                    <h4>When will your event end?</h4>
+                    <input
+                        required
+                        name="event-end-date"
+                        type="datetime-local"
+                        value={endDate}
+                        max={"9999-12-31T00:00"}
+                        onChange={e => setEndDate(e.target.value)} />
+                </div>
+
             </div>
+
+            <div className='button'>
+                <button className='button'  type="submit">Create your group</button>
+            </div>  
 
 
         </form>
