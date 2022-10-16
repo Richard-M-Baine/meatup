@@ -46,13 +46,36 @@ const deleteEventAction = (payload) => {
 }
 
 // lost in the sauce of thunkville
-
+//read
 export const getEventsThunk = () => async dispatch => {
     const response = await csrfFetch('/api/events')
     const data = await response.json()
 
     await dispatch(getEventsAction(data))
     return data
+}
+
+// create
+
+export const createEventThunk = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/groups/${payload.groupId}/events`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload.newEvent)
+        }
+    )
+    const data = await response.json()
+
+    if (response.ok) {
+        await dispatch(createEventAction(data))
+        return data
+    } else { 
+        return data
+    }
+
 }
 
 const initialState = {}

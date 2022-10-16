@@ -22,6 +22,7 @@ import EditGroupForm from "./components/Groups/EditGroup";
 
 // event stuff
 import AllEvents from './components/Events/ReadEvents'
+import CreateEventForm from "./components/Events/CreateEvent";
 
 
 
@@ -70,6 +71,10 @@ function App() {
 
           <Route path='/events/all'>
             <AllEvents />
+          </Route>
+
+          <Route path='/events/new'>
+            <CreateEventForm />
           </Route>
           
         </Switch>
