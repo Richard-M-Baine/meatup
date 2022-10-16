@@ -19,7 +19,7 @@ const getEventsAction = (payload) => {
 
 const getGroupsEventsAction = (payload) => {
     return {
-        type: GET_GROUPS_EVENTS,
+        type: GET_GROUP_EVENTS,
         payload
     }
 }
@@ -66,7 +66,7 @@ const eventsReducer = (state = initialState, action) => {
             })
             return newState
         }
-        case GET_GROUPS_EVENTS: {
+        case GET_GROUP_EVENTS: {
             action.payload.Events.forEach(event => {
                 newState[event.id] = event
             })
