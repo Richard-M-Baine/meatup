@@ -20,6 +20,11 @@ import AllGroups from "./components/Groups/AllGroups";
 import GroupDetails from "./components/Groups/GroupDetails";
 import EditGroupForm from "./components/Groups/EditGroup";
 
+// event stuff
+import AllEvents from './components/Events/ReadEvents'
+
+
+
 
 function App() {
 
@@ -61,6 +66,10 @@ function App() {
 
           <Route path='/groups/:groupId/edit'>
             <EditGroupForm />
+          </Route>
+
+          <Route path='/events/all'>
+            <AllEvents />
           </Route>
           
         </Switch>
