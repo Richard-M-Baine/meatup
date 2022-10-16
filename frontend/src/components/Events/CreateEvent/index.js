@@ -41,6 +41,8 @@ function CreateEventForm() {
 
 
 
+//const data = await dispatch(createEventThunk(groupId, payload))
+
 
     return (
         <form>

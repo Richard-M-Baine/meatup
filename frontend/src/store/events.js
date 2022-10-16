@@ -57,14 +57,14 @@ export const getEventsThunk = () => async dispatch => {
 
 // create
 
-export const createEventThunk = (payload) => async dispatch => {
-    const response = await csrfFetch(`/api/groups/${payload.groupId}/events`,
+export const createEventThunk = (groupId, payload) => async dispatch => {
+    const response = await csrfFetch(`/api/groups/${groupId}/events`,
         {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(payload.newEvent)
+            body: JSON.stringify(payload)
         }
     )
     const data = await response.json()
