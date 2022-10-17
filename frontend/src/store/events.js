@@ -4,6 +4,7 @@ const GET_EVENTS = "events/all"
 const GET_GROUP_EVENTS = 'events/group/events'
 
 
+
 const CREATE_EVENT = "events/create"
 const READ_EVENT = "events/details"
 const DELETE_EVENT = "events/delete"
@@ -78,6 +79,18 @@ export const createEventThunk = (groupId, payload) => async dispatch => {
 
 }
 
+// details 
+
+export const getOneEventThunk = id => async dispatch => {
+    const res = await csrfFetch(`/api/events/${id}`)
+    if (res.ok){
+        const singleEvent = await res.json()
+        dispatch(getEventDetailsAction(singleEvent))
+
+        return singleEvent
+    }
+}
+
 const initialState = {}
 
 const eventsReducer = (state = initialState, action) => {
@@ -105,9 +118,7 @@ const eventsReducer = (state = initialState, action) => {
             newState[action.payload.id] = { ...newState[action.payload.id], ...action.payload } // Gets the new data from the response and adds it to what exists
             return newState
         }
-        // case UPDATE_EVENT: {
-
-        // }
+       
         case DELETE_EVENT: {
             newState = { ...state }
             delete newState[action.payload]
