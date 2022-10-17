@@ -39,9 +39,7 @@ function EditGroupForm(){
     const [submitted, setSubmitted] = useState(false)
  
    
-useEffect(() =>{
-console.log(isPrivate)
-},[isPrivate])
+
  
     useEffect(() => {
         dispatch(getOneGroupThunk(groupId))
@@ -66,20 +64,12 @@ console.log(isPrivate)
            
         };
 
-        console.log('i am the payload ',payload)
+        
  
       
-        const data = await dispatch(editGroupThunk(payload, groupId))
+        const data = dispatch(editGroupThunk(payload, groupId))
        
-        .then(() => {
-            history.push(`/groups/all`);
-        })
-        .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) {
-                setErrors(data.errors);
-            }
-        })
+        history.push('/groups/all')
 }
  
  
