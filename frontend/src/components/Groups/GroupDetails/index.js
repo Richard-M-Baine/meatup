@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import * as sessionActions from '../../../store/session';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory, useParams, useRouteMatch, Link, NavLink } from 'react-router-dom';
+import { useHistory, useParams} from 'react-router-dom';
 
 //css
 import './GroupDetails.css'
