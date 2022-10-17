@@ -11,7 +11,8 @@ import './groupCard.css'
 function GroupCard({group}) {
 
     const array = [picture2, picture3, smilingPicture1]
-    const number = Math.random() * (2 - 0)
+    const end = array.length - 1
+    const number = Math.random() * (end - 0)
     const round = Math.round(number)
    
     
@@ -20,7 +21,7 @@ function GroupCard({group}) {
        <NavLink className='navGroup' to={`/groups/${group.id}/about`}>
         <div className='outerDiv'>
             <div className='photoPart'>
-                <img src={array[round]} />
+                <img id='photo'src={array[round]} />
             </div>
             
 

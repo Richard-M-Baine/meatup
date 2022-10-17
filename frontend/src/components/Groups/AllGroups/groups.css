@@ -14,8 +14,9 @@
     flex-direction: column;
     padding-left: 350px;
 }
-.text{
+.groupTextDiv{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    size: 40px;
 }
