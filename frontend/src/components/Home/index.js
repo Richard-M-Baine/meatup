@@ -6,6 +6,8 @@ import online_events from './splashImages/online_events.svg'
 import ticket from './splashImages/ticket.svg'
 import joinGroup from './splashImages/joinGroup.svg'
 import handsup from './splashImages/handsup.svg'
+import download from './splashImages/download.jpg'
+
 // end of pictures
 import './SplashMain.css'
 

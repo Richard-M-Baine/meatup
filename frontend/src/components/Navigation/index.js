@@ -9,6 +9,7 @@ import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import DemoUser from '../Demonstration/index';
 import SignupFormModal from '../SignupFormModal';
+import download from '../Home/splashImages/download.jpg'
 
 
 import './Navigation.css';
@@ -55,7 +56,7 @@ function Navigation({ isLoaded }){
 
     <div className={sessionUser ? "nav login" : 'nav logout'}>
       <div className='logo'>
-        <NavLink exact to="/">insert logo here</NavLink>
+        <NavLink exact to="/"><img src={download}/></NavLink>
       </div>
       <div className='buttons'>
         {isLoaded && sessionLinks}
