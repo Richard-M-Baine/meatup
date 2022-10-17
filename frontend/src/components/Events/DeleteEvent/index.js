@@ -15,8 +15,11 @@ const DeleteEvent = () => {
     const {eventId} = useParams()
     const history = useHistory();
     const thisEvent = useSelector((state) => state.events[eventId]);
-    
- 
+   
+    useEffect(() => {
+        dispatch(getOneEventThunk(eventId));
+
+    }, [dispatch]);
 
     const sessionUser = useSelector(state => state.session.user);
     
