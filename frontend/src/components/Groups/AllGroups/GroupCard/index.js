@@ -1,5 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import picture2 from '../../GroupImages/picture2.jpg'
+import picture3 from'../../GroupImages/picture3.jpg'
+import smilingPicture1 from '../../GroupImages/smilingPicture1.jpg'
 
 
 // css
@@ -7,18 +10,19 @@ import './groupCard.css'
 
 function GroupCard({group}) {
 
+    const array = [picture2, picture3, smilingPicture1]
+    const number = Math.random() * (2 - 0)
+    const round = Math.round(number)
+   
+    
+
     return (
        <NavLink className='navGroup' to={`/groups/${group.id}/about`}>
         <div className='outerDiv'>
-            <div className='imageDiv'>
-                <img
-                className='card-image'
-                src={group.previewImage?.length > 0 ? group.previewImage : ""}
-
-              // if exists make it visible if not hide it do we need preview images?
-                style={{ visibility: `${group.previewImage?.length > 0 ? "visible" : "hidden"}` }}
-            />
+            <div className='photoPart'>
+                <img src={array[round]} />
             </div>
+            
 
             <div className='otherStuffDiv'>
                 <div className='mainText'>

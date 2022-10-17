@@ -1,0 +1,4 @@
+.outerDiv{
+    display: flex;
+    flex-direction: row;
+}
