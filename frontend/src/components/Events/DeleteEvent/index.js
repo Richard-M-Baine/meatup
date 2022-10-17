@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import './DeleteEvent.css'
 
-import { getOneEventThunk } from '../../../store/events'
+import { getEventsThunk } from '../../../store/events'
 import { getOneGroupThunk } from '../../../store/group'
 
 
@@ -15,11 +15,20 @@ const DeleteEvent = () => {
     const {eventId} = useParams()
     const history = useHistory();
     const thisEvent = useSelector((state) => state.events[eventId]);
+    const [loaded, setLoaded] = useState(false)
    
-    useEffect(() => {
-        dispatch(getOneEventThunk(eventId));
 
-    }, [dispatch]);
+    // get event stuff
+    useEffect(() => {
+        dispatch(getEventsThunk()).then(() => setLoaded(true))
+    },[dispatch])
+
+    useEffect(() => {
+        dispatch(getOneGroupThunk(thisEvent.Group.id))
+            
+    }, [dispatch, eventId])
+
+
 
     const sessionUser = useSelector(state => state.session.user);
 
@@ -50,7 +59,7 @@ const DeleteEvent = () => {
   const endMinutes = (minuten > 10) ? minuten : '0'.concat(minuten)
     
 
-    return (
+    return loaded && (
         <div className='main-container'>
                 <div className='top-container_'>
                     

@@ -18,12 +18,7 @@ const getEventsAction = (payload) => {
     }
 }
 
-const getGroupsEventsAction = (payload) => {
-    return {
-        type: GET_GROUP_EVENTS,
-        payload
-    }
-}
+
 
 const createEventAction = (payload) => {
     return {
