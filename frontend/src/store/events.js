@@ -82,6 +82,7 @@ export const createEventThunk = (groupId, payload) => async dispatch => {
 // details 
 
 export const getOneEventThunk = id => async dispatch => {
+    
     const res = await csrfFetch(`/api/events/${id}`)
     if (res.ok){
         const singleEvent = await res.json()

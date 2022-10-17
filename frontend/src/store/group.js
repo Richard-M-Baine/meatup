@@ -149,7 +149,7 @@ export const editGroupThunk = (payload, groupId) => async(dispatch) => {
     
     const data = await response.json();
 
-    console.log('i am the response from the backend ', data)
+    
     dispatch(EditGroup(data));
     return response;
 }

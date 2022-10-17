@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import "./EventCard.css"
 
 function EventCard({ event }) {
-    console.log(event.name)
+    
 
     // getting all the stuff from the start date
     const start = new Date(event.startDate)
