@@ -618,8 +618,6 @@ res.json(object)
 router.put('/:groupId',requireAuth,async(req,res,next) => {
   const group = await Group.findByPk(req.params.groupId)
 
-
-
 // better way
 
 if (group){
@@ -628,20 +626,18 @@ if (group){
     err.status = 403
     return next(err)
   }
-const { name, about, type, private, city, state } = req.body
+const { name, about, type, city, state, private } = req.body
 
-
+console.log('i am the scary backend ',req.body)
 
 group.set({
   name: name,
   about: about,
   type: type,
-  private: private,
   city: city,
-  state: state
+  state: state,
+  private: private
 })
-
-
 
 await group.save()
 

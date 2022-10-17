@@ -17,27 +17,26 @@ import './EditGroup.css'
 function EditGroupForm(){
  
     const { groupId } = useParams();
-     const group = useSelector((state) => state.groups[groupId]);
-
     const history = useHistory();
-    const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
+
+     const group = useSelector((state) => state.groups[groupId]);
+     const sessionUser = useSelector((state) => state.session.user);
+    
  
    
    
 
  
     const [name, setName] = useState(group && group.name);
-    
     const [about, setAbout] = useState(group && group.about)
     const [type, setType] = useState(group && group.type)
     const [city, setCity] = useState(group && group.city)
     const [state, setState] = useState(group && group.state);
     const [isPrivate, setPrivate] = useState(group && group.private);
     const [errors, setErrors] = useState([]);
-
-    const [submitted, setSubmitted] = useState(false);
     const [loaded, setIsLoaded] = useState(false)
+    const [submitted, setSubmitted] = useState(false)
  
    
 
@@ -54,22 +53,24 @@ function EditGroupForm(){
     const submit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        setSubmitted(true);
+        if (errors.length > 0) return
         const payload = {
-            name: name,
-            about: about,
-            type: type,
-            private: isPrivate,
-            city: city,
-            state: state,
+           name,
+           about,
+           type, 
+           city,
+           state,
+           private: isPrivate
            
         };
+
+        console.log('i am the payload ',payload)
  
       
-        return dispatch(editGroupThunk(payload, groupId))
+        const data = await dispatch(editGroupThunk(payload, groupId))
        
         .then(() => {
-            history.push(`/groups/${groupId}`);
+            history.push(`/groups/all`);
         })
         .catch(async (res) => {
             const data = await res.json();

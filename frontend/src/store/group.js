@@ -129,21 +129,24 @@ export const deleteGroupThunk = (groupId) => async dispatch => {
 }
 
 
-export const editGroupThunk = (group, groupId) => async(dispatch) => {
-    const {name, about, type, isPrivate , city, state} = group;
+export const editGroupThunk = (payload, groupId) => async(dispatch) => {
+    const {name, about, type, city, state, isPrivate } = payload;
+    console.log(" i am the thunk body" , payload)
     const response = await csrfFetch(`/api/groups/${groupId}`, {
         method: 'PUT',
         body: JSON.stringify({
             name,
             about,
             type,
-            private: isPrivate,
-            city,
-            state
+             city,
+              state,
+            private: isPrivate,  
         })
     })
     
     const data = await response.json();
+
+    console.log('i am the response from the backend ', data)
     dispatch(EditGroup(data));
     return response;
 }
