@@ -22,11 +22,32 @@ const DeleteEvent = () => {
     }, [dispatch]);
 
     const sessionUser = useSelector(state => state.session.user);
+
+
+    // stuff with dates
+
+    const start = new Date(thisEvent.startDate)
+    const splitStart = start.toString().split(' ')
+        // getting all the stuff 
+    const day = splitStart[0]
+    const date = `${splitStart[1]} ${splitStart[2]}`
+    const militaryTime = start.getHours()
+    const minutess = start.getMinutes()
     
+    const civilians = Number(militaryTime) > 12 ? Number(militaryTime) - 12 : militaryTime
+    const stupidCivilians = Number(militaryTime) > 12 ? 'PM' : 'AM'
+    const realMinutes = (minutess > 10) ? minutess : '0'.concat(minutess)
+    const people = (thisEvent.numAttending > 1 || thisEvent.numAttending === 0) ? 'persons' : 'person'
 
  
-  
- 
+  const end = new Date(thisEvent.endDate)
+  const splitEnd = end.toString().split(' ')
+  const militarischZeit = end.getHours()
+  const minuten = end.getMinutes()
+
+  const endCivilians = Number(militarischZeit) > 12 ? Number(militarischZeit) - 12: militarischZeit
+  const idioten = Number(militarischZeit) > 12 ? 'PM' : 'AM'
+  const endMinutes = (minuten > 10) ? minuten : '0'.concat(minuten)
     
 
     return (
@@ -41,10 +62,11 @@ const DeleteEvent = () => {
                     </div>
                     <div className='descriptionDiv'>
                         <p>{thisEvent.description}</p>
-                        <p>there are currently {thisEvent.numAttending} people attending and only {thisEvent.capacity - thisEvent.numAttending} spots left!</p>
+                        <p>there are currently {thisEvent.numAttending} {people} attending and only {thisEvent.capacity - thisEvent.numAttending} spots left!</p>
                     </div>
                     <div className='startDiv'>
-                        <p>We will start at {thisEvent.startDate}</p>
+                    <h3>{`we will start at ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`} {`and end at ${endCivilians}:${endMinutes} ${idioten}`}</h3>
+                    
                     </div>
                 </div>
         </div>   
