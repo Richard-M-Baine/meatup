@@ -312,7 +312,7 @@ router.get('/:eventId', async (req,res,next) => {
             },
             {
                 model: Group,
-                attributes: ['id', 'name','private', 'city', 'state']
+                attributes: ['id', 'name','private', 'city', 'state', 'organizerId']
             },
             {
                 model: Venue,

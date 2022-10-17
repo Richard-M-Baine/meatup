@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import './DeleteEvent.css'
 
-import { getEventsThunk } from '../../../store/events'
+import { getOneEventThunk } from '../../../store/events'
 import { getOneGroupThunk } from '../../../store/group'
 
 
@@ -20,19 +20,21 @@ const DeleteEvent = () => {
 
     // get event stuff
     useEffect(() => {
-        dispatch(getEventsThunk()).then(() => setLoaded(true))
+        dispatch(getOneEventThunk(eventId)).then(() => setLoaded(true))
     },[dispatch])
 
-    useEffect(() => {
-        dispatch(getOneGroupThunk(thisEvent.Group.id))
+    // useEffect(() => {
+    //     dispatch(getOneGroupThunk(thisEvent.Group.id))
             
-    }, [dispatch, eventId])
+    // }, [dispatch, eventId])
 
 
 
     const sessionUser = useSelector(state => state.session.user);
 
-
+    if (!thisEvent){
+        return null
+    }
     // stuff with dates
 
     const start = new Date(thisEvent.startDate)
