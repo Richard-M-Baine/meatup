@@ -39,7 +39,9 @@ function EditGroupForm(){
     const [submitted, setSubmitted] = useState(false)
  
    
-
+useEffect(() =>{
+console.log(isPrivate)
+},[isPrivate])
  
     useEffect(() => {
         dispatch(getOneGroupThunk(groupId))

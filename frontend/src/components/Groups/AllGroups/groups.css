@@ -1,0 +1,21 @@
+
+.main{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px;
+
+}
+.groupPart{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 350px;
+}
+.text{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

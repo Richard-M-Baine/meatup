@@ -30,13 +30,25 @@ function AllGroups(){
     
 
     return loaded && (
-        <div>
+    <div className='main'>
+        <div className='text'>
+            <h1>Events</h1>
+            
+        </div>
+             <div className='groupPart'>
+                <div className='groupTextDiv'>
+                    <h1>Groups</h1>
+                </div>
+
+                <div className='groups'>
             {groupsList.map(group => (
                 <GroupCard group={group} key={group.id}/>
             ))}
+                </div>
                 
            
         </div>
+    </div>
     )
     
 }
