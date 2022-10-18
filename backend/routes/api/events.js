@@ -324,6 +324,7 @@ router.get('/:eventId', async (req,res,next) => {
         
         
     })
+   
 
     if (!event) {
         const err = new Error('Event couldn\'t be found')

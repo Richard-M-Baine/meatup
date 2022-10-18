@@ -23,7 +23,14 @@ const DeleteEvent = () => {
 
     const isOwner = user?.id === thisEvent?.Group.organizerId
 
+     // get event stuff
+     useEffect(() => {
+        dispatch(getOneEventThunk(eventId)).then(() => setLoaded(true))
+    },[dispatch, eventId])
+
     const [loaded, setLoaded] = useState(false)
+
+
 
     const makeEventgoByeBye = e => {
         e.preventDefault()
@@ -35,15 +42,8 @@ const DeleteEvent = () => {
    
    
 
-    // get event stuff
-    useEffect(() => {
-        dispatch(getOneEventThunk(eventId)).then(() => setLoaded(true))
-    },[dispatch, eventId])
+   
 
-    // useEffect(() => {
-    //     dispatch(getOneGroupThunk(thisEvent.Group.id))
-            
-    // }, [dispatch, eventId])
 
 
     if (!thisEvent){
@@ -74,6 +74,10 @@ const DeleteEvent = () => {
   const idioten = Number(militarischZeit) > 12 ? 'PM' : 'AM'
   const endMinutes = (minuten > 10) ? minuten : '0'.concat(minuten)
  
+
+// end stuff with dates
+
+
 
     return loaded && (
         <div className='main-container'>
