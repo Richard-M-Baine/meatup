@@ -87,6 +87,18 @@ export const getOneEventThunk = id => async dispatch => {
     }
 }
 
+
+// destroy the event
+
+export const deleteEvent = (eventId) => async(dispatch) => {
+    const response = await csrfFetch(`/api/events/${eventId}`, {
+        method: 'DELETE'
+    })
+    await response.json();
+    dispatch(deleteEventAction());
+    return response;
+}
+
 const initialState = {}
 
 const eventsReducer = (state = initialState, action) => {

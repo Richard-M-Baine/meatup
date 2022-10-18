@@ -17,11 +17,12 @@ const DeleteEvent = () => {
     const thisEvent = useSelector((state) => state.events[eventId]);
     const [loaded, setLoaded] = useState(false)
    
+   
 
     // get event stuff
     useEffect(() => {
         dispatch(getOneEventThunk(eventId)).then(() => setLoaded(true))
-    },[dispatch])
+    },[dispatch, eventId])
 
     // useEffect(() => {
     //     dispatch(getOneGroupThunk(thisEvent.Group.id))
@@ -30,7 +31,7 @@ const DeleteEvent = () => {
 
 
 
-    const sessionUser = useSelector(state => state.session.user);
+    
 
     if (!thisEvent){
         return null
@@ -67,7 +68,7 @@ const DeleteEvent = () => {
                     
 
                     <div className='introtopDiv'>
-                        <h1 className='name'>{thisEvent.name} detail Showcase!</h1>
+                        <h1 className='name'>{thisEvent.name}</h1>
                         <h3 className='location'> Proudly hosted at  {thisEvent.Venue.address}, {thisEvent.Venue.city}, {thisEvent.Venue.state}</h3>
                         <h4>by {thisEvent.Group.name}</h4>
                     </div>
@@ -80,6 +81,9 @@ const DeleteEvent = () => {
                     
                     </div>
                 </div>
+
+                
+               
         </div>   
     )
     
