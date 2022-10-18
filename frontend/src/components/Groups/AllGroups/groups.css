@@ -19,4 +19,6 @@
     flex-direction: row;
     justify-content: space-around;
     size: 40px;
+    padding-right: 300px;
+    padding-bottom: 40px;
 }
