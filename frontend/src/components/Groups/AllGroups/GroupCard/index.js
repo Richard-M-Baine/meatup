@@ -16,7 +16,10 @@ function GroupCard({group}) {
        <NavLink className='navGroup' to={`/groups/${group.id}/about`}>
         <div className='outerDiv'>
             <div className='photoPart'>
-                <img id='photo'src={group.previewImage[0].url} />
+                <img id='photo'src={group.previewImage?.length > 0 ? group.previewImage[0].url : ""} 
+                style={{ visibility: `${group.previewImage?.length > 0 ? "visible" : "hidden"}` }}
+                />
+
             </div>
             
 

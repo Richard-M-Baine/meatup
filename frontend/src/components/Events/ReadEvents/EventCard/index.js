@@ -40,10 +40,10 @@ function EventCard({ event }) {
         </div>
 
         <div className="otherStufDiv">
-            <h1>{event.name}</h1>
-            <h3>{`next meeting ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`}</h3>
-            <h4>Hosted By {event.Group.name} from {event.Group.city} {event.Group.state}</h4>
-            <h4>There currently {event.numAttending} {people} attending!</h4>
+            <h2>{event.name}</h2>
+            <h4>{`next meeting ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`}</h4>
+            <p>Hosted By {event.Group.name} from {event.Group.city} {event.Group.state}</p>
+            <div>There currently {event.numAttending} {people} attending!</div>
 
         </div>
 
