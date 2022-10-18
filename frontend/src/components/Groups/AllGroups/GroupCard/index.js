@@ -1,8 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import picture2 from '../../GroupImages/picture2.jpg'
-import picture3 from'../../GroupImages/picture3.jpg'
-import smilingPicture1 from '../../GroupImages/smilingPicture1.jpg'
+
 
 
 // css
@@ -10,10 +8,7 @@ import './groupCard.css'
 
 function GroupCard({group}) {
 
-    const array = [picture2, picture3, smilingPicture1]
-    const end = array.length - 1
-    const number = Math.random() * (end - 0)
-    const round = Math.round(number)
+
    
     
 
@@ -21,7 +16,7 @@ function GroupCard({group}) {
        <NavLink className='navGroup' to={`/groups/${group.id}/about`}>
         <div className='outerDiv'>
             <div className='photoPart'>
-                <img id='photo'src={array[round]} />
+                <img id='photo'src={group.previewImage[0].url} />
             </div>
             
 
