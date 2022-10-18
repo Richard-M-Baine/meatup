@@ -78,6 +78,9 @@ const DeleteEvent = () => {
     return loaded && (
         <div className='main-container'>
                 <div className='top-container_'>
+                    <div className='imageDiv'>
+                        <img src={thisEvent.previewImage[0].url}/>
+                    </div>
                     
 
                     <div className='introtopDiv'>
