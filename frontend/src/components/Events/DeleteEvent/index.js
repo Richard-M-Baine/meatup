@@ -17,6 +17,11 @@ const DeleteEvent = () => {
 
     const thisEvent = useSelector((state) => state.events[eventId]);
     
+    const thisUser = useSelector(state => state.session.user);
+   const newObject = {...thisUser}
+
+  
+   
 
     const [loaded, setLoaded] = useState(false)
    
@@ -31,10 +36,6 @@ const DeleteEvent = () => {
     //     dispatch(getOneGroupThunk(thisEvent.Group.id))
             
     // }, [dispatch, eventId])
-
-    
-   
-
 
 
     if (!thisEvent){
@@ -64,7 +65,7 @@ const DeleteEvent = () => {
   const endCivilians = Number(militarischZeit) > 12 ? Number(militarischZeit) - 12: militarischZeit
   const idioten = Number(militarischZeit) > 12 ? 'PM' : 'AM'
   const endMinutes = (minuten > 10) ? minuten : '0'.concat(minuten)
-    
+ 
 
     return loaded && (
         <div className='main-container'>
@@ -84,6 +85,7 @@ const DeleteEvent = () => {
                     <h3>{`we will start at ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`} {`and end at ${endCivilians}:${endMinutes} ${idioten}`}</h3>
                     
                     </div>
+                    <p>{newObject.lastName}</p>
                     
                 </div>
 
