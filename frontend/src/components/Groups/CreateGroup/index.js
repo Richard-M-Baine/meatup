@@ -228,7 +228,7 @@ function CreateGroupForm(){
                     {
                         part === 'PART 5' && (
                             <div className='partDiv'>
-                                <div className='fifthTextContainer'>
+                                <div className='TextContainer'>
                                 <h2 className="create-group">Almost done! Just take a minute to <a href='https://help.meetup.com/hc/en-us/sections/360000683791-Community-Guidelines'>review our guidelines </a></h2>
                                 <span className="create-group">Meetup is all about helping people live fuller, happier lives—with the help of strong communities. This means that all groups should:</span>
                                 <ul>
@@ -241,8 +241,8 @@ function CreateGroupForm(){
                                 <span>Once you submit your group, you'll be redirected to your newly created group's page</span>
 
                             <div className="buttons">
-                                <button className="return" onClick={e => setPart('PART 4')}>Back</button>
-                                <button className="default" type="submit">{'Agree & Create group'}</button>
+                                <button className="returnend" onClick={e => setPart('PART 4')}>Back</button>
+                                <button className="submit" type="submit">{'Agree & Create group'}</button>
                             </div>
 
 
