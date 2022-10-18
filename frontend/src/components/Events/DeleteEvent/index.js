@@ -18,9 +18,9 @@ const DeleteEvent = () => {
     const thisEvent = useSelector((state) => state.events[eventId]);
     
     const thisUser = useSelector(state => state.session.user);
-   const newObject = {...thisUser}
+   
 
-  
+  console.log(thisUser.id === thisEvent.Group.organizerId)
    
 
     const [loaded, setLoaded] = useState(false)
@@ -83,9 +83,9 @@ const DeleteEvent = () => {
                         </div>
                     <div className='startDiv'>
                     <h3>{`we will start at ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`} {`and end at ${endCivilians}:${endMinutes} ${idioten}`}</h3>
-                    
+                        <h6>This will cause it to go blank {thisUser.id === thisEvent.Group.organizerId}</h6>
                     </div>
-                    <p>{newObject.lastName}</p>
+                    
                     
                 </div>
 
