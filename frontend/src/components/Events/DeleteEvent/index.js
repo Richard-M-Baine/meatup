@@ -14,7 +14,10 @@ const DeleteEvent = () => {
     
     const {eventId} = useParams()
     const history = useHistory();
+
     const thisEvent = useSelector((state) => state.events[eventId]);
+    
+
     const [loaded, setLoaded] = useState(false)
    
    
@@ -29,9 +32,10 @@ const DeleteEvent = () => {
             
     // }, [dispatch, eventId])
 
+    const sessionUser = useSelector(state => state.session.user);
+   
 
 
-    
 
     if (!thisEvent){
         return null
@@ -68,21 +72,22 @@ const DeleteEvent = () => {
                     
 
                     <div className='introtopDiv'>
-                        <h1 className='name'>{thisEvent.name}</h1>
-                        <h3 className='location'> Proudly hosted at  {thisEvent.Venue.address}, {thisEvent.Venue.city}, {thisEvent.Venue.state}</h3>
+                        <h1 className='name'>{thisEvent.name}!</h1>
+                        <h3 className='location'> we will meet at {thisEvent.Venue.address}, {thisEvent.Venue.city}, {thisEvent.Venue.state}</h3>
                         <h4>by {thisEvent.Group.name}</h4>
                     </div>
-                    <div className='descriptionDiv'>
+                        <div className='descriptionDiv'>
                         <p>{thisEvent.description}</p>
                         <p>there are currently {thisEvent.numAttending} {people} attending and only {thisEvent.capacity - thisEvent.numAttending} spots left!</p>
-                    </div>
+                        </div>
                     <div className='startDiv'>
                     <h3>{`we will start at ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`} {`and end at ${endCivilians}:${endMinutes} ${idioten}`}</h3>
                     
                     </div>
                 </div>
 
-                
+              
+
                
         </div>   
     )
