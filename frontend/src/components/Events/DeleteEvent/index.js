@@ -16,13 +16,13 @@ const DeleteEvent = () => {
     const history = useHistory();
 
     const thisEvent = useSelector((state) => state.events[eventId]);
-    
-    const thisUser = useSelector(state => state.session.user);
+    const user = useSelector(state => state.session.user);
    
 
-  console.log(thisUser.id === thisEvent.Group.organizerId)
-   
+    //  moment of truth
 
+    const isOwner = user?.id === thisEvent?.Group.organizerId
+    console.log(isOwner)
     const [loaded, setLoaded] = useState(false)
    
    
@@ -83,8 +83,11 @@ const DeleteEvent = () => {
                         </div>
                     <div className='startDiv'>
                     <h3>{`we will start at ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`} {`and end at ${endCivilians}:${endMinutes} ${idioten}`}</h3>
-                        <h6>This will cause it to go blank {thisUser.id === thisEvent.Group.organizerId}</h6>
+                        
                     </div>
+
+                    {isOwner && 
+                    <p>this works</p>}
                     
                     
                 </div>
