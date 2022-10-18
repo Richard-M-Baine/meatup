@@ -32,7 +32,7 @@ const DeleteEvent = () => {
             
     // }, [dispatch, eventId])
 
-    const sessionUser = useSelector(state => state.session.user);
+    
    
 
 
@@ -84,6 +84,7 @@ const DeleteEvent = () => {
                     <h3>{`we will start at ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`} {`and end at ${endCivilians}:${endMinutes} ${idioten}`}</h3>
                     
                     </div>
+                    
                 </div>
 
               
