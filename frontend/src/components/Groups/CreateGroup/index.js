@@ -193,7 +193,7 @@ function CreateGroupForm(){
 
                     {
                         part === 'PART 4' && (
-                        <div className='partDiv'>
+                        <div className='SpecialpartDiv'>
                             <div className='TextContainer'>
                                 <h2 className="create-group">What type of group will {name} be ?</h2>
 
@@ -211,6 +211,12 @@ function CreateGroupForm(){
                                 <option value={true} >Private</option>
                             </select>
                             </div>
+
+                            <p className="create-group">Enter the url of your groups image here</p>
+                            <input
+                            type='text' 
+                            className='url'/>
+                            
                         
 
                            <div className='buttons'>

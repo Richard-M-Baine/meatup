@@ -126,7 +126,7 @@
 }
 
 .select{
-    height: 35px;
+    height: 25px;
     border-radius: 8px;
     font-size: 15px;
     margin-top: 15px;
@@ -134,7 +134,7 @@
 }
 
 #specialSelect{
-    height: 35px;
+    height: 30px;
     font-size: 15px;
 }
 
@@ -196,3 +196,10 @@
 
 }
 
+.url{
+    margin-top: 15px;
+    font-size: 15px;
+    
+    border-radius: 8px;
+    
+}
