@@ -5,7 +5,8 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 import './CreateGroup.css';
 import { createGroupThunk } from '../../../store/group';
-import * as GroupActions from '../../../store/group';
+import {createGroupImageThunk} from '../../../store/group'
+
 
 
 function CreateGroupForm(){
@@ -21,6 +22,7 @@ function CreateGroupForm(){
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [preImage, setPreImage] = useState('')
+    const [preview, setPreview] = useState(false)
     const [privacy, setPrivacy] = useState(false)
     const [errors, setErrors] = useState([])
     const [submit, setSubmit] = useState(false)
@@ -57,10 +59,12 @@ function CreateGroupForm(){
 
         const data = await dispatch(createGroupThunk(newGroup))
 
+        const groupImageCreate = await dispatch(createGroupImageThunk(preImage, preview, data.id))
+
         history.push(`/groups/${data.id}/about`)
     }
 
-           // renamed copied classes from  cloned site DONE 
+           
 
 
 
@@ -212,10 +216,17 @@ function CreateGroupForm(){
                             </select>
                             </div>
 
-                            <p className="create-group">Enter the url of your groups image here</p>
+                            <p className="create-group">Enter the url of an image for your group here</p>
                             <input
                             type='text' 
-                            className='url'/>
+                            className='url'
+                            value={preImage}
+                            onChange={(e)=> setPreImage(e.target.value)}
+                            />
+                            <label>
+                            Select if this is a preview image or not:
+                            <input type='checkbox' onChange={() => setPreview(!preview)}/> 
+                            </label>
                             
                         
 

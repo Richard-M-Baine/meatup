@@ -7,6 +7,7 @@ const GET_GROUPS = 'groups/all'
 const ONE_GROUP = 'groups/one'
 const EDIT_GROUP = 'groups/edit'
 const DELETE_GROUP = 'groups/delete'
+const GROUP_IMG = 'groups/image'
 
 
 
@@ -49,6 +50,13 @@ const EditGroup = group => {
     return {
         type: EDIT_GROUP,
         group
+    }
+}
+
+const createGroupImg = (groupImage) => {
+    return {
+        type: GROUP_IMG,
+        payload: groupImage
     }
 }
 
@@ -116,7 +124,7 @@ export const getOneGroupThunk = id => async dispatch => {
 
 
 export const deleteGroupThunk = (groupId) => async dispatch => {
-    console.log('i am in the thunk')
+    
     const response = await csrfFetch(`/api/groups/${groupId}`,
         {
             method: 'DELETE'
@@ -158,6 +166,23 @@ export const editGroupThunk = (payload, groupId) => async(dispatch) => {
 }
 
 
+// stupid image thunk 
+
+export const createGroupImageThunk = (preImage, preview, groupId) => async(dispatch) => {
+   
+    const response = await csrfFetch(`/api/groups/${groupId}/images`, {
+        method:'POST',
+        body: JSON.stringify({
+            id: groupId,
+            url: preImage,
+            preview
+        })
+    });
+    const data = await response.json();
+    dispatch(createGroupImg(data))
+    return response
+} 
+
 
 
 // REDUCERVILLE
@@ -196,6 +221,13 @@ const groupReducer = (state = initialState, action) => {
             newState = { ...state }
             delete newState[action.payload]
             return newState
+        }
+
+        case GROUP_IMG: {
+            newState = { ...state}
+            newState.groupImg = action.payload;
+            return newState
+
         }
        
       
