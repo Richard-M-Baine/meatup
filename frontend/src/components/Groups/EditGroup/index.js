@@ -69,7 +69,7 @@ function EditGroupForm(){
       
         const data = dispatch(editGroupThunk(payload, groupId))
        
-        history.push('/groups/all')
+        history.push(`/groups/${groupId}/about`)
 }
  
  
