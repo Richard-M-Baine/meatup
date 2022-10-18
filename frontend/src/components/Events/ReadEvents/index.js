@@ -20,11 +20,22 @@ function AllEvents() {
     },[dispatch])
 
     return loaded && (
-        <div>
+    <div className='main'>
+      <div className='eventPart'>
+        <div className='eventTextDiv'>
+            <h1>Events</h1>
+        </div>
+
+
+        <div className='events'>
           {eventList.map(event => (
                 <EventCard event={event} key={event.id}/>
           ))}
         </div>
+      </div>
+
+
+    </div>
       )
     
 }
