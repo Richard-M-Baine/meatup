@@ -2,9 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import "./EventCard.css"
-import image1 from '../../EventImages/image1.jpg'
-import image2 from '../../EventImages/image2.jpg'
-import image3 from '../../EventImages/image3.jpg'
+
 
 
 
@@ -12,10 +10,7 @@ import image3 from '../../EventImages/image3.jpg'
 
 function EventCard({ event }) {
 
-    const array = [image1, image2, image3]
-    const end = array.length - 1
-    const number = Math.random() * (end - 0)
-    const round = Math.round(number)
+   
     
 
     // getting all the stuff from the start date
@@ -41,7 +36,7 @@ function EventCard({ event }) {
         <NavLink to={`/events/${event.id}/about`}>
     <div className="outerDiv">
         <div className="photoPart">
-        <img id='photo'src={array[round]} />
+        <img id='photo'src={event.previewImage} />
         </div>
 
         <div className="otherStufDiv">
