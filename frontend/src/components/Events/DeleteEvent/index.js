@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import './DeleteEvent.css'
 
 import { getOneEventThunk } from '../../../store/events'
-import { getOneGroupThunk } from '../../../store/group'
+import { deleteEvent } from '../../../store/events';
 
 
 const DeleteEvent = () => {
@@ -22,8 +22,16 @@ const DeleteEvent = () => {
     //  moment of truth
 
     const isOwner = user?.id === thisEvent?.Group.organizerId
-    console.log(isOwner)
+
     const [loaded, setLoaded] = useState(false)
+
+    const makeEventgoByeBye = e => {
+        e.preventDefault()
+        setLoaded(false)
+        dispatch(deleteEvent(eventId)).then(() => history.push('/events/all'))
+     
+     
+    }
    
    
 
@@ -87,7 +95,7 @@ const DeleteEvent = () => {
                     </div>
 
                     {isOwner && 
-                    <p>this works</p>}
+                    <button onClick={makeEventgoByeBye}>The button of truth</button>}
                     
                     
                 </div>
