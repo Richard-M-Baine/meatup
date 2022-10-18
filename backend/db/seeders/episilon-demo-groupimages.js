@@ -6,26 +6,26 @@ module.exports = {
 
       {
         groupId: 1,
-        url:'/.smilingGrouppicture1',
+        url:'smilingGrouppicture1',
         preview:true,
       },
       {
         groupId:2,
-        url:'/.smilingGrouppicture2',
+        url:'smilingGrouppicture2',
         preview:false,
       },
       {
         groupId:3,
-        url:'/.smilingGrouppicture3',
+        url:'smilingGrouppicture3',
         preview:false
       },
       {groupId:1,
-        url:'/.smilingGrouppicture4',
+        url:'smilingGrouppicture4',
       preview:false
       },
       {
         groupId:2,
-        url:'/.smilingGrouppicture5',
+        url:'smilingGrouppicture5',
         preview:false
       }
 

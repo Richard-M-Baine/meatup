@@ -74,6 +74,8 @@ function EditGroupForm(){
  
  
 const deleteGroup = e => {
+    console.log('this is group id on the front side ',group.id, ' the type of is ',typeof(group.id))
+    
     e.preventDefault()
     setIsLoaded(false)
     dispatch(deleteGroupThunk(group.id)).then(() => history.push('/groups/all'))

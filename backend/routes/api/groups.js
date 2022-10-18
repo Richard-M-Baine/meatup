@@ -663,9 +663,11 @@ else{
 
 
 router.delete('/:groupId', async(req, res, next) => {
+  
   const { groupId } = req.params;
 
   let group = await Group.findByPk(groupId)
+ 
 
   if(group){
       await group.destroy()

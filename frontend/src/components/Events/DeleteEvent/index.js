@@ -93,9 +93,14 @@ const DeleteEvent = () => {
                     <h3>{`we will start at ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`} {`and end at ${endCivilians}:${endMinutes} ${idioten}`}</h3>
                         
                     </div>
+                    {isOwner && 
+                    <div className='flavorText'>
+                    <p>Hi Mr / Mrs. {user.lastName} if you wish to cancel this event please click below.</p>
+                    <p>Please be warned that there is no way to undo this process</p>
+                    </div>}
 
                     {isOwner && 
-                    <button onClick={makeEventgoByeBye}>The button of truth</button>}
+                    <button classname='submitButton' onClick={makeEventgoByeBye}>Cancel {thisEvent.name}</button>}
                     
                     
                 </div>

@@ -114,6 +114,7 @@ export const getOneGroupThunk = id => async dispatch => {
 
 
 export const deleteGroupThunk = (groupId) => async dispatch => {
+    console.log('i am in the thunk')
     const response = await csrfFetch(`/api/groups/${groupId}`,
         {
             method: 'DELETE'
