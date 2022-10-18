@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Event.hasMany(models.Attendance, {foreignKey: 'eventId'})
+      Event.hasMany(models.Attendance, {foreignKey: 'eventId', foreignKey: 'eventId', onDelete: 'CASCADE', hooks:true })
       Event.belongsTo(models.Venue, {foreignKey: 'venueId'})
       Event.belongsTo(models.Group, {foreignKey: 'groupId'})
-      Event.hasMany(models.EventImage, {foreignKey: 'eventId', as: 'previewImage'})
+      Event.hasMany(models.EventImage, {foreignKey: 'eventId', as: 'previewImage', foreignKey: 'eventId', onDelete: 'CASCADE', hooks:true })
     }
   }
   Event.init({
