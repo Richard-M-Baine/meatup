@@ -134,12 +134,13 @@ function CreateGroupForm(){
                      {
                         part === 'PART 2' && (
                             <div className='partDiv'>
-                                <div className='SecondTextContainer'>
+                                <div className='TextContainer'>
                                     <h2 className="create-group">What will your group's name be?</h2>
                                     <p className="create-group">Choose a name that will give people a clear idea of what the group is about. Feel free to get creative! You can edit this later if you change your mind.</p>
                                 </div>
                             
                             <input type='text'
+                                className='input'
                                 onChange={e => setName(e.target.value)}
                                 value={name}
                                 maxLength='60'
@@ -158,8 +159,8 @@ function CreateGroupForm(){
                      {/* part 3 */}
 
                      {part === 'PART 3' && (
-                        <div className='partDiv'>
-                            <div className='thirdTextContainer'>
+                        <div className='SpecialpartDiv'>
+                            <div className='SpecialTextContainer'>
                             <h2 className="create-group">Now describe what {name} will be about</h2>
                                 <p className="create-group"> People will see this when we promote your group, but you'll be able to add to it later, too.</p>
                                 <ol>
@@ -170,6 +171,7 @@ function CreateGroupForm(){
                             </div>
 
                             <textarea
+                                className='textArea'
                                 rows='10'
                                 cols='70'
                                 onChange={e => setAbout(e.target.value)}
@@ -192,22 +194,24 @@ function CreateGroupForm(){
                     {
                         part === 'PART 4' && (
                         <div className='partDiv'>
-                            <div className='fourthTextContainer'>
+                            <div className='TextContainer'>
                                 <h2 className="create-group">What type of group will {name} be ?</h2>
 
                                 <p className="create-group">Will this group primarily be In Person or Online?</p>
 
-                                <select name='type' value={type} onChange={e => setType(e.target.value)} >
+                                <select className='select' name='type' value={type} onChange={e => setType(e.target.value)} >
                                     <option value="In Person">In Person</option>
                                     <option value="Online">Online</option>
                                 </select>
-                            </div>
-
+                            
+                        
                             <p className="create-group">Will this group be a private or public group?</p>
-                            <select name='private' value={privacy} onChange={e => setPrivacy(e.target.value)}>
+                            <select className='select' id='specialSelect' name='private' value={privacy} onChange={e => setPrivacy(e.target.value)}>
                                 <option value={false} >Public</option>
                                 <option value={true} >Private</option>
                             </select>
+                            </div>
+                        
 
                            <div className='buttons'>
                                  <button className="return" onClick={e => setPart('PART 3')}>Back</button>
