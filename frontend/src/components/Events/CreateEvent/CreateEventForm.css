@@ -1,0 +1,71 @@
+.createEventForm{
+    display: flex;
+    flex-direction: column;
+    
+    min-width: 33vw;
+    margin-left: 33vw;
+
+} 
+
+
+.createEventDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-bottom: 10px;
+}
+
+
+.ceinputEvent{
+    max-width: 20vw;
+}
+
+.ceinputSpan{
+    margin-top: 6px;
+}
+
+.cedescription{
+    max-width: 25vw;
+}
+
+.ceselectEvent{
+    max-width: 10vw;
+}
+
+.ceOuterDiv{
+    display: flex;
+    flex-direction: column;
+    
+  
+}
+
+#ceHeader{
+    margin-left: 35vw;
+    margin-bottom: 25px;
+    
+}
+
+.cebutton{
+    
+    top: 92%;
+    right: 0;
+    left: 75%;
+    bottom: 0;
+    height: 50px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    
+    margin-top: 15px;
+    background-color:#f65858;
+    border-color: #f65858;
+    fill: #ffff;
+    color: #ffff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 15px;
+    font-weight: bold;
+    align-items: center;
+}

@@ -88,8 +88,10 @@ history.push(`/events/all`)
 
 
     return (
-        <form onSubmit={submit}>
-            <h2>Let's create an event!</h2>
+        <div className='ceOuterDiv'>
+        <h2 id='ceHeader'>Let's create an event!</h2>
+        <form className='createEventForm'onSubmit={submit}>
+            
 
             {isSubmitted && validationErrors.length > 0 &&
                 <ul>
@@ -99,7 +101,7 @@ history.push(`/events/all`)
             <div className='createEventDiv'>
                 <h3>What is the name for your event?</h3>
                 <input
-                className='inputEvent'
+                className='ceinputEvent'
                 required
                 value={name}
                 onChange={e => setName(e.target.value)}
@@ -107,27 +109,27 @@ history.push(`/events/all`)
                 id='nameInput'
                 placeholder='max 50 characters'
                 />
-                <span className="inputSpan">{name.length} characters</span>
+                <span className="ceinputSpan">{50 - name.length} characters remaining</span>
                 
             </div>
 
             <div className='createEventDiv'>
                 <h3>Please enter a description</h3>
-                <p>Our advice is to keep the message simple and positive.</p>
                 <textarea
+                className='cedescription'
                 required
                 rows='10'
                 cols='75'
                 value={description}
                 onChange={e => setDescription(e.target.value)}
-                placeholder='please enter at least 50 characters'>
+                placeholder='please enter at least 50 characters.  Our experience shows that the best description is simple and positive.'>
                 </textarea>
-                <span className='inputSpan'>{description.length} characters</span>
+                <span className='ceinputSpan'>{description.length} characters</span>
             </div>
 
             <div className="createEventDiv">
                 <h3>Will this event be in person or online?</h3>
-                <select name='type' value={type} onChange={e => setType(e.target.value)} >
+                <select className='ceselectEvent' name='type' value={type} onChange={e => setType(e.target.value)} >
                     <option value='In person'>In Person</option>
                     <option value='Online'>Online</option>
                 </select>
@@ -135,9 +137,9 @@ history.push(`/events/all`)
 
             <div className="createEventDiv">
                 <h3>How many people are allowed to attend this event? </h3>
-                <h5> You can have up to 100 people attend.</h5>
+                <p> You can have up to 100 people attend.</p>
                 <input
-                    className='inputEvent'
+                   className='ceselectEvent'
                     required
                     name="event-capacity"
                     type="number"
@@ -149,9 +151,9 @@ history.push(`/events/all`)
             </div>
 
             <div className='createEventDiv'>
-                <h3>How much will it cost to attend the event?</h3>
+                <h3 >How much will it cost to attend the event?</h3>
                 <input 
-                className='inputEvent'
+                className='ceselectEvent'
                 required
                 name="event-price"
                 value={price}
@@ -163,9 +165,10 @@ history.push(`/events/all`)
             </div>
 
             <div className='createEventDiv'>
-                <div className='startDiv'>
+                
                     <h3>When will your event start?</h3>
                         <input
+                        className='ceselectEvent'
                         required
                         name="event-start-date"
                         type="datetime-local"
@@ -173,23 +176,26 @@ history.push(`/events/all`)
                         value={startDate}
                         onChange={e => setStartDate(e.target.value)} 
                         />
-                </div>
-
-                <div className='endDiv'>
-                    <h4>When will your event end?</h4>
+                
+            </div>
+            <div className='createEventDiv'>
+                
+                    <h3>When will your event end?</h3>
                     <input
+                        className='ceselectEvent'
                         required
                         name="event-end-date"
                         type="datetime-local"
                         value={endDate}
                         max={"9999-12-31T00:00"}
                         onChange={e => setEndDate(e.target.value)} />
-                </div>
-
-                <p className="create-group">Enter the url of an image for your group here</p>
+                
+            </div>
+            <div className='createEventDiv'>
+                <h3 id='h3cebottom'>Enter the url of an image for your group here</h3>
                             <input
                             type='text' 
-                            className='url'
+                            className='ceinputEvent'
                             value={preImage}
                             onChange={(e)=> setPreImage(e.target.value)}
                             />
@@ -200,12 +206,13 @@ history.push(`/events/all`)
 
             </div>
 
-            <div className='button'>
-                <button className='button'  type="submit">Create your group</button>
+            <div className='cebuttondiv'>
+                <button className='cebutton'  type="submit">Create your group</button>
             </div>  
 
 
         </form>
+        </div>
     )
 }
 
