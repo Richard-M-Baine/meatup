@@ -108,7 +108,7 @@ const DeleteEvent = () => {
                     </div>}
 
                     {isOwner && 
-                    <button classname='submitButton' onClick={makeEventgoByeBye}>Cancel {thisEvent.name}</button>}
+                    <button className='submitButton' onClick={makeEventgoByeBye}>Cancel {thisEvent.name}</button>}
                     
                     
                 </div>
