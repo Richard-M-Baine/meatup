@@ -26,6 +26,7 @@ const DeleteEvent = () => {
      // get event stuff
      useEffect(() => {
         
+        
         dispatch(getOneEventThunk(eventId)).then(() => setLoaded(true))
     },[dispatch, eventId])
 
