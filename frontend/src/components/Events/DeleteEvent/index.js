@@ -91,7 +91,7 @@ const DeleteEvent = () => {
 
                     <div className='introtopDiv'>
                         <h1 className='name'>{thisEvent.name}!</h1>
-                        <h3 className='location'> we will meet at {thisEvent.Venue.address}, {thisEvent.Venue.city}, {thisEvent.Venue.state}</h3>
+                        <h3 className='location'> we will meet at {thisEvent.Venue ? thisEvent.Venue.address : ''}, {thisEvent.Venue ? thisEvent.Venue.city : ''}, {thisEvent.Venue ? thisEvent.Venue.state: ''}</h3>
                         <h4>by {thisEvent.Group.name}</h4>
                     </div>
                         <div className='descriptionDiv'>

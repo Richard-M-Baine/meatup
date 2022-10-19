@@ -8,7 +8,7 @@ import './CreateEventForm.css'
 
 import {getOneGroupThunk} from '../../../store/group'
 import {createEventThunk} from '../../../store/events'
-import * as EventActions from '../../../store/events'
+import {createEventImageThunk} from '../../../store/events'
 
 
 // selectors
@@ -35,6 +35,8 @@ function CreateEventForm() {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [isLoaded, setIsLoaded] = useState(false)
+    const [preImage, setPreImage] = useState('')
+    const [preview, setPreview] = useState(false)
 
     const [validationErrors, setvalidationErrors] = useState([])
     const [isSubmitted, setIsSubmitted] = useState(false)
@@ -75,6 +77,8 @@ const payload = {
 }
 
 const data = await dispatch(createEventThunk(groupId, payload))
+
+const eventImageCreate = await dispatch(createEventImageThunk(preImage, preview, data.id))
 
 
 history.push(`/events/${data.id}/about`)
@@ -180,6 +184,18 @@ history.push(`/events/${data.id}/about`)
                         max={"9999-12-31T00:00"}
                         onChange={e => setEndDate(e.target.value)} />
                 </div>
+
+                <p className="create-group">Enter the url of an image for your group here</p>
+                            <input
+                            type='text' 
+                            className='url'
+                            value={preImage}
+                            onChange={(e)=> setPreImage(e.target.value)}
+                            />
+                            <label>
+                            Select if this is a preview image or not:
+                            <input type='checkbox' onChange={() => setPreview(!preview)}/> 
+                            </label>
 
             </div>
 
