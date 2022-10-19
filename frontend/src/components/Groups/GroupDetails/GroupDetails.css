@@ -92,3 +92,14 @@
     align-items: center;
 }
 
+.GDnotice{
+    display: flex;
+    margin-left: 400px;
+    min-width: 500px;
+    min-height: 100px;
+}
+
+.GDnoUser{
+    margin-left: 10px;
+    margin-right: 5px;
+}

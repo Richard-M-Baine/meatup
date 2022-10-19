@@ -95,8 +95,8 @@ export default function GroupDetails(){
                     <div className='GDnotice'>
                         {!isOwner &&
                         <>
-                            <p>You are not an organizer of this group.  </p>
-                            <p>If you are the organizer and do not have access to edit or delete the group <a href='https://help.meetup.com/hc/en-us'>please contact us </a></p>
+                            <p className='GDnoUser'>You are not an organizer of this group.</p>
+                            <p className='GDnoUser'>If you are the organizer and do not have access to edit or delete the group <a href='https://help.meetup.com/hc/en-us'>please contact us </a></p>
                             </>
                         }
                     </div>
