@@ -91,8 +91,11 @@ const DeleteEvent = () => {
 
                     <div className='introtopDiv'>
                         <h1 className='name'>{thisEvent.name}!</h1>
-                        <h3 className='location'> we will meet at {thisEvent.Venue ? thisEvent.Venue.address : 'The organizer has not determined the location of the event yet'} {thisEvent.Venue ? thisEvent.Venue.city : ''} {thisEvent.Venue ? thisEvent.Venue.state: ''}</h3>
-                        <h4>by {thisEvent.Group.name}</h4>
+                    <div className='EDaddressParentDiv'>
+                        <h3>We will meet at </h3>
+                        <h4 className='location'>{thisEvent.Venue ?  thisEvent.Venue.address : 'The organizer has not determined the location of the event yet'} {thisEvent.Venue ? thisEvent.Venue.city : ''} {thisEvent.Venue ? thisEvent.Venue.state: ''}</h4>
+                        </div>
+                        <h4>Proudly hosted by {thisEvent.Group.name}</h4>
                     </div>
                         <div className='descriptionDiv'>
                         <p>{thisEvent.description}</p>
