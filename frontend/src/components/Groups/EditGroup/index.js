@@ -24,9 +24,11 @@ function EditGroupForm(){
      const sessionUser = useSelector((state) => state.session.user);
     
  
+    useEffect(() => {
+        dispatch(getOneGroupThunk(groupId))
+            .then(() => setIsLoaded(true))
+    }, [dispatch, groupId])
    
-   
-
  
     const [name, setName] = useState(group && group.name);
     const [about, setAbout] = useState(group && group.about)
@@ -41,10 +43,7 @@ function EditGroupForm(){
    
 
  
-    useEffect(() => {
-        dispatch(getOneGroupThunk(groupId))
-            .then(() => setIsLoaded(true))
-    }, [dispatch, groupId])
+   
  
    
  
