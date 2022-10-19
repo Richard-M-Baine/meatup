@@ -15,10 +15,10 @@ import './EditGroup.css'
  
  
 function EditGroupForm(){
- 
-    const { groupId } = useParams();
-    const history = useHistory();
+  const history = useHistory();
     const dispatch = useDispatch();
+    const { groupId } = useParams();
+   
 
      const group = useSelector((state) => state.groups[groupId]);
      const sessionUser = useSelector((state) => state.session.user);
@@ -27,7 +27,7 @@ function EditGroupForm(){
     useEffect(() => {
         dispatch(getOneGroupThunk(groupId))
             .then(() => setIsLoaded(true))
-    }, [dispatch, groupId])
+    }, [dispatch])
    
  
     const [name, setName] = useState(group && group.name);
@@ -39,9 +39,19 @@ function EditGroupForm(){
     const [errors, setErrors] = useState([]);
     const [loaded, setIsLoaded] = useState(false)
     const [submitted, setSubmitted] = useState(false)
- 
+ console.log(loaded)
    
-
+    useEffect(() => {
+        const errors = [];
+    
+       if (!name?.length) {
+          errors.push('Name Required')
+        }
+        if (about?.length < 50) errors.push('About must be 50 characters or more')
+        if (!city?.length) errors.push('City required')
+        if (!state?.length) errors.push('State required')
+        setErrors(errors)
+        }, [name, about, city, state]);
  
    
  
@@ -173,7 +183,7 @@ return loaded && (
                         Submit
                     </button>
                     <h4>DELETE GROUP CAUTION THERE IS NO WAY TO GET IT BACK!</h4>
-                    <button className='deleteGroupEdit' onClick={deleteGroup}>DELETE GROUP</button>
+                    <button className='deleteGroupEdit' disabled={errors.length > 0}onClick={deleteGroup}>DELETE GROUP</button>
  
  
  
