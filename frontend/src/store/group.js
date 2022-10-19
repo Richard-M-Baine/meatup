@@ -231,9 +231,9 @@ const groupReducer = (state = initialState, action) => {
         }
        
       
-        default:
+        default: {
             return state;
-
+        }
 
 
 

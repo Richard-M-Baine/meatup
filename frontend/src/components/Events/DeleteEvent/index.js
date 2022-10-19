@@ -85,7 +85,7 @@ const DeleteEvent = () => {
         <div className='main-container'>
                 <div className='top-container_'>
                     <div className='imageDiv'>
-                        <img src={thisEvent.previewImage[0].url}/>
+                        <img id='EDphoto'src={thisEvent.previewImage?.length > 0 ? thisEvent.previewImage[0].url : ""}/>
                     </div>
                     
 

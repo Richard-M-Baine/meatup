@@ -3,11 +3,11 @@ import { csrfFetch } from "./csrf";
 const GET_EVENTS = "events/all"
 const GET_GROUP_EVENTS = 'events/group/events'
 
-
-
 const CREATE_EVENT = "events/create"
 const READ_EVENT = "events/details"
 const DELETE_EVENT = "events/delete"
+
+const EVENT_IMG = 'events/image'
 
 // action creators fewer spaces
 
@@ -38,6 +38,14 @@ const deleteEventAction = (payload) => {
     return {
         type: DELETE_EVENT,
         payload
+    }
+}
+
+
+const createEventImg = (eventImage) => {
+    return {
+        type: EVENT_IMG,
+        payload: eventImage
     }
 }
 
@@ -100,6 +108,27 @@ export const deleteEvent = (eventId) => async(dispatch) => {
     return response;
 }
 
+export const createEventImageThunk = (preImage, preview, eventId) => async(dispatch) => {
+   
+    const response = await csrfFetch(`/api/events/${eventId}/images`, {
+        method:'POST',
+        body: JSON.stringify({
+            id: eventId,
+            url: preImage,
+            preview
+        })
+    });
+    const data = await response.json();
+    dispatch(createEventImg(data))
+    return response
+} 
+
+
+
+
+
+
+
 const initialState = {}
 
 const eventsReducer = (state = initialState, action) => {
@@ -133,6 +162,14 @@ const eventsReducer = (state = initialState, action) => {
             delete newState[action.payload]
             return newState
         }
+
+        case EVENT_IMG: {
+            newState = { ...state}
+            newState.eventImg = action.payload;
+            return newState
+
+        }
+
         default: {
             return state
         }
