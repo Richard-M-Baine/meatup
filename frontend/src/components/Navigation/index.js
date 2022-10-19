@@ -29,7 +29,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <div className='navLoginOutDiv'>
         <div className='newGroupDiv'>
-        <NavLink className='new' to={`/groups/new`}>Create a group</NavLink>
+        <NavLink className='newNavGroup' to={`/groups/new`}>Create a group</NavLink>
         </div>
       <div className='profile'>
       <ProfileButton user={sessionUser} />
