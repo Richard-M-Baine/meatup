@@ -55,8 +55,7 @@
     flex-direction: column;
     height: 450px;
     justify-content: space-around;
-    border-bottom: 2px;
-    border-style: solid;
+   
 }
 
 .GDname-container{
