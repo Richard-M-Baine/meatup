@@ -99,13 +99,21 @@ export const getOneEventThunk = (id) => async dispatch => {
 
 // destroy the event
 
-export const deleteEvent = (eventId) => async(dispatch) => {
+export const deleteEvent = (eventId) => async dispatch => {
+    console.log(eventId, 'i am in the thunk ', typeof(eventId))
     const response = await csrfFetch(`/api/events/${eventId}`, {
+        
         method: 'DELETE'
     })
-    await response.json();
+    const data = await response.json();
+    console.log(data)
+
+    if(response.ok){
     dispatch(deleteEventAction());
+    return data
+    } else {
     return response;
+    }
 }
 
 export const createEventImageThunk = (preImage, preview, eventId) => async(dispatch) => {

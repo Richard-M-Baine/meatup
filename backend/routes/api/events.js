@@ -354,12 +354,12 @@ router.get('/:eventId', async (req,res,next) => {
 })
 
 router.delete('/:eventId', requireAuth, async(req, res, next) => {
-    const { groupId } = req.params;
+    const { eventId } = req.params;
 
-    let group = await Group.findByPk(groupId)
+    let event = await Event.findByPk(eventId)
   
-    if(group){
-        await group.destroy()
+    if(event){
+        await event.destroy()
   
         res.json({
             message: "Successfully deleted",
@@ -368,7 +368,7 @@ router.delete('/:eventId', requireAuth, async(req, res, next) => {
     } else {
         res.status = 404
         res.json({
-            message: "Group couldn't be found",
+            message: "Event couldn't be found",
             statusCode: 404
         })
     }

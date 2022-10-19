@@ -35,6 +35,7 @@ const DeleteEvent = () => {
 
 
     const makeEventgoByeBye = e => {
+        console.log('i am here and this is the eventid ',eventId)
         e.preventDefault()
         setLoaded(false)
         dispatch(deleteEvent(eventId)).then(() => history.push('/events/all'))
