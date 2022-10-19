@@ -53,6 +53,7 @@
 .otherStuffGD{
     margin-top: 40px;
     margin-bottom: 20px;
+    margin-left: 5vw;
     display: flex;
     flex-direction: column;
     height: 450px;
@@ -66,7 +67,7 @@
 
 .GDbuttonsuperDiv{
     display: flex;
-    margin-left: 550px;
+    margin-left: 580px;
     min-width: 500px;
     min-height: 100px;
 }

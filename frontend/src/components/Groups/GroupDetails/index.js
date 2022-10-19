@@ -76,6 +76,7 @@ export default function GroupDetails(){
                     
                 </div>
 
+
                 <div className='otherStuffGD'>
                     <div className='GDname-container'>
                         {isOwner &&
