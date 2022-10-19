@@ -54,6 +54,7 @@ useEffect(() => {
     if (price < 0) errors.push('Price can not be a negative value')
     if (new Date(startDate) <= new Date()) errors.push('Start date must be in the future')
     if (new Date(endDate) < new Date(startDate)) errors.push('End date must be after the start date')
+    if (!preview)
 
     setvalidationErrors(errors)
 
@@ -81,7 +82,7 @@ const data = await dispatch(createEventThunk(groupId, payload))
 const eventImageCreate = await dispatch(createEventImageThunk(preImage, preview, data.id))
 
 
-history.push(`/events/${data.id}/about`)
+history.push(`/events/all`)
 }
 
 
