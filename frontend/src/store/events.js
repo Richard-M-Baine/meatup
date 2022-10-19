@@ -76,7 +76,8 @@ export const createEventThunk = (groupId, payload) => async dispatch => {
 
 // details 
 
-export const getOneEventThunk = id => async dispatch => {
+export const getOneEventThunk = (id) => async dispatch => {
+  
     
     const res = await csrfFetch(`/api/events/${id}`)
     if (res.ok){
@@ -123,7 +124,7 @@ const eventsReducer = (state = initialState, action) => {
         }
         case READ_EVENT: {
             newState = { ...state }
-            newState[action.payload.id] = { ...newState[action.payload.id], ...action.payload } // Gets the new data from the response and adds it to what exists
+            newState[action.payload.id] = { ...newState[action.payload.id], ...action.payload } 
             return newState
         }
        

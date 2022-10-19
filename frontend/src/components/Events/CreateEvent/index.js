@@ -77,7 +77,7 @@ const payload = {
 const data = await dispatch(createEventThunk(groupId, payload))
 
 
-history.push('/events/all')
+history.push(`/events/${data.id}/about`)
 }
 
 

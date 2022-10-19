@@ -54,45 +54,45 @@ export default function GroupDetails(){
 
     return isLoaded && (
         
-       <div className='main-container'>
-                <div className='top-container_'>
-                    <div className='leftPhotos'>
-                        {singleGroup.GroupImages && singleGroup.GroupImages[0] && <img className='big-image' src={singleGroup.GroupImages[0].url}></img>}
-                        {(!singleGroup.GroupImages || !singleGroup.GroupImages[0]) && <div className='place-holder-group-img' ></div>}
+       <div className='mainGroupDetails'>
+                <div className='groupDetailsTop'>
+                    <div className='leftGroupDetailPhotos'>
+                    <img id='GDphoto'src={singleGroup.groupImages?.length > 0 ? singleGroup.groupImages[0].url : ""} />
+                
                     </div>
 
-                    <div className='rightOtherStuff'>
-                        <div className='name'>{singleGroup.name}</div>
-                        <div className='location'> {singleGroup.city}, {singleGroup.state}</div>
-                        <div className='members-public'> {singleGroup.numMembers} {singleGroup.numMembers === 1 ? "member" : "members"} · {singleGroup.private ? "Private" : "Public"} group </div>
-                        <div className='organizer'> Organized by {singleGroup.organizer.firstName}</div>
-                        <div className='bottom-left-container'>
-                        <div className='about'>
-                            What we are about
-                            <br />
+                    <div className='rightTopGroupDetails'>
+                        <h2 className='GDname'>{singleGroup.name}</h2>
+                        <h3 className='GDlocation'> {singleGroup.city}, {singleGroup.state}</h3>
+                        <div className='GDmembers-public'> {singleGroup.numMembers} {singleGroup.numMembers === 1 ? "member" : "members"} · {singleGroup.private ? "Private" : "Public"} group </div>
+                        <div className='GDorganizer'> Organized by {singleGroup.organizer.firstName}</div>
+                        <div className='GDbottom-left-container'>
+                        <div className='GDabout'>
+                            <h4>What are we about? </h4>
                             {singleGroup.about}
                         </div>
                     </div>
-
+                    </div>
                     
                 </div>
 
-                <div className='otherStuff'>
-                    <div className='name-container'>
+                <div className='otherStuffGD'>
+                    <div className='GDname-container'>
                         {isOwner &&
                         <p>Welcome Mr. / Mrs. {singleGroup.organizer.lastName}.  As the organizer of the group how do you wish to proceed?</p>}
                     </div>
                 
-                
-                    <div className='button-container'>
+                <div className='GDbuttonsuperDiv'>
+                    <div className='GDbutton-container'>
                         {isOwner &&
-                            <button className='button' onClick={editRoute}>Edit or remove Group</button>}
+                            <button className='GDbutton' onClick={editRoute}>Edit or remove Group</button>}
                     </div>
-                    <div className='button-container'>
+                    <div className='GDbutton-container'>
                         {isOwner &&
-                            <button className='button' onClick={makeEvent}>Create Event</button>}
+                            <button className='GDbutton' onClick={makeEvent}>Create Event</button>}
                     </div>
-                    <div className='notice'>
+                </div>
+                    <div className='GDnotice'>
                         {!isOwner &&
                         <>
                             <p>You are not an organizer of this group.  </p>
@@ -104,6 +104,6 @@ export default function GroupDetails(){
 
                 </div>
         </div>
-        </div>
+        
     )
 }
