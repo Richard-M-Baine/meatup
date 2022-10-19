@@ -89,42 +89,44 @@ const deleteGroup = e => {
  
  
  
-return (
+return loaded && (
     <div className='main'>
-        <div className='flavorText'>
-    <h1>Welcome {sessionUser.firstName}! </h1>
-    <h3>feel free to alter your group as you see fit</h3>
+        <div className='flavorTextGroupDetails'>
+    <h1 id='gdh1ft'>Welcome {sessionUser.firstName}! </h1>
+    <h3 >feel free to alter your group as you see fit</h3>
         </div>
        
-       <form onSubmit={submit}>
+       <form className='groupDetailForm'onSubmit={submit}>
        <ul className='error'>
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
  
-                        <div className='inputDiv'>
-                            <label className='label'>name</label>
+                        <div className='gdinputDiv'>
+                            <label className='gdlabel'>Name</label>
                             <input
-                                className='input-box'
+                                className='gdinput-box'
                                 type='text'
                                 value={name}
                                 onChange={e => setName(e.target.value)}
                                 required
                             />
                         </div>
-                        <div className='field'>
-                            <label className='label'>About</label>
-                            <input
-                                className='input-box'
+                        <div className='gdinputDiv'>
+                            <label className='gdlabel'>About</label>
+                            <textarea
+                                className='gdTextArea'
+                                rows='4'
+                                cols='20'
                                 type='text'
                                 value={about}
                                 onChange={e => setAbout(e.target.value)}
                                 required
                             />
                         </div>
-                        <div className='field'>
-                            <label className='label'>Type</label>
+                        <div className='gdinputDiv'>
+                            <label className='gdlabel'>Type</label>
                             <select
-                                  className = 'dropdown-option'
+                                className = 'gddropdown-option'
                                 value={type}
                                 onChange={e => setType(e.target.value)}
                                 required
@@ -133,20 +135,20 @@ return (
                                 <option   className = 'dropdown-option' value={'Online'}>Online</option>
                             </select>
                         </div>
-                        <div className='field'>
-                            <label className='label'>City</label>
+                        <div className='gdinputDiv'>
+                            <label className='gdlabel'>City</label>
                             <input
-                                className='input-box'
+                                className='gdinput-box'
                                 type='text'
                                 value={city}
                                 onChange={e => setCity(e.target.value)}
                                 required
                             />
                         </div>
-                        <div className='field'>
-                            <label className='label'>State</label>
+                        <div className='gdinputDiv'>
+                            <label className='gdlabel'>State</label>
                             <input
-                                className='input-box'
+                                className='gdinput-box'
                                 type='text'
                                 value={state}
                                 onChange={e => setState(e.target.value)}
@@ -154,17 +156,17 @@ return (
                             >
                             </input>
                         </div>
-                        <div className='field'>
-                            <label className='label'>Group Privacy</label>
+                        <div className='gdinputDiv'>
+                            <label className='gdlabel'>Group Privacy</label>
                             <select
-                                className = 'dropdown-option'
+                                className = 'gddropdown-option'
                                 type='text'
                                 value={isPrivate}
                                 onChange={e => setPrivate(e.target.value)}
                                 required
                             >
-                                <option className='input-box' value={true}>Private</option>
-                                <option className='input-box' value={false}>Public</option>
+                                <option className='gdinput-box' value={true}>Private</option>
+                                <option className='gdinput-box' value={false}>Public</option>
                             </select>
                         </div>
  
@@ -172,7 +174,7 @@ return (
                         Submit
                     </button>
                     <h4>DELETE GROUP CAUTION THERE IS NO WAY TO GET IT BACK!</h4>
-                    <button onClick={deleteGroup}>DELETE GROUP</button>
+                    <button className='deleteGroupEdit' onClick={deleteGroup}>DELETE GROUP</button>
  
  
  
