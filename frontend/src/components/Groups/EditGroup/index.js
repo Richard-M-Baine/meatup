@@ -192,7 +192,7 @@ return loaded && (
                             </select>
                         </div>
  
-                        <button className='edit-group-button' type='submit'>
+                        <button className='edit-group-button' disabled={errors.length > 0} type='submit'>
                         Submit
                     </button>
                     <h4>DELETE GROUP CAUTION THERE IS NO WAY TO GET IT BACK!</h4>
