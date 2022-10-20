@@ -1,7 +1,7 @@
 # MeatUp
 meetUp.com clone project
 
-Welcome to MeatUp.  The purpose of this site is to enable indivduals to setup volunteer groups and schedule specific events in order for them coordinate food deliveries / pop up free food markets.  The inspiration behind this is Food Not Bombs, a loosely organized confederation that offers vegan / human vegetarian food and related services free of charge.  The styling, and the backend,  behind this project was inspired by meetup.com as part of a requirement for a social engineering bootcamp.  It will be redesigned at a later date.  In order to run a localhost version of this site on your own computer:
+Welcome to MeatUp.  The purpose of this site is to enable indivduals to setup volunteer groups, and schedule specific events, in order for them coordinate food deliveries / pop up free food markets.  The inspiration behind this is Food Not Bombs, a loosely organized confederation that offers vegan / human vegetarian food and related services free of charge.  The styling, and the backend,  behind this project was inspired by meetup.com as part of a requirement for a social engineering bootcamp.  It will be redesigned at a later date.  In order to run a localhost version of this site on your own computer:
 
 
 
@@ -18,6 +18,51 @@ Welcome to MeatUp.  The purpose of this site is to enable indivduals to setup vo
 6- type npm start in the backend
 
 7- type npm start in the front end
+
+
+PART 0 REDUX STORE SHAPE
+
+Groups: {
+1 (id):
+{
+about:
+city:
+createdAt:
+name:
+numMembers:
+organizerId:
+previewImage: (url)
+groupImages: [array of images]
+private: ie public or private invitation only
+state:
+type: ie in person or online only
+updatedAt:
+------ end of Groups ----
+
+Events
+
+the following nested objects apply
+group - with groupId, name, private / public, state
+Venue - venueId, address, city, state, lat and longitude are also included but not used
+
+the event section proper includes
+eventId
+name
+capacity
+description
+endDate
+numAttending
+startDate / time
+endDate / time
+type : inperson / online
+
+session: user{
+id
+firstname
+lastName
+email
+}
+
 
 
 PART 1 DATABASE DESIGN
