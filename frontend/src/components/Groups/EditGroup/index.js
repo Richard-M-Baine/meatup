@@ -37,7 +37,6 @@ function EditGroupForm(){
     const [loaded, setIsLoaded] = useState(false)
     const [submitted, setSubmitted] = useState(false)
 
-    console.log(isPrivate)
 
 
 
@@ -57,6 +56,7 @@ function EditGroupForm(){
         if (!state?.length) errors.push('State required')
         if (!type) errors.push('select a type')
         if (!about) errors.push('add a bloody about section')
+        if (isPrivate === undefined) errors.push('select private or public')
         setErrors(errors)
         }, [name, about, city, state, type, isPrivate, about]);
  
@@ -122,7 +122,7 @@ return loaded && (
                                 className='gdinput-box'
                                 type='text'
                                 
-                                defaultValue = {group?.name}
+                                value = {name}
                                 
                                 onChange={e => setName(e.target.value)}
                                 required
@@ -135,7 +135,7 @@ return loaded && (
                                 rows='4'
                                 cols='20'
                                 type='text'
-                                defaultValue = {group?.about}
+                                value = {about}
                                
                                 onChange={e => setAbout(e.target.value)}
                                 required
@@ -145,11 +145,11 @@ return loaded && (
                             <label className='gdlabel'>Type</label>
                             <select
                                 className = 'gddropdown-option'
-                                defaultValue = {group?.type}
+                                value = {type}
                                 
                                 onChange={e => setType(e.target.value)}
                                 required
-                            >   
+                            >   <option className='gdinput-box'>Enter a value below</option>
                                 <option   className = 'dropdown-option' value={'In person'}>In person</option>
                                 <option   className = 'dropdown-option' value={'Online'}>Online</option>
                             </select>
@@ -159,7 +159,7 @@ return loaded && (
                             <input
                                 className='gdinput-box'
                                 type='text'
-                                defaultValue = {group?.city}
+                                value = {city}
                               
                                 onChange={e => setCity(e.target.value)}
                                 required
@@ -170,7 +170,7 @@ return loaded && (
                             <input
                                 className='gdinput-box'
                                 type='text'
-                                defaultValue = {group?.state}
+                                value = {state}
                              
                                 onChange={e => setState(e.target.value)}
                                 required
@@ -182,11 +182,11 @@ return loaded && (
                             <select
                                 className = 'gddropdown-option'
                                 type='text'
-                                defaultValue = {group?.private}
+                                value = {isPrivate}
                                 
                                 onChange={e => setPrivate(e.target.value)}
                                 required
-                            >   
+                            >   <option className='gdinput-box'>Enter a value below</option>
                                 <option className='gdinput-box' value={true}>Private</option>
                                 <option className='gdinput-box' value={false}>Public</option>
                             </select>
