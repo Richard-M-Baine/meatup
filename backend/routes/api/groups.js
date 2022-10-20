@@ -358,7 +358,7 @@ res.json(venue)
 // add an image to group
 router.post('/:groupId/images',requireAuth, async (req,res,next) =>{
   const {groupId} = req.params
-  console.log(req.body, ' I am in the backend')
+
   const{url,preview} = req.body
 
   const group = await Group.findByPk(req.params.groupId)
@@ -628,7 +628,7 @@ if (group){
   }
 const { name, about, type, city, state, private } = req.body
 
-console.log('i am the scary backend ',req.body)
+
 
 group.set({
   name: name,

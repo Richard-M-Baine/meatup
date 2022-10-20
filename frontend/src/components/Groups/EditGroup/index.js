@@ -62,8 +62,7 @@ function EditGroupForm(){
  
     const submit = async (e) => {
         e.preventDefault();
-        setErrors([]);
-        if (errors.length > 0) return
+    
         const payload = {
            name,
            about,
@@ -117,7 +116,7 @@ return loaded && (
                                 className='gdinput-box'
                                 type='text'
                                 defaultValue = {group?.name}
-                                value={name}
+                                
                                 onChange={e => setName(e.target.value)}
                                 required
                             />

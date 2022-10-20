@@ -213,11 +213,16 @@ const groupReducer = (state = initialState, action) => {
         }
 
         case EDIT_GROUP: {
-            console.log(action.payload, 'this is state ',state)
-            newState = { ...state, [action.payload.id]:action.payload }
-            // newState[action.payload.id] = { ...newState[action.payload.id], ...action.payload }
+            // console.log(action.payload, 'this is state ',state)
+            // newState = { ...state, [action.payload.id]:action.payload }
+            // // newState[action.payload.id] = { ...newState[action.payload.id], ...action.payload }
             
-            return newState
+            // return newState
+
+
+            const newerState = Object.assign({}, state);
+            newerState.group = action.payload;
+            return newerState;
         }
 
         case DELETE_GROUP: {
