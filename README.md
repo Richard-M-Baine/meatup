@@ -42,7 +42,9 @@ updatedAt:
 Events
 
 the following nested objects apply
+
 group - with groupId, name, private / public, state
+
 Venue - venueId, address, city, state, lat and longitude are also included but not used
 
 the event section proper includes
@@ -55,6 +57,7 @@ numAttending
 startDate / time
 endDate / time
 type : inperson / online
+
 
 session: user{
 id
