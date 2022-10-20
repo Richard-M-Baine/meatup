@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
           'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN',
           'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
-          if (!validStates.includes(value)){
+          if (!validStates.includes(value.toUpperCase())){
             throw new Error('State must be valid')
           }
         }

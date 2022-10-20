@@ -168,6 +168,7 @@ function CreateGroupForm(){
                                 placeholder='enter betweeen 5 and 60 characters'
                                 name='name'/>
                                 <span className="secondSpan">Character count: {name.length}</span>
+                                <span className="secondSpan">Character count: {60 - name.length} remaining</span>
 
                                 <div className="buttons">
                                 <button className="return" onClick={e => setPart('PART 1')}>Back</button>
