@@ -93,7 +93,7 @@ history.push(`/events/all`)
         <form className='createEventForm'onSubmit={submit}>
             
 
-            {isSubmitted && validationErrors.length > 0 &&
+            {validationErrors.length > 0 &&
                 <ul>
                     {validationErrors.map(error => <li key={error}>{error}</li>)}
                 </ul>}
