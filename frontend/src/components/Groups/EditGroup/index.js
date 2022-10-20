@@ -22,12 +22,9 @@ function EditGroupForm(){
 
      const group = useSelector((state) => state.groups[groupId]);
      const sessionUser = useSelector((state) => state.session.user);
-    
+     
  
-    useEffect(() => {
-        dispatch(getOneGroupThunk(groupId))
-            .then(() => setIsLoaded(true))
-    }, [dispatch])
+ 
    
  
     const [name, setName] = useState(group && group.name);
@@ -39,7 +36,11 @@ function EditGroupForm(){
     const [errors, setErrors] = useState([]);
     const [loaded, setIsLoaded] = useState(false)
     const [submitted, setSubmitted] = useState(false)
- console.log(loaded)
+
+    useEffect(() => {
+        dispatch(getOneGroupThunk(groupId)).then(() => setIsLoaded(true))       
+    }, [dispatch])
+
    
     useEffect(() => {
         const errors = [];
@@ -76,7 +77,7 @@ function EditGroupForm(){
         
  
       
-        const data = dispatch(editGroupThunk(payload, groupId))
+         dispatch(editGroupThunk(payload, groupId))
        
         history.push(`/groups/${groupId}/about`)
 }
@@ -94,7 +95,7 @@ const deleteGroup = e => {
  
  
  
- 
+
  
  
  
@@ -115,6 +116,7 @@ return loaded && (
                             <input
                                 className='gdinput-box'
                                 type='text'
+                                defaultValue = {group?.name}
                                 value={name}
                                 onChange={e => setName(e.target.value)}
                                 required
@@ -127,6 +129,7 @@ return loaded && (
                                 rows='4'
                                 cols='20'
                                 type='text'
+                                defaultValue = {group?.about}
                                 value={about}
                                 onChange={e => setAbout(e.target.value)}
                                 required
@@ -136,6 +139,7 @@ return loaded && (
                             <label className='gdlabel'>Type</label>
                             <select
                                 className = 'gddropdown-option'
+                                defaultValue = {group?.type}
                                 value={type}
                                 onChange={e => setType(e.target.value)}
                                 required
@@ -149,6 +153,7 @@ return loaded && (
                             <input
                                 className='gdinput-box'
                                 type='text'
+                                defaultValue = {group?.city}
                                 value={city}
                                 onChange={e => setCity(e.target.value)}
                                 required
@@ -159,6 +164,7 @@ return loaded && (
                             <input
                                 className='gdinput-box'
                                 type='text'
+                                defaultValue = {group?.state}
                                 value={state}
                                 onChange={e => setState(e.target.value)}
                                 required
@@ -170,6 +176,7 @@ return loaded && (
                             <select
                                 className = 'gddropdown-option'
                                 type='text'
+                                defaultValue = {group?.private}
                                 value={isPrivate}
                                 onChange={e => setPrivate(e.target.value)}
                                 required
