@@ -28,6 +28,22 @@ function CreateGroupForm(){
     const [submit, setSubmit] = useState(false)
     const [part, setPart] = useState('PART 1')
 
+    const USstates = [
+        'AL', 'AK', 'AS', 'AZ', 'AR',
+        'CA', 'CO', 'CT', 'DE', 'DC',
+        'FM', 'FL', 'GA', 'GU', 'HI',
+        'ID', 'IL', 'IN', 'IA', 'KS',
+        'KY', 'LA', 'ME', 'MH', 'MD',
+        'MA', 'MI', 'MN', 'MS', 'MO',
+        'MT', 'NE', 'NV', 'NH', 'NJ',
+        'NM', 'NY', 'NC', 'ND', 'MP',
+        'OH', 'OK', 'OR', 'PW', 'PA',
+        'PR', 'RI', 'SC', 'SD', 'TN',
+        'TX', 'UT', 'VT', 'VI', 'VA',
+        'WA', 'WV', 'WI', 'WY'
+    ];
+
+
 
     // end form stuff
 
@@ -84,7 +100,7 @@ function CreateGroupForm(){
                     <div className="partDiv">
                         <div className="TextContainer">
                             <h2 className="create-group">First, set your group's location</h2>
-                            <p className="create-group">Meetup groups meet locally, in person and online. We'll connect you with people in your area, and more can join you online.</p>
+                            <p className="create-group">Meetup groups meet locally, in person and online. We'll connect you with people in your area, and more can join you online.  You will need to enter a proper state abbreviation to continue.  If your not sure what yours is <a href='https://www.faa.gov/air_traffic/publications/atpubs/cnt_html/appendix_a.html'>feel free to click here</a></p>
                         </div>
 
                     <div className='secondPart'>
@@ -114,7 +130,7 @@ function CreateGroupForm(){
                             onChange={text => setState(text.target.value)}
                             value={state}
                              maxLength='50'
-                             placeholder='enter the state abbreviation'
+                             placeholder='enter the proper state abbreviation'
                             name='city'
                              id='city' />
                         
@@ -124,7 +140,7 @@ function CreateGroupForm(){
 
                         <div className='buttons'>
                              <button className='return' style={{ visibility: 'hidden' }}></button>
-                              <button className="default" disabled={city.length < 3} onClick={e => setPart('PART 2')}>Next</button>
+                              <button className="default" disabled={city.length < 3 || (!USstates.includes(state))} onClick={e => setPart('PART 2')}>Next</button>
 
                         </div>
 
@@ -148,7 +164,7 @@ function CreateGroupForm(){
                                 onChange={e => setName(e.target.value)}
                                 value={name}
                                 maxLength='60'
-                                placeholder='max 60 characters'
+                                placeholder='enter betweeen 5 and 60 characters'
                                 name='name'/>
                                 <span className="secondSpan">Character count: {name.length}</span>
 
@@ -181,9 +197,10 @@ function CreateGroupForm(){
                                 onChange={e => setAbout(e.target.value)}
                                 value={about}
                                 maxLength='1000'
-                                placeholder='Please write at least 50 characters'
+                                placeholder='Please write at least 50 characters and no more than 1000'
                                 name='about' />
                             <span className="text14 textcolor-grey">Character count: {about.length}</span>
+                            <span className="text14 textcolor-grey">Character count: {1000 - about.length} remaining</span>
 
                             <div className="buttons">
                                 <button className="return" onClick={e => setPart('PART 2')}>Back</button>
