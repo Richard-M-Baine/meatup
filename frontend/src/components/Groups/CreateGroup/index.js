@@ -100,7 +100,8 @@ function CreateGroupForm(){
                     <div className="partDiv">
                         <div className="TextContainer">
                             <h2 className="create-group">First, set your group's location</h2>
-                            <p className="create-group">Meetup groups meet locally, in person and online. We'll connect you with people in your area, and more can join you online.  You will need to enter a proper state abbreviation to continue.  If your not sure what yours is <a href='https://www.faa.gov/air_traffic/publications/atpubs/cnt_html/appendix_a.html'>feel free to click here</a></p>
+                            <p className="create-group">Meetup groups meet locally, in person and online. We'll connect you with people in your area, and more can join you online.  </p>
+                            <p>You will need to enter a proper state abbreviation to continue.  If your not sure what yours is <a href='https://www.faa.gov/air_traffic/publications/atpubs/cnt_html/appendix_a.html'>feel free to click here</a></p>
                         </div>
 
                     <div className='secondPart'>
@@ -140,7 +141,7 @@ function CreateGroupForm(){
 
                         <div className='buttons'>
                              <button className='return' style={{ visibility: 'hidden' }}></button>
-                              <button className="default" disabled={city.length < 3 || (!USstates.includes(state))} onClick={e => setPart('PART 2')}>Next</button>
+                              <button className="default" disabled={city.length < 3 || (!USstates.includes(state.toUpperCase()))} onClick={e => setPart('PART 2')}>Next</button>
 
                         </div>
 
