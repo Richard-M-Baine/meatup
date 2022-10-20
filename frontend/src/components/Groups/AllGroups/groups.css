@@ -1,0 +1,24 @@
+
+.main{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px;
+
+}
+.groupPart{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 350px;
+}
+.groupTextDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    size: 40px;
+    padding-right: 300px;
+    padding-bottom: 40px;
+}

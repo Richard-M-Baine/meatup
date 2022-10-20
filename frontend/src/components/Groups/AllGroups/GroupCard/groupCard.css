@@ -1,0 +1,14 @@
+.outerDiv{
+    display: flex;
+    flex-direction: row;
+}
+.photoPart{
+    
+    padding-right: 30px;
+    padding-bottom: 20px;
+}
+#photo{
+    height: 200px;
+    width: 200px;
+
+}

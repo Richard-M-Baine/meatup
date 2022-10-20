@@ -1,0 +1,109 @@
+.mainGroupDetails{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    justify-content: center;
+    
+}
+
+.groupDetailsTop{
+    margin-top: 180px;
+    display: flex;
+    flex-direction: row;
+    height: 350px;
+    justify-content: space-around;
+  
+   
+    
+}
+
+.leftGroupDetailPhotos{
+    display: flex;
+    width: 535px;
+    height: 300px;
+    margin-left: 350px;
+    margin-top: 20px;
+    
+}
+#GDphoto{
+    min-width: 450px;
+    min-height: 250px;
+    max-width: 450px;
+    max-height: 250px;
+    
+
+  
+}
+
+.rightTopGroupDetails{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 350px;
+    margin-top: 20px;
+   margin-right: 75px;
+  
+}
+
+.GDabout{
+    margin-top: 20px;
+}
+
+
+.otherStuffGD{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left: 5vw;
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+    justify-content: space-around;
+   
+}
+
+.GDname-container{
+    margin-left: 500px;
+}
+
+.GDbuttonsuperDiv{
+    display: flex;
+    margin-left: 580px;
+    min-width: 500px;
+    min-height: 100px;
+}
+
+.GDbutton{
+    top: 92%;
+    right: 0;
+    left: 75%;
+    bottom: 0;
+    height: 40px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    margin-top: 19px;
+    background-color:#f65858;
+    border-color: #f65858;
+    fill: #ffff;
+    color: #ffff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 15px;
+    font-weight: bold;
+    align-items: center;
+}
+
+.GDnotice{
+    display: flex;
+    margin-left: 400px;
+    min-width: 500px;
+    min-height: 100px;
+}
+
+.GDnoUser{
+    margin-left: 10px;
+    margin-right: 5px;
+}

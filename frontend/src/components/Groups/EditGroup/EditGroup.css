@@ -1,0 +1,78 @@
+.deleteGroupEdit{
+    
+    height: 50px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    margin-top: 19px;
+    background-color:#f65858;
+    border-color: #f65858;
+    fill: #ffff;
+    color: #ffff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: bold;
+    align-items: center;
+}
+
+.edit-group-button{
+    
+    height: 50px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    
+    margin-top: 19px;
+    background-color:#f65858;
+    border-color: #f65858;
+    fill: #ffff;
+    color: #ffff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 15px;
+    font-weight: bold;
+    align-items: center;
+}
+
+.flavorTextGroupDetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 40vw;
+    width: 22vw;
+    
+}
+
+.groupDetailForm{
+    display: flex;
+    flex-direction: column;
+    margin-left: 35vw;
+    width: 30vw;
+}
+
+.gdinputDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-bottom: 20px;
+    
+}
+#gdh1ft{
+    margin-left: 60px;
+}
+
+.gddropdown-option{
+    width: 150px;
+    height: 20px;
+    border-radius: 4px;
+    justify-content: center;
+}
+
+.gdlabel{
+    margin-bottom: 5px;
+}

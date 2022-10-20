@@ -45,7 +45,7 @@ const validateGroup = [
       .withMessage('About must be 50 characters or more'),
   check('type')
       .exists({ checkFalsy: true })
-      .isIn(['Online', 'In person'])
+      .isIn(['Online', 'In Person'])
       .withMessage('Type must be Online or In person'),
   check('private')
       .exists()
@@ -183,7 +183,6 @@ router.put('/:groupId/membership', requireAuth, async(req, res, next) => {
 
   let group = await Group.findByPk(groupId)
  
-console.log(group.organizerId)
   let checkUser = await User.findByPk(currentUserId)
   let currentUserMembership = await Membership.findOne({where: { [Op.and]: [ {userId: currentUserId}, {groupId} ] } })
 
@@ -208,7 +207,7 @@ console.log(group.organizerId)
       })
   }
 
-  console.log(group.organizerId)
+  
 
   if(!checkUser){
       res.status = 404;
@@ -567,11 +566,7 @@ router.get(
   async (req, res, next) => {
       const group = await Group.findByPk(req.params.groupId)
 
-      if (!group) {
-        const err = new Error('Group couldn\'t be found')
-        err.status = 404
-        return next(err)
-    }
+   
 
       const numMembers = await Membership.findAll({
         where: {
@@ -623,8 +618,6 @@ res.json(object)
 router.put('/:groupId',requireAuth,async(req,res,next) => {
   const group = await Group.findByPk(req.params.groupId)
 
-
-
 // better way
 
 if (group){
@@ -633,18 +626,18 @@ if (group){
     err.status = 403
     return next(err)
   }
-const { name, about, type, private, city, state } = req.body
+const { name, about, type, city, state, private } = req.body
+
+
 
 group.set({
   name: name,
   about: about,
   type: type,
-  private: private,
   city: city,
-  state: state
+  state: state,
+  private: private
 })
-
-
 
 await group.save()
 
@@ -670,9 +663,11 @@ else{
 
 
 router.delete('/:groupId', async(req, res, next) => {
+  
   const { groupId } = req.params;
 
   let group = await Group.findByPk(groupId)
+ 
 
   if(group){
       await group.destroy()

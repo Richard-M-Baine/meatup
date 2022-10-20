@@ -1,0 +1,74 @@
+.login{
+    border-bottom: 0.5px solid rgba(34, 34, 34, 0.2);
+}
+
+.logout{
+    border-bottom: none;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    
+}
+
+.profile{
+    display: flex;
+    border-radius: 50%;
+    background-color: #f65858;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    align-content: center;
+    font-weight: bold;
+    cursor: pointer
+}
+
+.nav{
+    
+        display: flex;
+        background-color: white;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030px;
+        width: 100vw;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        
+    
+}
+
+.navLoginOutDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.newNavGroup{
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 80px;
+}
+
+.new:hover{
+    color: #0098ae;
+}
+
+
+
+.newGroupDiv{
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
