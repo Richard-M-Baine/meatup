@@ -64,7 +64,7 @@ const submit = async e => {
 e.preventDefault()
 setIsSubmitted(true)
 
-if (validationErrors.length > 0) return
+
 
 const payload = {
     
@@ -208,7 +208,7 @@ history.push(`/events/all`)
             </div>
 
             <div className='cebuttondiv'>
-                <button className='cebutton'  type="submit">Create your group</button>
+                <button className='cebutton' disabled={validationErrors.length > 0}type="submit">Create your group</button>
             </div>  
 
 
