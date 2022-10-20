@@ -6,11 +6,17 @@ Welcome to MeatUp.  The purpose of this site is to enable indivduals to setup vo
 
 
 1 - download the repository and add a .env file in the backend folder.  
+
 2- paste the contents of the env.example in the backend into the new env file
+
 3- npm install both the, main, front, and backend files.
+
 4- in the backend type npx dotenv sequelize db:migrate in order to format the sqlite3 database
+
 5- also in the backend type npx dotenv sequelize db:seed:all to populate the database with seed data. 
+
 6- type npm start in the backend
+
 7- type npm start in the front end
 
 
