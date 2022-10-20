@@ -204,6 +204,7 @@ function CreateGroupForm(){
                                 <p className="create-group">Will this group primarily be In Person or Online?</p>
 
                                 <select className='select' name='type' value={type} onChange={e => setType(e.target.value)} >
+                                <option >Enter a value below</option>
                                     <option value="In Person">In Person</option>
                                     <option value="Online">Online</option>
                                 </select>
@@ -211,6 +212,7 @@ function CreateGroupForm(){
                         
                             <p className="create-group">Will this group be a private or public group?</p>
                             <select className='select' id='specialSelect' name='private' value={privacy} onChange={e => setPrivacy(e.target.value)}>
+                            <option >Enter a value below</option>
                                 <option value={false} >Public</option>
                                 <option value={true} >Private</option>
                             </select>

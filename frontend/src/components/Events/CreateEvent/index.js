@@ -130,6 +130,7 @@ history.push(`/events/all`)
             <div className="createEventDiv">
                 <h3>Will this event be in person or online?</h3>
                 <select className='ceselectEvent' name='type' value={type} onChange={e => setType(e.target.value)} >
+                
                     <option value='In person'>In Person</option>
                     <option value='Online'>Online</option>
                 </select>
