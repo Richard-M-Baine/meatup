@@ -1,7 +1,17 @@
 # MeatUp
 meetUp.com clone project
 
+Welcome to MeatUp.  The purpose of this site is to enable indivduals to setup volunteer groups and schedule specific events in order for them coordinate food deliveries / pop up free food markets.  The inspiration behind this is Food Not Bombs, a loosely organized confederation that offers vegan / human vegetarian food and related services free of charge.  The styling, and the backend,  behind this project was inspired by meetup.com as part of a requirement for a social engineering bootcamp.  It will be redesigned at a later date.  In order to run a localhost version of this site on your own computer:
 
+
+
+1 - download the repository and add a .env file in the backend folder.  
+2- paste the contents of the env.example in the backend into the new env file
+3- npm install both the, main, front, and backend files.
+4- in the backend type npx dotenv sequelize db:migrate in order to format the sqlite3 database
+5- also in the backend type npx dotenv sequelize db:seed:all to populate the database with seed data. 
+6- type npm start in the backend
+7- type npm start in the front end
 
 
 PART 1 DATABASE DESIGN
