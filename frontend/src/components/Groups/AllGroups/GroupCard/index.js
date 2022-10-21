@@ -31,6 +31,7 @@ function GroupCard({group}) {
                 </div>
                 <div id='aboutDivGroupAll'>
                     <p>{group.about}</p>
+                    <p>{group.type === 'Online' ? "this group solely meets online" : 'this group meets in person'}</p>
                 </div>
                 <div id='theRestGroupAll'>{group.numMembers} members • {group.private ? 'Private' : 'Public'}</div>
 
