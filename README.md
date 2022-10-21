@@ -1,7 +1,7 @@
 # MeatUp
 meetUp.com clone project
 
-Welcome to MeatUp.  The purpose of this site is to enable indivduals to setup volunteer groups, and schedule specific events, in order for them coordinate food deliveries / pop up free food markets.  The inspiration behind this is Food Not Bombs, a loosely organized confederation that offers vegan / human vegetarian food and related services free of charge.  The styling, and the backend,  behind this project was inspired by meetup.com as part of a requirement for a social engineering bootcamp.  It will be redesigned at a later date.  In order to run a localhost version of this site on your own computer:
+Welcome to MeatUp!  The purpose of this site is to enable indivduals to setup volunteer groups, and schedule specific events, in order for them coordinate food deliveries / pop up free food markets.  The inspiration behind this is Food Not Bombs, a loosely organized confederation that offers vegan / human vegetarian food and related services free of charge.  The styling, and the backend,  behind this project was inspired by meetup.com as part of a requirement for a social engineering bootcamp.  It will be redesigned at a later date.  In order to run a localhost version of this site on your own computer:
 
 
 
@@ -21,6 +21,7 @@ Welcome to MeatUp.  The purpose of this site is to enable indivduals to setup vo
 
 
 Features 
+adding groups, events, along with user authentication.  
 
 
 
