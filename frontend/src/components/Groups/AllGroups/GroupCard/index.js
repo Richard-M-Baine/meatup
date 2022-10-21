@@ -24,7 +24,7 @@ function GroupCard({group}) {
             </div>
             
 
-            <div className='otherStuffDiv'>
+            <div className='otherStuffDivGroupAll'>
                 <div className='mainTextGroupAll'>
                     <h2 id='title'>{group.name}</h2>
                     <h4 id='location stuff'>{group.city},{group.state}</h4>

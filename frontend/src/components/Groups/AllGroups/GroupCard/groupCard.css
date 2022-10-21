@@ -5,7 +5,7 @@
 .photoPart{
     
     padding-right: 30px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 #photo{
     height: 200px;
@@ -30,4 +30,8 @@ border: none;
     color:  black;
     font-style: normal
     
+}
+
+.otherStuffDivGroupAll{
+    margin-top: 10px;
 }
