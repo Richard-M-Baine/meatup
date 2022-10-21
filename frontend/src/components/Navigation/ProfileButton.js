@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 
 import './profile.css'
+import ukraine from './ukraine.png'
 
 
 
@@ -35,7 +36,7 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+        <img className='ukraine' src={ukraine}/>
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
