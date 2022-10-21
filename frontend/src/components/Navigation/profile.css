@@ -2,21 +2,19 @@
     display: flex;
     flex-direction: column;
     justify-content: left;
-  margin-right: 120px;
-  margin-top: 20px;
+  margin-right: 126px;
+  margin-top: 50px;
   margin-bottom: 30px;
-  min-width: 100px;
+  min-width: 110px;
   border: rgba(0, 0, 0, 0.2) solid 1px;
   border-radius: 8%;
   box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.1);
   z-index: 1;
-  color: white;
-  background-color: #f65858;
-  opacity: 0.7;
+  color: whitesmoke;
+  background-color: #f53535;
+
 }
-.profile-dropdown:hover{
-    opacity: 1.0;
-}
+
 
 
   .profileButton{
@@ -27,7 +25,7 @@
     background-color: white;
   }
 
-  #profileNavName{
+  .profileNavName{
     margin-top: 10px;
     margin-right: 20px;
     list-style-type: none;
@@ -35,6 +33,18 @@
 
   #profileNavButton{
     list-style-type: none;
+  }
+
+  .profileButtonp{
+    width: 80px;
+    height: 24px;
+    margin-top: 20px;
+    margin-right: 20px;
+    background-color: lightgreen;
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: #f65858;
+
   }
 
   

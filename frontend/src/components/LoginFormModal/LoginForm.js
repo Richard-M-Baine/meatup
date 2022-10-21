@@ -63,7 +63,7 @@ function Login( ){
                   {errors.map((error, index) => <li key={index}>{error}</li>)}
               </ul>
               <label className='email-login-label'>
-                  Username or Email  </label>
+                  Please enter your Email  </label>
               <input
                   className='email-box'
                   type="text"

@@ -34,6 +34,13 @@ function Signup() {
       }
       return setErrors([{ password: 'Confirm Password field must be the same as the Password field!' }]);
     };
+
+
+    if (sessionUser) return (
+         
+      
+      <Redirect to="/" />
+    );
   
     return (
       <div className="signup-ruckgrund">
