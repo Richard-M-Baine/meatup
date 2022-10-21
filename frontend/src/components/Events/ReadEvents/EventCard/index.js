@@ -39,11 +39,11 @@ function EventCard({ event }) {
         <img id='photo'src={event.previewImage} />
         </div>
 
-        <div className="otherStufDiv">
-            <h2>{event.name}</h2>
-            <h4>{`next meeting ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`}</h4>
-            <p>Hosted By {event.Group.name} from {event.Group.city} {event.Group.state}</p>
-            <div>There currently {event.numAttending} {people} attending!</div>
+        <div className="otherStufDivEA">
+            <h2 className="otherStufDivEA">{event.name}</h2>
+            <h4 className="otherStufDivEA">{`next meeting ${day} ${date} at ${civilians}:${realMinutes} ${stupidCivilians}`}</h4>
+            <p className="otherStufDivEA">Hosted By {event.Group.name} from {event.Group.city} {event.Group.state}</p>
+            <div className="otherStufDivEA">There currently {event.numAttending} {people} attending!</div>
 
         </div>
 
