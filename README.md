@@ -30,37 +30,58 @@ adding groups, events, along with user authentication.
 PART 0 REDUX STORE SHAPE
 
 store = {
+
     session: {
+    
         user: {
+        
             id,
             firstName,
             lastName,
             email,
             username
         },
+        
     },
+    
     groups: {
+    
         groupId: {
+        
             groupData,
+            
             Organizer: {
+            
                 userData of the owner of the group
             },
+            
             Images: [
+            
                 array of images uploaded to a group
             ]
         }
     },
+    
     events: {
+    
         eventId: {
+        
             eventData, 
+            
             Group: {
+            
                 groupData for the group hosting the event.  This includes organizerId a deviation from the original api specs. 
             },
+            
             Venue: {
+            
                 venueData for the venue location
             }
+            
         }
+        
     },
+    
 }
 
 
