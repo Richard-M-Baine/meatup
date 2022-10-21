@@ -9,7 +9,7 @@ Welcome to MeatUp.  The purpose of this site is to enable indivduals to setup vo
 
 2- paste the contents of the env.example in the backend into the new env file
 
-3- npm install both the, main, front, and backend files.
+3- npm install at the 'root' folder.  This will automatically install both the back and front ends. 
 
 4- in the backend type npx dotenv sequelize db:migrate in order to format the sqlite3 database
 
@@ -20,52 +20,47 @@ Welcome to MeatUp.  The purpose of this site is to enable indivduals to setup vo
 7- type npm start in the front end
 
 
+Features 
+
+
+
+
+
 PART 0 REDUX STORE SHAPE
 
-Groups: {
-1 (id):
-{
-about:
-city:
-createdAt:
-name:
-numMembers:
-organizerId:
-previewImage: (url)
-groupImages: [array of images]
-private: ie public or private invitation only
-state:
-type: ie in person or online only
-updatedAt:
------- end of Groups ----
-
-Events
-
-the following nested objects apply
-
-group - with groupId, name, private / public, state
-
-Venue - venueId, address, city, state, lat and longitude are also included but not used
-
-the event section proper includes
-eventId
-name
-capacity
-description
-endDate
-numAttending
-startDate / time
-endDate / time
-type : inperson / online
-
-
-session: user{
-id
-firstname
-lastName
-email
+store = {
+    session: {
+        user: {
+            id,
+            firstName,
+            lastName,
+            email,
+            username
+        },
+    },
+    groups: {
+        groupId: {
+            groupData,
+            Organizer: {
+                userData of the owner of the group
+            },
+            Images: [
+                array of images uploaded to a group
+            ]
+        }
+    },
+    events: {
+        eventId: {
+            eventData, 
+            Group: {
+                groupData for the group hosting the event.  This includes organizerId a deviation from the original api specs. 
+            },
+            Venue: {
+                venueData for the venue location
+            }
+        }
+    },
 }
-
 
 
 PART 1 DATABASE DESIGN
