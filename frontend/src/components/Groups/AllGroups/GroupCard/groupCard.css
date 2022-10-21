@@ -12,3 +12,22 @@
     width: 200px;
 
 }
+
+.mainTextGroupAll{
+color: black;
+border: none;
+}
+
+#aboutDivGroupAll{
+    color: black;
+}
+
+#theRestGroupAll{
+    color: black
+}
+
+#title{
+    color:  black;
+    font-style: normal
+    
+}
