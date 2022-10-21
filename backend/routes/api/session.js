@@ -81,7 +81,7 @@ router.get(
     const { user } = req;
     if (user) {
       return res.json(user);
-    } else return res.json({});
+    } else return res.json(null);
   }
 );
 
