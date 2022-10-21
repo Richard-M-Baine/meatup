@@ -1,0 +1,10 @@
+.button-signup{
+   
+    background-color: transparent;
+    border: none;
+    color: rgba(0, 0, 0, 0.637);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    
+}

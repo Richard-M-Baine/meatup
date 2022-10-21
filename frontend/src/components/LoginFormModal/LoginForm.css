@@ -74,7 +74,7 @@
 .button-login {
     background-color: transparent;
     border: none;
-    color: black;
+    color: rgba(0, 0, 0, 0.637);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;

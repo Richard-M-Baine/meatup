@@ -70,6 +70,7 @@ export default function GroupDetails() {
                         <div className='GDabout'>
                             <h4>What are we about? </h4>
                             {singleGroup.about}
+                            <p>{singleGroup.type === 'Online' ? "this group solely meets online" : 'this group meets in person'}</p>
                         </div>
                     </div>
                 </div>

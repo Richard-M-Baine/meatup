@@ -5,10 +5,33 @@
 .photoPart{
     
     padding-right: 30px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 #photo{
     height: 200px;
     width: 200px;
 
+}
+
+.mainTextGroupAll{
+color: black;
+border: none;
+}
+
+#aboutDivGroupAll{
+    color: black;
+}
+
+#theRestGroupAll{
+    color: black
+}
+
+#title{
+    color:  black;
+    font-style: normal
+    
+}
+
+.otherStuffDivGroupAll{
+    margin-top: 10px;
 }

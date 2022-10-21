@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 // css
 import './groupCard.css'
 
+
 function GroupCard({group}) {
 
 
@@ -23,15 +24,16 @@ function GroupCard({group}) {
             </div>
             
 
-            <div className='otherStuffDiv'>
-                <div className='mainText'>
+            <div className='otherStuffDivGroupAll'>
+                <div className='mainTextGroupAll'>
                     <h2 id='title'>{group.name}</h2>
                     <h4 id='location stuff'>{group.city},{group.state}</h4>
                 </div>
-                <div id='aboutDiv'>
+                <div id='aboutDivGroupAll'>
                     <p>{group.about}</p>
+                    <p>{group.type === 'Online' ? "this group solely meets online" : 'this group meets in person'}</p>
                 </div>
-                <div id='theRest'>{group.numMembers} members • {group.private ? 'Private' : 'Public'}</div>
+                <div id='theRestGroupAll'>{group.numMembers} members • {group.private ? 'Private' : 'Public'}</div>
 
 
             </div>
