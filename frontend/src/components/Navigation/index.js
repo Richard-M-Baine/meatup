@@ -24,8 +24,13 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
- 
+
+
+
+
   if (sessionUser) {
+
+
     sessionLinks = (
       <div className='navLoginOutDiv'>
         <div className='newGroupDiv'>
@@ -36,16 +41,20 @@ function Navigation({ isLoaded }){
       </div>
       </div>
     );
+
   } 
   
   else {
+    
     sessionLinks = (
       <div className='logout'>
-        <DemoUser />
-        <LoginFormModal />
-        <SignupFormModal />
-      </div>
-    );
+          <DemoUser />
+          <LoginFormModal />
+          <SignupFormModal />
+        </div>
+      )
+      
+    
   }
 
 
@@ -54,14 +63,14 @@ function Navigation({ isLoaded }){
   return (
     // thank you
 
-    <div className={sessionUser ? "nav login" : 'nav logout'}>
+    <nav className='nav login'>
       <div className='logo'>
         <NavLink exact to="/"><img src={download}/></NavLink>
       </div>
       <div className='buttons'>
         {isLoaded && sessionLinks}
       </div>
-    </div>
+    </nav>
   );
 }
 
