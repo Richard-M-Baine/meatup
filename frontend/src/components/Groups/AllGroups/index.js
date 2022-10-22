@@ -37,7 +37,7 @@ function AllGroups(){
                     <h1>Groups</h1>
                 </div>
 
-                <div className='groups'>
+                <div className='groupsAllPart'>
             {groupsList.map(group => (
                 <GroupCard group={group} key={group.id}/>
             ))}
