@@ -28,38 +28,29 @@ const validateSignup = [
 const router = express.Router();
 
 // Sign up
+// Sign up
 router.post(
   '/',
   validateSignup,
-  async (req, res) => {
-    const { firstName, lastName, email, password} = req.body;
-
-    const duplicate = await User.findOne({
-      where: {
-        email: email
-      }
-    })
-
-    if (duplicate) {
-
-      const err = new Error('User already exists')
-      err.status = 403
-      err.errors = {}
-      err.errors.email = 'User with that email already exists'
-
-    res.json(err)
-  
+  async (req, res, next) => {
+    const { email, firstName, lastName, password, username } = req.body;
+    if (await User.findOne({where: {email: email}})) {
+      const err = new Error("User with that email already exists");
+      err.status = 403;
+      err.title = 'Sign up failed';
+      err.errors = ['The provided credentials were invalid.'];
+      return next(err);
     }
+    const user = await User.signup({ email, firstName, lastName, username, password });
 
-
-
-
-    const user = await User.signup({ firstName, lastName,email,password});
-
-    await setTokenCookie(res, user);
+    const token = await setTokenCookie(res, user);
 
     return res.json({
-      user
+      "id": user.id,
+      "firstName": user.firstName,
+      "lastName": user.lastName,
+      "email": user.email,
+      "token": token
     });
   }
 );
