@@ -91,7 +91,7 @@ PART 1 DATABASE DESIGN
 
 ![](https://github.com/Richard-M-Baine/MeatUp/blob/main/wiki_images/meatup-schema.PNG)
 
-## API Documentation
+PART 2 API Documentation
 
 ## USER AUTHENTICATION/AUTHORIZATION
 
