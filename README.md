@@ -1,5 +1,7 @@
 # MeatUp
-meetUp.com clone project
+meetUp.com "clone" project
+
+currently hosted at ef-meat-up.herokuapp.com
 
 Welcome to MeatUp!  
 
