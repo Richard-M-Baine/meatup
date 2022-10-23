@@ -149,7 +149,7 @@ return loaded && (
                                 
                                 onChange={e => setType(e.target.value)}
                                 required
-                            >   <option className='gdinput-box'>Enter a value below</option>
+                            >   
                                 <option   className = 'dropdown-option' value={'In person'}>In person</option>
                                 <option   className = 'dropdown-option' value={'Online'}>Online</option>
                             </select>
