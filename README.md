@@ -25,7 +25,7 @@ The purpose of this site is to enable indivduals to setup volunteer groups, and 
 Features 
 adding groups, events, along with user authentication.  
 
-
+Design philosophy:  To have as much blank space as would be possible without hindering the aesthetics of the site.  This enables the user to not be cluttered with random stock photos and other distracting information.  It also reduces the fees of hosting and increases the turnaround to the user.  It also improves user stories / reduces data.  A key feature that needs to be taken into consideration as many users of the site might not be wealthy and thus be on metered plans.  The project required using meetup design criteria but after consultation the user was allowed to deviate from the "pixel perfect" concept and thus allowed some design independence.   
 
 
 
