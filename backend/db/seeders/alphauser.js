@@ -10,7 +10,8 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return await queryInterface.bulkInsert('Users',[
+    options.tableName = 'Users'; 
+    return await queryInterface.bulkInsert(options,[
       {
       firstName: 'Bilbo',
       lastName: 'Baggins',
@@ -60,7 +61,8 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Users', {
+    options.tableName = 'Users'; 
+    return queryInterface.bulkDelete(options, 'Users', {
       email: {
         [Op.in]:['bilbo@gmail.com','frodo@gmail.com','cthulhu@oldones.com','userFour@gmail.com','userFive@gmail.com','usersix@gmail.com']
       }

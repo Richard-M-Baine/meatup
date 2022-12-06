@@ -11,7 +11,8 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return await queryInterface.bulkInsert('Venues', [
+    options.tableName = 'Venues'; 
+    return await queryInterface.bulkInsert(options, [
 
       {
         groupId: 1,
@@ -44,7 +45,8 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Venues', {
+    options.tableName = 'Venues'; 
+    return queryInterface.bulkDelete(options, 'Venues', {
       state: {
         [Op.in]: [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC',
         'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS',

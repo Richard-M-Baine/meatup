@@ -9,7 +9,8 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return await queryInterface.bulkInsert('Memberships', [
+    options.tableName = 'Memberships'; 
+    return await queryInterface.bulkInsert(options, [
 
       {
         userId:1,
@@ -38,7 +39,8 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Memberships', {
+    options.tableName = 'Memberships'; 
+    return queryInterface.bulkDelete(options, 'Memberships', {
       status: {
         [Op.in]:['member','pending','co-host']
       }

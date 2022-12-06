@@ -10,7 +10,8 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return await queryInterface.bulkInsert('EventImages', [
+    options.tableName = 'EventImages'; 
+    return await queryInterface.bulkInsert(options, [
 
       {
         eventId: 1,
@@ -43,7 +44,8 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('EventImages', {
+    options.tableName = 'EventImages'; 
+    return queryInterface.bulkDelete(options, 'EventImages', {
       preview: {
         [Op.in]:[true,false]
       }

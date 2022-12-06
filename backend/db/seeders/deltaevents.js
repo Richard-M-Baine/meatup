@@ -9,7 +9,8 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return await queryInterface.bulkInsert('Events',[
+    options.tableName = 'Events'; 
+    return await queryInterface.bulkInsert(options,[
     {
       name: 'Cthulhu cult fridays',
       description:'first get together with neigbhorhood cultists.',
@@ -76,7 +77,8 @@ module.exports = {
 
 down: async (queryInterface, Sequelize) => {
   const Op = Sequelize.Op;
-  return queryInterface.bulkDelete('Events', {
+  options.tableName = 'Events'; 
+  return queryInterface.bulkDelete(options, 'Events', {
     capacity: {
       [Op.in]:[20]
     }
