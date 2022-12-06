@@ -9,17 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 // END of new code
 
 
-// add options object to up and down functions:
-module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('table-name', {
-        // ...
-    }, options);    // add options object here
-  },
-  down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('table-name', options); // and here
-  }
-};
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Attendances', {
@@ -62,9 +52,9 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    });
+    }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Attendances');
+    await queryInterface.dropTable('Attendances', options);
   }
 };
